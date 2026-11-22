@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://klqsnsdhavjslghxeovw.supabase.co https://cdn.discordapp.com; connect-src 'self' https://klqsnsdhavjslghxeovw.supabase.co wss://klqsnsdhavjslghxeovw.supabase.co; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Moderação · mapa de Leonida</title>
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" type="image/png" href="assets/marca/np-monograma.png" />
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="css/publico.css" />
+    <link rel="stylesheet" href="css/moderacao.css" />
+  </head>
+  <body class="pagina-mod">
+    <header class="topo">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="assets/marca/logo-np-96.png" width="104" height="96" alt="Nauã Pietro" />
+        <span class="marca-texto"><span class="marca-titulo">Moderação</span><span class="marca-sub">por Nauã Pietro</span></span>
+      </a>
+      <nav class="nav-site" data-paginas aria-label="Páginas do site"></nav>
+      <nav class="canais canais-topo" data-canais aria-label="Canais do Nauã Pietro"></nav>
+      <span class="selo-demo" title="Dados de mentira, só para testar"><span class="selo-longo">Demonstração</span><span class="selo-curto">Demo</span></span>
+      <div class="topo-acoes">
+        <a class="btn btn-fantasma" href="index.html">Voltar ao mapa</a>
+        <div class="conta" id="conta">
+          <button type="button" class="btn btn-discord" id="btn-entrar">
+            Entrar com Discord
+          </button>
+          <div class="conta-logado" id="conta-logado" hidden>
+            <button
+              type="button"
+              class="conta-botao"
+              id="btn-conta"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-controls="menu-conta"
+            >
+              <span class="avatar" id="conta-avatar" aria-hidden="true"></span>
+              <span class="conta-nome" id="conta-nome"></span>
+            </button>
+            <div class="menu" id="menu-conta" role="menu" hidden>
+              <a role="menuitem" class="menu-item" href="index.html">Mapa</a>
+              <button
+                type="button"
+                role="menuitem"
+                class="menu-item"
+                id="menu-sair"
+              >
+                Sair
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="mod">
+      <section class="sem-acesso" id="sem-acesso" hidden>
+        <h1>Área da moderação</h1>
+        <p id="sem-acesso-texto">
+          Entre com o Discord. Só moderadores e o dono veem esta página.
+        </p>
+      </section>
+
+      <div id="painel" hidden>
+        <nav class="abas" role="tablist" aria-label="Seções da moderação">
+          <button
+            type="button"
+            role="tab"
+            class="aba"
+            id="aba-fila"
+            aria-controls="sec-fila"
+            aria-selected="true"
+          >
+            Fila <span class="conta-num" id="n-fila">0</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            class="aba"
+            id="aba-denuncias"
+            aria-controls="sec-denuncias"
+            aria-selected="false"
+          >
+            Denúncias <span class="conta-num" id="n-denuncias">0</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            class="aba"
+            id="aba-registro"
+            aria-controls="sec-registro"
+            aria-selected="false"
+          >
+            Registro
+          </button>
+          <button
+            type="button"
+            role="tab"
+            class="aba so-dono"
+            id="aba-usuarios"
+            aria-controls="sec-usuarios"
+            aria-selected="false"
+            hidden
+          >
+            Usuários
+          </button>
+          <button
+            type="button"
+            role="tab"
+            class="aba so-dono"
+            id="aba-ofertas"
+            aria-controls="sec-ofertas"
+            aria-selected="false"
+            hidden
+          >
+            Patrocínio e ofertas
+          </button>
+        </nav>
+
+        <section
+          class="secao"
+          id="sec-fila"
+          role="tabpanel"
+          aria-labelledby="aba-fila"
+        >
+          <div class="fila">
+            <ul
+              class="fila-lista"
+              id="fila-lista"
+              aria-label="Sugestões em análise"
+            ></ul>
+            <div class="fila-detalhe" id="fila-detalhe">
+              <p class="vazio-grande">Escolha uma sugestão da lista.</p>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="secao"
+          id="sec-denuncias"
+          role="tabpanel"
+          aria-labelledby="aba-denuncias"
+          hidden
+        >
+          <ul class="cartoes" id="lista-denuncias"></ul>
+        </section>
+
+        <section
+          class="secao"
+          id="sec-registro"
+          role="tabpanel"
+          aria-labelledby="aba-registro"
+          hidden
+        >
+          <p class="bloco-nota">
+            Tudo que a moderação faz fica registrado aqui (as últimas 100
+            ações).
+          </p>
+          <div class="cartao so-dono" id="caixa-removidos" hidden>
+            <h2 class="cartao-titulo">Pontos removidos</h2>
+            <p class="bloco-nota">
+              Pontos tirados do mapa ficam aqui por 30 dias antes de sumir de
+              vez. Só o dono restaura.
+            </p>
+            <ul class="cartoes" id="lista-removidos"></ul>
+          </div>
+          <div class="tabela-rolagem">
+            <table class="tabela" id="tabela-log">
+              <thead>
+                <tr>
+                  <th scope="col">Quando</th>
+                  <th scope="col">Quem</th>
+                  <th scope="col">Ação</th>
+                  <th scope="col">Detalhe</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section
+          class="secao"
+          id="sec-usuarios"
+          role="tabpanel"
+          aria-labelledby="aba-usuarios"
+          hidden
+        >
+          <form class="linha-busca" id="form-busca-usuarios">
+            <label class="busca"
+              ><span class="sr">Buscar usuário</span
+              ><input
+                type="search"
+                id="busca-usuarios"
+                placeholder="Nome ou ID do Discord"
+                maxlength="60"
+            /></label>
+            <button type="submit" class="btn">Buscar</button>
+          </form>
+          <ul class="cartoes" id="lista-usuarios"></ul>
+        </section>
+
+        <section
+          class="secao"
+          id="sec-ofertas"
+          role="tabpanel"
+          aria-labelledby="aba-ofertas"
+          hidden
+        >
+          <div class="colunas">
+            <form class="cartao form-sugestao" id="form-patrocinio">
+              <h2 class="cartao-titulo">Espaço de patrocínio</h2>
+              <div class="campo">
+                <label for="pat-texto">Texto (até 140 letras)</label
+                ><input id="pat-texto" maxlength="140" />
+              </div>
+              <div class="campo">
+                <label for="pat-link">Link (https://)</label
+                ><input
+                  id="pat-link"
+                  type="url"
+                  maxlength="500"
+                  placeholder="https://"
+                />
+              </div>
+              <div class="campo">
+                <label for="pat-imagem">Imagem (opcional)</label
+                ><input
+                  id="pat-imagem"
+                  maxlength="300"
+                  placeholder="img/patrocinio.webp"
+                />
+                <p class="campo-ajuda">
+                  Arquivo do site (img/...) ou link público do Storage do
+                  Supabase.
+                </p>
+              </div>
+              <label class="caixa-check"
+                ><input type="checkbox" id="pat-ativo" /> Mostrar no mapa</label
+              >
+              <button type="submit" class="btn btn-primario">
+                Salvar patrocínio
+              </button>
+            </form>
+            <div class="cartao">
+              <h2 class="cartao-titulo">
+                Ofertas / equipamento (links de afiliado)
+              </h2>
+              <ul class="cartoes" id="lista-afiliados"></ul>
+              <button type="button" class="btn" id="btn-nova-oferta">
+                Nova oferta
+              </button>
+            </div>
+          </div>
+          <div class="cartao manutencao">
+            <h2 class="cartao-titulo">Manutenção</h2>
+            <p class="bloco-nota">
+              Apaga sugestões recusadas há mais de 90 dias e os prints delas (o
+              que a política de privacidade promete).
+            </p>
+            <button type="button" class="btn" id="btn-limpar">
+              Limpar recusadas antigas
+            </button>
+            <button
+              type="button"
+              class="btn btn-fantasma so-demo"
+              id="btn-reiniciar-demo"
+            >
+              Reiniciar a demonstração
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="rodape-pagina">
+      <nav class="canais canais-rodape" data-canais aria-label="Canais do Nauã Pietro"></nav>
+      <p>Fan site não oficial; GTA e Leonida são marcas da Rockstar Games.</p>
+      <p>
+        <a href="regras.html">Regras</a> ·
+        <a href="politica-de-privacidade.html">Privacidade</a>
+      </p>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/util.js"></script>
+    <script src="vendor/leaflet/leaflet.js"></script>
+    <script src="js/api-demo.js"></script>
+    <script src="js/api-supabase.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/mapa.js"></script>
+    <script src="js/conta.js"></script>
+    <script src="js/moderacao.js"></script>
+  </body>
+</html>

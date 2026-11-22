@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'none'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <title>Como platinar GTA 6 · mapa de Leonida</title>
+    <meta
+      name="description"
+      content="Os 55 troféus do GTA 6 com guia, perdíveis, roteiro da platina e seu progresso salvo no navegador."
+    />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" type="image/png" href="assets/marca/np-monograma.png" />
+    <link rel="stylesheet" href="css/publico.css" />
+  </head>
+  <body class="pagina-texto pagina-platina">
+    <header class="topo">
+      <a class="marca" href="index.html">
+        <img
+          class="marca-logo"
+          src="assets/marca/logo-np-96.png"
+          width="104"
+          height="96"
+          alt="Nauã Pietro"
+        />
+        <span class="marca-texto"
+          ><span class="marca-titulo">Mapa de Leonida</span
+          ><span class="marca-sub">por Nauã Pietro</span></span
+        >
+      </a>
+      <nav class="nav-site" data-paginas aria-label="Páginas do site"></nav>
+      <nav
+        class="canais canais-topo"
+        data-canais
+        aria-label="Canais do Nauã Pietro"
+      ></nav>
+      <div class="topo-acoes">
+        <a class="btn btn-fantasma" href="index.html">Voltar ao mapa</a>
+      </div>
+    </header>
+
+    <main class="platina">
+      <section class="pl-abertura" aria-labelledby="pl-titulo">
+        <p class="pl-sobre">Guia de troféus · PS5 e Xbox</p>
+        <h1 id="pl-titulo">Como platinar GTA 6</h1>
+        <p class="pl-lead">
+          Os 55 troféus, o que cada um pede, o único que pode ser perdido e o
+          caminho mais curto até a platina. Marque o que já conquistou.
+        </p>
+        <ul class="pl-fatos" id="pl-fatos" aria-label="Resumo da platina"></ul>
+      </section>
+
+      <section class="pl-progresso cartao" aria-labelledby="pl-prog-titulo">
+        <div class="pl-prog-topo">
+          <h2 id="pl-prog-titulo" class="pl-h2">Seu progresso</h2>
+          <p class="pl-prog-num" id="pl-prog-num" aria-live="polite">
+            0 de 55 · 0%
+          </p>
+        </div>
+        <progress
+          id="pl-barra"
+          max="55"
+          value="0"
+          aria-labelledby="pl-prog-titulo"
+        ></progress>
+        <ul
+          class="pl-tipos"
+          id="pl-tipos"
+          aria-label="Conquistados por tipo"
+        ></ul>
+        <div class="pl-salvo">
+          <p id="pl-salvo-texto">Fica salvo neste navegador (sem login).</p>
+          <div class="pl-salvo-acoes">
+            <button
+              type="button"
+              class="btn btn-fantasma btn-peq"
+              id="pl-exportar"
+            >
+              Baixar cópia
+            </button>
+            <label class="btn btn-fantasma btn-peq pl-importar">
+              Restaurar cópia
+              <input
+                type="file"
+                id="pl-importar"
+                accept="application/json,.json"
+              />
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="pl-alerta" aria-labelledby="pl-alerta-titulo">
+        <h2 id="pl-alerta-titulo" class="pl-h2">Antes de começar</h2>
+        <ul id="pl-alerta-lista"></ul>
+      </section>
+
+      <section class="pl-roteiro" aria-labelledby="pl-roteiro-titulo">
+        <h2 id="pl-roteiro-titulo" class="pl-h2">Roteiro da platina</h2>
+        <ol class="pl-etapas" id="pl-etapas"></ol>
+        <div class="pl-dificil cartao">
+          <h3 class="pl-h3">
+            O mais difícil: <span id="pl-dificil-nome">A Long Road</span>
+          </h3>
+          <p id="pl-dificil-texto"></p>
+          <ul class="pl-checklist" id="pl-checklist"></ul>
+        </div>
+      </section>
+
+      <section class="pl-lista-bloco" aria-labelledby="pl-lista-titulo">
+        <h2 id="pl-lista-titulo" class="pl-h2">Todos os troféus</h2>
+        <form
+          class="pl-filtros"
+          id="pl-filtros"
+          role="search"
+          aria-label="Filtrar troféus"
+        >
+          <label class="pl-campo pl-campo-busca">
+            <span>Buscar</span>
+            <input
+              type="search"
+              id="pl-busca"
+              maxlength="60"
+              autocomplete="off"
+              placeholder="Nome, missão, tradução…"
+            />
+          </label>
+          <label class="pl-campo">
+            <span>Tipo</span>
+            <select id="pl-tipo">
+              <option value="">Todos</option>
+              <option value="platina">Platina</option>
+              <option value="ouro">Ouro</option>
+              <option value="prata">Prata</option>
+              <option value="bronze">Bronze</option>
+            </select>
+          </label>
+          <label class="pl-campo">
+            <span>Mostrar</span>
+            <select id="pl-status">
+              <option value="">Todos</option>
+              <option value="faltando">Faltando</option>
+              <option value="conquistados">Conquistados</option>
+            </select>
+          </label>
+          <div class="pl-chaves">
+            <button
+              type="button"
+              class="pl-chave"
+              id="pl-so-perdiveis"
+              aria-pressed="false"
+            >
+              Só perdíveis
+            </button>
+            <button
+              type="button"
+              class="pl-chave"
+              id="pl-spoilers"
+              aria-pressed="false"
+            >
+              Mostrar todos os spoilers
+            </button>
+          </div>
+        </form>
+        <p class="pl-mostrando" id="pl-mostrando" aria-live="polite"></p>
+        <p class="pl-carregando" id="pl-carregando">Carregando troféus…</p>
+        <ol class="pl-trofeus" id="pl-trofeus"></ol>
+      </section>
+
+      <section class="pl-nota" aria-labelledby="pl-nota-titulo">
+        <h2 id="pl-nota-titulo" class="pl-h2">Sobre estas informações</h2>
+        <p id="pl-nota-texto"></p>
+        <details class="pl-fontes-gerais">
+          <summary>Fontes consultadas</summary>
+          <ul id="pl-fontes-gerais"></ul>
+        </details>
+      </section>
+    </main>
+
+    <footer class="rodape-pagina">
+      <nav
+        class="canais canais-rodape"
+        data-canais
+        aria-label="Canais do Nauã Pietro"
+      ></nav>
+      <p>
+        Fan site não oficial; GTA e Leonida são marcas da Rockstar Games.
+        Troféus: nomes originais do jogo.
+      </p>
+      <p>
+        <a href="index.html">Mapa</a> · <a href="regras.html">Regras</a> ·
+        <a href="politica-de-privacidade.html">Privacidade</a>
+      </p>
+    </footer>
+    <script src="js/config.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/platina.js"></script>
+  </body>
+</html>

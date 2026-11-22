@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Segurança: só carrega coisas do próprio site e do Supabase configurado.
+         O id do projeto é gravado aqui por ferramentas/configurar-dominio.js. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://klqsnsdhavjslghxeovw.supabase.co https://cdn.discordapp.com; connect-src 'self' https://klqsnsdhavjslghxeovw.supabase.co wss://klqsnsdhavjslghxeovw.supabase.co; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <title>Mapa de Leonida · comunidade</title>
+    <meta
+      name="description"
+      content="Mapa da comunidade de GTA 6 (Leonida): armas, dinheiro, easter eggs, mistérios, veículos e lojas descobertos pelos jogadores."
+    />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" type="image/png" href="assets/marca/np-monograma.png" />
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="css/publico.css" />
+  </head>
+  <body class="pagina-mapa">
+    <header class="topo">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="assets/marca/logo-np-96.png" width="104" height="96" alt="Nauã Pietro" />
+        <span class="marca-texto"><span class="marca-titulo">Mapa de Leonida</span><span class="marca-sub">por Nauã Pietro</span></span>
+      </a>
+      <nav class="nav-site" data-paginas aria-label="Páginas do site"></nav>
+      <nav class="canais canais-topo" data-canais aria-label="Canais do Nauã Pietro"></nav>
+      <span class="selo-demo" title="Dados de mentira, só para testar"><span class="selo-longo">Demonstração</span><span class="selo-curto">Demo</span></span>
+      <div class="topo-acoes">
+        <button type="button" class="btn btn-primario" id="btn-sugerir">
+          Sugerir lugar
+        </button>
+        <button
+          type="button"
+          class="btn btn-lista"
+          id="btn-lista"
+          aria-controls="lateral"
+          aria-expanded="false"
+        >
+          Lista
+        </button>
+        <div class="conta" id="conta">
+          <button type="button" class="btn btn-discord" id="btn-entrar">
+            Entrar com Discord
+          </button>
+          <div class="conta-logado" id="conta-logado" hidden>
+            <button
+              type="button"
+              class="conta-botao"
+              id="btn-conta"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-controls="menu-conta"
+            >
+              <span class="avatar" id="conta-avatar" aria-hidden="true"></span>
+              <span class="conta-nome" id="conta-nome"></span>
+            </button>
+            <div class="menu" id="menu-conta" role="menu" hidden>
+              <button
+                type="button"
+                role="menuitem"
+                class="menu-item"
+                id="menu-minhas"
+              >
+                Minhas sugestões
+              </button>
+              <a
+                role="menuitem"
+                class="menu-item"
+                id="menu-moderacao"
+                href="moderacao.html"
+                hidden
+                >Moderação</a
+              >
+              <a
+                role="menuitem"
+                class="menu-item"
+                href="politica-de-privacidade.html#apagar"
+                >Apagar minha conta</a
+              >
+              <button
+                type="button"
+                role="menuitem"
+                class="menu-item"
+                id="menu-sair"
+              >
+                Sair
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="corpo">
+      <aside class="lateral" id="lateral" aria-label="Busca, lista e ofertas">
+        <div class="lateral-topo">
+          <label class="busca">
+            <span class="sr">Buscar</span>
+            <input
+              type="search"
+              id="busca"
+              placeholder="Buscar nome, região ou prêmio"
+              autocomplete="off"
+              maxlength="80"
+            />
+          </label>
+          <div
+            class="filtros"
+            id="filtros"
+            role="group"
+            aria-label="Categorias"
+          ></div>
+        </div>
+
+        <div class="lateral-rolagem">
+          <p class="aviso-banido" id="aviso-banido" hidden>
+            Sua conta está suspensa: você pode ver o mapa, mas não enviar
+            sugestões.
+          </p>
+
+          <section class="bloco" id="bloco-minhas" hidden>
+            <h2 class="bloco-titulo">
+              Minhas sugestões
+              <span class="conta-num" id="conta-minhas">0</span>
+            </h2>
+            <ul class="lista" id="lista-minhas"></ul>
+          </section>
+
+          <section class="bloco">
+            <h2 class="bloco-titulo">
+              No mapa <span class="conta-num" id="conta-mapa">0</span>
+            </h2>
+            <p class="carregando" id="carregando">Carregando os pontos…</p>
+            <ul class="lista" id="lista-mapa"></ul>
+          </section>
+
+          <section class="bloco" id="bloco-sem" hidden>
+            <h2 class="bloco-titulo">
+              Sem posição ainda <span class="conta-num" id="conta-sem">0</span>
+            </h2>
+            <p class="bloco-nota">
+              Ninguém marcou o lugar exato. Abra para ler como achar.
+            </p>
+            <ul class="lista" id="lista-sem"></ul>
+          </section>
+
+          <section class="bloco" id="bloco-ofertas" hidden>
+            <h2 class="bloco-titulo">Ofertas e equipamento</h2>
+            <p class="bloco-nota">
+              Links de afiliado: o canal pode ganhar uma comissão, sem custo
+              extra para você.
+            </p>
+            <ul class="ofertas" id="lista-ofertas"></ul>
+          </section>
+
+          <aside
+            class="patrocinio"
+            id="patrocinio"
+            aria-label="Patrocínio"
+            hidden
+          ></aside>
+
+          <footer class="rodape">
+            <nav class="canais canais-rodape" data-canais aria-label="Canais do Nauã Pietro"></nav>
+            <p>
+              Fan site não oficial; GTA e Leonida são marcas da Rockstar Games.
+            </p>
+            <p>
+              <a href="regras.html">Regras para sugerir</a> ·
+              <a href="politica-de-privacidade.html">Privacidade</a>
+            </p>
+          </footer>
+        </div>
+      </aside>
+
+      <div class="mapa-area">
+        <div id="mapa" aria-label="Mapa de Leonida"></div>
+        <p class="mapa-aviso" id="mapa-aviso" hidden></p>
+        <div class="escolher" id="escolher" hidden>
+          <p><strong>Toque no mapa</strong> onde fica o lugar.</p>
+          <button
+            type="button"
+            class="btn btn-fantasma btn-peq"
+            id="escolher-cancelar"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+
+      <aside class="detalhe" id="detalhe" aria-label="Detalhes" hidden>
+        <button type="button" class="detalhe-fechar" id="detalhe-fechar">
+          Fechar
+        </button>
+        <div class="detalhe-conteudo" id="detalhe-conteudo"></div>
+      </aside>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/util.js"></script>
+    <script src="vendor/leaflet/leaflet.js"></script>
+    <script src="js/api-demo.js"></script>
+    <script src="js/api-supabase.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/imagem.js"></script>
+    <script src="js/mapa.js"></script>
+    <script src="js/conta.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

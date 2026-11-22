@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://klqsnsdhavjslghxeovw.supabase.co https://cdn.discordapp.com; connect-src 'self' https://klqsnsdhavjslghxeovw.supabase.co wss://klqsnsdhavjslghxeovw.supabase.co; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <title>Privacidade · mapa de Leonida</title>
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" type="image/png" href="assets/marca/np-monograma.png" />
+    <link rel="stylesheet" href="css/publico.css" />
+  </head>
+  <body class="pagina-texto">
+    <header class="topo">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="assets/marca/logo-np-96.png" width="104" height="96" alt="Nauã Pietro" />
+        <span class="marca-texto"><span class="marca-titulo">Mapa de Leonida</span><span class="marca-sub">por Nauã Pietro</span></span>
+      </a>
+      <nav class="nav-site" data-paginas aria-label="Páginas do site"></nav>
+      <nav class="canais canais-topo" data-canais aria-label="Canais do Nauã Pietro"></nav>
+      <span class="selo-demo" title="Dados de mentira, só para testar"><span class="selo-longo">Demonstração</span><span class="selo-curto">Demo</span></span>
+      <div class="topo-acoes">
+        <a class="btn btn-fantasma" href="index.html">Voltar ao mapa</a>
+        <div class="conta" id="conta">
+          <button type="button" class="btn btn-discord" id="btn-entrar">
+            Entrar com Discord
+          </button>
+          <div class="conta-logado" id="conta-logado" hidden>
+            <button
+              type="button"
+              class="conta-botao"
+              id="btn-conta"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-controls="menu-conta"
+            >
+              <span class="avatar" id="conta-avatar" aria-hidden="true"></span>
+              <span class="conta-nome" id="conta-nome"></span>
+            </button>
+            <div class="menu" id="menu-conta" role="menu" hidden>
+              <a role="menuitem" class="menu-item" href="index.html">Mapa</a>
+              <button
+                type="button"
+                role="menuitem"
+                class="menu-item"
+                id="menu-sair"
+              >
+                Sair
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="texto">
+      <h1>Política de privacidade</h1>
+      <p class="atualizado">
+        Atualizada em 22 de novembro de 2026 · segue a LGPD (Lei 13.709/2018).
+      </p>
+
+      <p>
+        Este é um mapa feito por fãs, mantido pelo streamer
+        <strong>Nauã Pietro</strong> (o “controlador” dos dados, na linguagem da
+        lei). Aqui explicamos, sem juridiquês, quais dados guardamos, por quê,
+        por quanto tempo e como apagar tudo.
+      </p>
+
+      <h2>Quem só olha o mapa</h2>
+      <p>
+        Não guardamos nada sobre você. O site não usa cookies de propaganda nem
+        ferramentas de rastreamento. O serviço que hospeda o site (GitHub Pages)
+        e o banco de dados (Supabase) registram dados técnicos de acesso, como
+        endereço IP, por segurança e por pouco tempo, de acordo com as políticas
+        deles.
+      </p>
+
+      <h2>Quem entra com o Discord</h2>
+      <ul>
+        <li>
+          <strong>O que guardamos:</strong> seu ID do Discord, seu nome de
+          exibição e o endereço da sua foto de perfil. A foto e o ID
+          <strong>não aparecem para o público</strong>: só você e a moderação
+          veem.
+        </li>
+        <li>
+          <strong>E-mail:</strong> o Supabase (nosso banco de dados) sempre pede
+          o e-mail ao Discord no login e o guarda na área de contas dele. O site
+          <strong>não</strong> usa, não mostra e não copia o seu e-mail para
+          nenhuma outra tabela.
+        </li>
+        <li>
+          <strong>Para quê:</strong> saber quem enviou cada sugestão, dar o
+          crédito “Descoberto por @nome” no mapa, aplicar os limites (5
+          sugestões e 6 prints por dia) e barrar quem quebra as regras.
+        </li>
+        <li>
+          <strong>Base legal:</strong> execução do serviço que você pediu (art.
+          7º, V) e legítimo interesse em manter o mapa sem spam e sem abuso
+          (art. 7º, IX).
+        </li>
+        <li>
+          <strong>Senha do Discord:</strong> nunca passa por aqui. O login
+          acontece no próprio Discord.
+        </li>
+      </ul>
+
+      <h2>O que fica público</h2>
+      <ul>
+        <li>
+          Dos pontos aprovados: nome do lugar, categoria, posição no mapa,
+          textos, print e data da descoberta.
+        </li>
+        <li>
+          De quem descobriu: só o <strong>nome de exibição do Discord</strong>
+          (“Descoberto por @nome”). Sem foto, sem ID, sem e-mail.
+        </li>
+        <li>Sugestões em análise ou recusadas nunca ficam públicas.</li>
+      </ul>
+
+      <h2>Sugestões e prints</h2>
+      <ul>
+        <li>
+          O que você escreve na sugestão e o print que você envia ficam
+          guardados para a moderação analisar.
+        </li>
+        <li>
+          Antes de enviar, o seu navegador <strong>redesenha o print</strong>
+          para tentar apagar os dados escondidos da foto (localização GPS,
+          modelo do celular, data). Isso acontece no seu aparelho; o servidor
+          não confere de novo. Por isso, envie só prints tirados dentro do jogo.
+        </li>
+        <li>
+          Prints de sugestões em análise só são vistos por você e pela
+          moderação. Se a sugestão for aprovada, o print e o seu nome do Discord
+          ficam públicos no ponto.
+        </li>
+        <li>
+          Não envie prints que mostrem seu rosto, nome real, endereço ou dados
+          de outras pessoas.
+        </li>
+      </ul>
+
+      <h2>Por quanto tempo</h2>
+      <p>Uma faxina automática roda de hora em hora e apaga sozinha:</p>
+      <ul>
+        <li>
+          Sugestões recusadas: 90 dias depois da recusa, junto com o print.
+        </li>
+        <li>
+          Pontos removidos pela moderação: 30 dias depois da remoção (nesse
+          tempo o dono ainda pode desfazer), junto com o print.
+        </li>
+        <li>Prints enviados e não usados em nenhuma sugestão: em até 2 horas.</li>
+        <li>
+          Contadores de limite (quantas sugestões e prints você enviou): 7
+          dias. Eles guardam só um código embaralhado (hash) do seu Discord.
+        </li>
+        <li>Conta e sugestões aprovadas: enquanto a conta existir.</li>
+        <li>
+          Conta suspensa por quebrar as regras: guardamos só o código
+          embaralhado (hash) do Discord enquanto a suspensão durar, mesmo se a
+          conta for apagada, para impedir que a pessoa volte com o mesmo
+          Discord (legítimo interesse, art. 7º, IX).
+        </li>
+        <li>
+          Registro da moderação (quem aprovou, recusou ou removeu algo): mantido
+          para segurança do mapa. Se a sua conta for apagada, o seu nome sai
+          desse registro.
+        </li>
+      </ul>
+
+      <h2>Com quem compartilhamos</h2>
+      <p>
+        Com ninguém para propaganda. Usamos três serviços para o site funcionar:
+      </p>
+      <ul>
+        <li>
+          <strong>Supabase</strong> (banco de dados e prints): servidores em São
+          Paulo, Brasil; a empresa é dos Estados Unidos.
+        </li>
+        <li>
+          <strong>GitHub Pages</strong> (hospeda as páginas): Estados Unidos.
+        </li>
+        <li><strong>Discord</strong> (login): Estados Unidos.</li>
+      </ul>
+      <p>
+        Por isso pode haver <strong>transferência internacional</strong> de
+        dados, feita conforme o art. 33 da LGPD: esses serviços oferecem
+        garantias e contratos de proteção de dados, e a transferência é
+        necessária para entregar o serviço que você pediu (entrar com o Discord
+        e enviar sugestões). Cada um segue a própria política de privacidade.
+      </p>
+
+      <h2>Ofertas e patrocínio</h2>
+      <p>
+        Alguns links da seção “Ofertas e equipamento” são de afiliado: se você
+        comprar, o canal pode ganhar uma comissão, sem custo extra para você. Ao
+        clicar, você sai deste site e passa a valer a política da loja.
+      </p>
+
+      <h2>Seus direitos</h2>
+      <p>
+        Você pode pedir para ver, corrigir ou apagar seus dados a qualquer
+        momento. Seu nome e foto vêm do Discord: mude lá e eles se atualizam
+        aqui no próximo login. Para apagar tudo, use o botão abaixo. Dúvidas ou
+        pedidos: <span id="contato-privacidade">fale com o Nauã no servidor do
+        Discord da live</span>.
+      </p>
+
+      <h2 id="apagar">Apagar minha conta e dados</h2>
+      <div class="caixa-perigo" id="caixa-apagar">
+        <p id="apagar-texto">Entre com o Discord para apagar sua conta.</p>
+        <p class="campo-ajuda">
+          Apaga: seu login, seu perfil, todas as suas sugestões (em análise,
+          aprovadas e recusadas), suas denúncias e todos os seus prints. Pontos
+          que você descobriu e já estão no mapa continuam, mas sem o seu nome e
+          sem o seu print. Não dá para desfazer.
+        </p>
+        <button
+          type="button"
+          class="btn btn-perigo"
+          id="btn-apagar-conta"
+          hidden
+        >
+          Apagar minha conta e dados
+        </button>
+      </div>
+    </main>
+
+    <footer class="rodape-pagina">
+      <nav class="canais canais-rodape" data-canais aria-label="Canais do Nauã Pietro"></nav>
+      <p>Fan site não oficial; GTA e Leonida são marcas da Rockstar Games.</p>
+      <p><a href="index.html">Mapa</a> · <a href="regras.html">Regras</a></p>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/api-demo.js"></script>
+    <script src="js/api-supabase.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/conta.js"></script>
+    <script src="js/privacidade.js"></script>
+  </body>
+</html>

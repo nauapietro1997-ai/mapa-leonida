@@ -1,0 +1,894 @@
+// Página do mapa público: pontos aprovados, detalhes, sugerir lugar, minhas sugestões, ofertas.
+(async function () {
+  "use strict";
+  const {
+    CATEGORIAS,
+    el,
+    limpar,
+    linkSeguro,
+    imagemSegura,
+    host,
+    dinheiro,
+    data,
+    semAcento,
+    aviso,
+    textoErro,
+    perguntar,
+  } = window.U;
+  const { criarMapa, iconePino, iconeNovo, paraLatLng, deLatLng } = window.Mapa;
+  const $ = (s) => document.querySelector(s);
+
+  let api;
+  try {
+    api = await window.prepararApi();
+  } catch (e) {
+    $("#carregando").textContent = textoErro(e);
+    return;
+  }
+
+  // ---------- Mapa ----------
+  const { mapa, camada } = criarMapa($("#mapa"));
+  camada.on("error", () => {
+    const a = $("#mapa-aviso");
+    a.hidden = false;
+    a.textContent =
+      "A imagem do mapa não carregou. Os pontos aparecem mesmo assim.";
+  });
+
+  let pontos = [];
+  let prints = {};
+  const marcadores = {};
+  const filtros = new Set(Object.keys(CATEGORIAS));
+  let busca = "";
+  // Link vindo de outra página (ex.: troféus): index.html?categoria=colecionaveis&busca=carta
+  let veioDeLink = false;
+  try {
+    const q = new URLSearchParams(location.search);
+    const cat = q.get("categoria");
+    if (cat && CATEGORIAS[cat]) {
+      filtros.clear();
+      filtros.add(cat);
+      veioDeLink = true;
+    }
+    const b = (q.get("busca") || "").trim().slice(0, 60);
+    if (b) {
+      $("#busca").value = b;
+      busca = semAcento(b);
+      veioDeLink = true;
+    }
+  } catch (e) {
+    /* endereço sem filtro */
+  }
+  let selecionado = null;
+  let perfil = null;
+
+  // ---------- Painel lateral direito (detalhe ou formulário) ----------
+  const detalhe = $("#detalhe");
+  const conteudo = $("#detalhe-conteudo");
+  function abrirPainel(rotulo) {
+    detalhe.hidden = false;
+    detalhe.setAttribute("aria-label", rotulo);
+    detalhe.scrollTop = 0;
+  }
+  function fecharPainel() {
+    detalhe.hidden = true;
+    selecionado = null;
+    cancelarEscolha();
+    atualizarPinos();
+    marcarLista();
+  }
+  $("#detalhe-fechar").addEventListener("click", fecharPainel);
+  document.addEventListener("keydown", (ev) => {
+    if (
+      ev.key === "Escape" &&
+      !detalhe.hidden &&
+      !document.querySelector("dialog[open]")
+    )
+      fecharPainel();
+  });
+
+  // ---------- Pontos ----------
+  function visivel(p) {
+    if (!filtros.has(p.categoria)) return false;
+    if (!busca) return true;
+    const t = semAcento([p.nome, p.regiao, p.o_que_tem].join(" "));
+    return busca.split(/\s+/).every((b) => t.includes(b));
+  }
+
+  function atualizarPinos() {
+    for (const p of pontos) {
+      const m = marcadores[p.id];
+      if (!m) continue;
+      if (visivel(p)) {
+        m.setIcon(
+          iconePino(p.categoria, selecionado === p.id ? "sel" : "", p.subtipo),
+        );
+        m.setZIndexOffset(selecionado === p.id ? 1000 : 0);
+        if (!mapa.hasLayer(m)) m.addTo(mapa);
+      } else if (mapa.hasLayer(m)) m.remove();
+    }
+  }
+
+  function itemLista(p) {
+    const cat = CATEGORIAS[p.categoria] || CATEGORIAS.misterios;
+    return el(
+      "li",
+      null,
+      el(
+        "button",
+        {
+          type: "button",
+          class: "item",
+          dataset: { id: p.id },
+          onclick: () => abrirPonto(p.id, true),
+        },
+        el(
+          "span",
+          { class: "item-ic", cor: cat.cor },
+          U.iconeCategoria(p.categoria, p.subtipo, "item-ic-img"),
+        ),
+        el(
+          "span",
+          { class: "item-texto" },
+          el("span", { class: "item-nome", text: p.nome }),
+          el("span", { class: "item-regiao", text: p.regiao || cat.nome }),
+        ),
+        p.valor
+          ? el("span", { class: "item-valor", text: dinheiro(p.valor) })
+          : null,
+      ),
+    );
+  }
+
+  function desenharLista() {
+    const noMapa = pontos.filter(
+      (p) => p.x !== null && p.x !== undefined && visivel(p),
+    );
+    const sem = pontos.filter(
+      (p) => (p.x === null || p.x === undefined) && visivel(p),
+    );
+    const ordem = (a, b) => a.nome.localeCompare(b.nome, "pt-BR");
+    const lm = limpar($("#lista-mapa"));
+    noMapa.sort(ordem).forEach((p) => lm.append(itemLista(p)));
+    if (!noMapa.length)
+      lm.append(
+        el("li", {
+          class: "vazio",
+          text: busca
+            ? "Nada encontrado com essa busca."
+            : "Nenhum ponto nessas categorias.",
+        }),
+      );
+    $("#conta-mapa").textContent = noMapa.length;
+    const ls = limpar($("#lista-sem"));
+    sem.sort(ordem).forEach((p) => ls.append(itemLista(p)));
+    $("#conta-sem").textContent = sem.length;
+    $("#bloco-sem").hidden = !sem.length;
+    marcarLista();
+  }
+  function marcarLista() {
+    document
+      .querySelectorAll(".item[data-id]")
+      .forEach((b) => b.classList.toggle("sel", b.dataset.id === selecionado));
+  }
+
+  function desenharFiltros() {
+    const caixa = limpar($("#filtros"));
+    for (const [id, c] of Object.entries(CATEGORIAS)) {
+      const n = pontos.filter((p) => p.categoria === id).length;
+      caixa.append(
+        el(
+          "button",
+          {
+            type: "button",
+            class: "filtro",
+            cor: c.cor,
+            "aria-pressed": String(filtros.has(id)),
+            onclick: (ev) => {
+              filtros.has(id) ? filtros.delete(id) : filtros.add(id);
+              ev.currentTarget.setAttribute(
+                "aria-pressed",
+                String(filtros.has(id)),
+              );
+              desenharLista();
+              atualizarPinos();
+            },
+          },
+          U.iconeCategoria(id, null, "filtro-ic"),
+          c.nome,
+          el("span", { class: "filtro-conta", text: n }),
+        ),
+      );
+    }
+  }
+
+  $("#busca").addEventListener("input", (ev) => {
+    busca = semAcento(ev.target.value.trim());
+    desenharLista();
+    atualizarPinos();
+  });
+
+  function campo(titulo, ...corpo) {
+    return el(
+      "div",
+      { class: "det-campo" },
+      el("h3", { text: titulo }),
+      ...corpo,
+    );
+  }
+
+  function abrirPonto(id, centralizar) {
+    const p = pontos.find((x) => x.id === id);
+    if (!p) return;
+    cancelarEscolha();
+    selecionado = id;
+    const cat = CATEGORIAS[p.categoria] || CATEGORIAS.misterios;
+    limpar(conteudo);
+    const autor = p.autor && p.autor.nome ? "@" + p.autor.nome : "Equipe Nauã";
+    const fontes = (p.fontes || []).map((f) => linkSeguro(f)).filter(Boolean);
+    const urlPrint = p.print_path && prints[p.print_path];
+
+    conteudo.append(
+      ...[
+        el(
+          "div",
+          { class: "det-cab" },
+          el("span", {
+            class: "det-cat",
+            cor: cat.cor,
+            text: cat.icone + " " + cat.nome,
+          }),
+          p.precisao ? el("span", { class: "selo", text: p.precisao }) : null,
+        ),
+        el("h2", { class: "det-nome", text: p.nome }),
+        el(
+          "p",
+          { class: "det-autor" },
+          "Descoberto por ",
+          el("strong", { text: autor }),
+          p.descoberto_em ? " · " + data(p.descoberto_em) : "",
+        ),
+        urlPrint
+          ? el(
+              "figure",
+              { class: "det-img" },
+              el("img", {
+                src: urlPrint,
+                alt: "Print enviado para " + p.nome,
+                loading: "lazy",
+                decoding: "async",
+              }),
+              el("figcaption", { text: "Print enviado por " + autor }),
+            )
+          : null,
+        p.regiao ? campo("Região", el("p", { text: p.regiao })) : null,
+        p.referencia
+          ? campo("Onde fica", el("p", { text: p.referencia }))
+          : null,
+        p.o_que_tem || p.valor
+          ? campo(
+              "O que tem",
+              p.o_que_tem
+                ? el("p", { class: "det-forte", text: p.o_que_tem })
+                : null,
+              p.valor
+                ? el("p", { class: "det-valor", text: dinheiro(p.valor) })
+                : null,
+            )
+          : null,
+        p.como_pegar
+          ? campo("Como pegar", el("p", { text: p.como_pegar }))
+          : null,
+        p.codigo
+          ? campo("Código", el("p", { class: "det-codigo", text: p.codigo }))
+          : null,
+        p.observacoes
+          ? el(
+              "div",
+              { class: "det-campo det-obs" },
+              el("h3", { text: "Atenção" }),
+              el("p", { text: p.observacoes }),
+            )
+          : null,
+        fontes.length
+          ? campo(
+              "Fontes",
+              el(
+                "ul",
+                { class: "fontes" },
+                fontes.map((f) =>
+                  el(
+                    "li",
+                    null,
+                    "Fonte: ",
+                    el("a", {
+                      href: f,
+                      target: "_blank",
+                      rel: "noopener noreferrer nofollow ugc",
+                      text: host(f),
+                    }),
+                  ),
+                ),
+              ),
+            )
+          : null,
+        el(
+          "div",
+          { class: "det-rodape" },
+          el("button", {
+            type: "button",
+            class: "link-discreto",
+            text: "Denunciar este ponto",
+            onclick: () => denunciar(p),
+          }),
+        ),
+      ].filter(Boolean),
+    ); // sem os campos vazios (append de null escreveria "null")
+    abrirPainel("Detalhes de " + p.nome);
+    atualizarPinos();
+    marcarLista();
+    document.body.classList.remove("lista-aberta");
+    $("#btn-lista").setAttribute("aria-expanded", "false");
+    if (centralizar && p.x !== null && p.x !== undefined)
+      mapa.flyTo(paraLatLng(p.x, p.y), Math.max(mapa.getZoom(), -1), {
+        duration: 0.5,
+      });
+  }
+
+  async function denunciar(p) {
+    if (!perfil) {
+      aviso("Entre com o Discord para denunciar.");
+      return;
+    }
+    const motivo = await perguntar({
+      titulo: "Denunciar ponto",
+      texto:
+        "Conte o que está errado (informação falsa, print impróprio, spam…). A moderação vai olhar.",
+      campo: true,
+      rotuloCampo: "O que está errado?",
+      confirmar: "Enviar denúncia",
+      minimo: 5,
+    });
+    if (!motivo) return;
+    try {
+      await api.denunciar(p.id, motivo);
+      aviso("Denúncia enviada. Valeu demais!");
+    } catch (e) {
+      aviso(textoErro(e), "erro");
+    }
+  }
+
+  async function carregarPontos() {
+    try {
+      pontos = await api.pontos();
+    } catch (e) {
+      $("#carregando").textContent =
+        "Não consegui carregar os pontos. " + textoErro(e);
+      return;
+    }
+    $("#carregando").hidden = true;
+    for (const m of Object.values(marcadores)) m.remove();
+    for (const k of Object.keys(marcadores)) delete marcadores[k];
+    for (const p of pontos) {
+      if (p.x === null || p.x === undefined) continue;
+      const m = L.marker(paraLatLng(p.x, p.y), {
+        icon: iconePino(p.categoria, "", p.subtipo),
+        title: p.nome,
+        alt: p.nome,
+        keyboard: true,
+        riseOnHover: true,
+      });
+      // no modo "escolher lugar", tocar num pino marca a posição dele (não abre o ponto)
+      m.on("click", (ev) =>
+        escolhendo
+          ? mapa.fire("click", { latlng: ev.latlng })
+          : abrirPonto(p.id, false),
+      );
+      marcadores[p.id] = m;
+    }
+    desenharFiltros();
+    desenharLista();
+    atualizarPinos();
+    prints = await api.urlsPrints(pontos.map((p) => p.print_path));
+  }
+
+  // ---------- Sugerir lugar ----------
+  let escolhendo = false;
+  let marcadorNovo = null;
+  let posicaoNova = null;
+
+  function cancelarEscolha() {
+    escolhendo = false;
+    $("#escolher").hidden = true;
+    $("#mapa").classList.remove("escolhendo");
+    if (marcadorNovo) {
+      marcadorNovo.remove();
+      marcadorNovo = null;
+    }
+  }
+  $("#escolher-cancelar").addEventListener("click", cancelarEscolha);
+
+  $("#btn-sugerir").addEventListener("click", () => {
+    if (!perfil) {
+      aviso("Entre com o Discord para sugerir um lugar.");
+      $("#btn-entrar").focus();
+      return;
+    }
+    if (perfil.banido) {
+      aviso("Sua conta está suspensa e não pode enviar sugestões.", "erro");
+      return;
+    }
+    detalhe.hidden = true;
+    selecionado = null;
+    atualizarPinos();
+    document.body.classList.remove("lista-aberta");
+    escolhendo = true;
+    $("#escolher").hidden = false;
+    $("#mapa").classList.add("escolhendo");
+  });
+
+  mapa.on("click", (ev) => {
+    if (!escolhendo) return;
+    escolhendo = false;
+    $("#escolher").hidden = true;
+    $("#mapa").classList.remove("escolhendo");
+    posicaoNova = deLatLng(ev.latlng);
+    if (marcadorNovo) marcadorNovo.remove();
+    marcadorNovo = L.marker(paraLatLng(posicaoNova.x, posicaoNova.y), {
+      icon: iconeNovo(),
+      draggable: true,
+      title: "Lugar sugerido (arraste para ajustar)",
+      zIndexOffset: 2000,
+    }).addTo(mapa);
+    marcadorNovo.on("dragend", () => {
+      posicaoNova = deLatLng(marcadorNovo.getLatLng());
+      const pos = document.getElementById("form-posicao");
+      if (pos) pos.textContent = textoPosicao();
+    });
+    abrirFormulario();
+  });
+
+  function textoPosicao() {
+    return (
+      "Posição marcada (x " +
+      posicaoNova.x +
+      ", y " +
+      posicaoNova.y +
+      "). Arraste o pino para ajustar."
+    );
+  }
+
+  function grupo(id, rotulo, controle, ajuda) {
+    return el(
+      "div",
+      { class: "campo" },
+      el("label", { for: id, text: rotulo }),
+      controle,
+      ajuda
+        ? el("p", { class: "campo-ajuda", id: id + "-ajuda", text: ajuda })
+        : null,
+    );
+  }
+
+  function abrirFormulario() {
+    limpar(conteudo);
+    let preparado = null;
+    const opcoes = Object.entries(CATEGORIAS).map(([v, c]) =>
+      el("option", { value: v, text: c.icone + " " + c.nome }),
+    );
+    const preview = el("div", { class: "print-preview", hidden: true });
+    const erro = el("p", { class: "form-erro", role: "alert", hidden: true });
+    const arquivo = el("input", {
+      type: "file",
+      id: "f-print",
+      accept: "image/jpeg,image/png,image/webp",
+      "aria-describedby": "f-print-ajuda",
+    });
+    const enviar = el("button", {
+      type: "submit",
+      class: "btn btn-primario btn-largo",
+      text: "Enviar para a moderação",
+    });
+
+    arquivo.addEventListener("change", async () => {
+      erro.hidden = true;
+      preparado = null;
+      limpar(preview);
+      preview.hidden = true;
+      const f = arquivo.files[0];
+      if (!f) return;
+      try {
+        preview.hidden = false;
+        preview.append(
+          el("p", { class: "campo-ajuda", text: "Preparando o print…" }),
+        );
+        preparado = await window.prepararPrint(f);
+        limpar(preview);
+        const url = URL.createObjectURL(preparado.blob);
+        preview.append(
+          el("img", { src: url, alt: "Prévia do print" }),
+          el("p", {
+            class: "campo-ajuda",
+            id: "print-info",
+            text:
+              preparado.largura +
+              " × " +
+              preparado.altura +
+              " px · " +
+              Math.round(preparado.blob.size / 1024) +
+              " KB · dados escondidos da foto (GPS, celular) removidos",
+          }),
+        );
+      } catch (e) {
+        preview.hidden = true;
+        arquivo.value = "";
+        erro.hidden = false;
+        erro.textContent = textoErro(e);
+      }
+    });
+
+    const form = el(
+      "form",
+      { class: "form-sugestao", id: "form-sugestao", novalidate: true },
+      el("h2", { class: "det-nome", text: "Sugerir lugar" }),
+      el("p", {
+        class: "campo-ajuda",
+        id: "form-posicao",
+        text: textoPosicao(),
+      }),
+      grupo(
+        "f-nome",
+        "Nome do lugar *",
+        el("input", {
+          id: "f-nome",
+          name: "nome",
+          required: true,
+          minlength: 3,
+          maxlength: 80,
+          autocomplete: "off",
+        }),
+      ),
+      grupo(
+        "f-categoria",
+        "Categoria *",
+        el(
+          "select",
+          { id: "f-categoria", name: "categoria", required: true },
+          opcoes,
+        ),
+      ),
+      grupo(
+        "f-oque",
+        "O que tem *",
+        el("input", {
+          id: "f-oque",
+          name: "o_que_tem",
+          required: true,
+          minlength: 3,
+          maxlength: 500,
+          placeholder: "Ex.: pistola dourada, maleta de dinheiro",
+        }),
+      ),
+      grupo(
+        "f-valor",
+        "Valor em US$ (se for dinheiro)",
+        el("input", {
+          id: "f-valor",
+          name: "valor",
+          type: "number",
+          min: 0,
+          max: 100000000,
+          step: 1,
+          inputmode: "numeric",
+        }),
+      ),
+      grupo(
+        "f-como",
+        "Como pegar *",
+        el("textarea", {
+          id: "f-como",
+          name: "como_pegar",
+          required: true,
+          minlength: 3,
+          maxlength: 1500,
+          rows: 4,
+          placeholder: "Passo a passo: por onde entrar, o que fazer",
+        }),
+      ),
+      grupo(
+        "f-codigo",
+        "Código (opcional)",
+        el("input", {
+          id: "f-codigo",
+          name: "codigo",
+          maxlength: 60,
+          autocomplete: "off",
+          placeholder: "Ex.: cofre 1234",
+        }),
+      ),
+      grupo(
+        "f-print",
+        "Print do jogo (opcional)",
+        arquivo,
+        "JPG, PNG ou WebP até 8 MB. Use só print SEU, nunca imagem de site de guia.",
+      ),
+      preview,
+      el(
+        "p",
+        { class: "campo-ajuda" },
+        "Ao enviar, você aceita as ",
+        el("a", {
+          href: "regras.html",
+          target: "_blank",
+          rel: "noopener",
+          text: "regras",
+        }),
+        ". Seu nome do Discord aparece no ponto se ele for aprovado.",
+      ),
+      erro,
+      enviar,
+    );
+
+    form.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      erro.hidden = true;
+      const d = Object.fromEntries(new FormData(form));
+      const faltando = [];
+      if ((d.nome || "").trim().length < 3) faltando.push("nome");
+      if ((d.o_que_tem || "").trim().length < 3) faltando.push("o que tem");
+      if ((d.como_pegar || "").trim().length < 3) faltando.push("como pegar");
+      if (faltando.length) {
+        erro.hidden = false;
+        erro.textContent =
+          "Preencha: " + faltando.join(", ") + " (pelo menos 3 letras).";
+        return;
+      }
+      const valor = d.valor === "" ? null : Math.round(Number(d.valor));
+      if (
+        valor !== null &&
+        (!Number.isFinite(valor) || valor < 0 || valor > 1e8)
+      ) {
+        erro.hidden = false;
+        erro.textContent = "Valor inválido.";
+        return;
+      }
+      if (arquivo.files[0] && !preparado) {
+        erro.hidden = false;
+        erro.textContent = "Espere o print terminar de preparar.";
+        return;
+      }
+      enviar.disabled = true;
+      enviar.textContent = "Enviando…";
+      try {
+        await api.enviarSugestao(
+          {
+            nome: d.nome.trim(),
+            categoria: d.categoria,
+            o_que_tem: d.o_que_tem.trim(),
+            valor,
+            como_pegar: d.como_pegar.trim(),
+            codigo: (d.codigo || "").trim() || null,
+            x: posicaoNova.x,
+            y: posicaoNova.y,
+          },
+          preparado && preparado.blob,
+          preparado && preparado.ext,
+        );
+        fecharPainel();
+        aviso("Sugestão enviada! Valeu demais, a moderação vai conferir.");
+        carregarMinhas();
+      } catch (e) {
+        erro.hidden = false;
+        erro.textContent = textoErro(e);
+        enviar.disabled = false;
+        enviar.textContent = "Enviar para a moderação";
+      }
+    });
+
+    conteudo.append(form);
+    abrirPainel("Sugerir lugar");
+    setTimeout(() => $("#f-nome").focus(), 50);
+  }
+
+  // ---------- Minhas sugestões ----------
+  const ROTULO_STATUS = {
+    pendente: "Em análise",
+    aprovada: "Aprovada",
+    recusada: "Recusada",
+  };
+  async function carregarMinhas() {
+    const bloco = $("#bloco-minhas");
+    if (!perfil) {
+      bloco.hidden = true;
+      return;
+    }
+    let lista = [];
+    try {
+      lista = await api.minhasSugestoes();
+    } catch (e) {
+      lista = [];
+    }
+    bloco.hidden = false;
+    $("#conta-minhas").textContent = lista.length;
+    const ul = limpar($("#lista-minhas"));
+    if (!lista.length)
+      ul.append(
+        el("li", {
+          class: "vazio",
+          text: "Nada por aqui ainda. Bora marcar o primeiro lugar em “Sugerir lugar”?",
+        }),
+      );
+    for (const s of lista) {
+      const cat = CATEGORIAS[s.categoria] || CATEGORIAS.misterios;
+      ul.append(
+        el(
+          "li",
+          { class: "minha" },
+          el(
+            "span",
+            { class: "item-ic", cor: cat.cor },
+            U.iconeCategoria(s.categoria, s.subtipo, "item-ic-img"),
+          ),
+          el(
+            "div",
+            { class: "item-texto" },
+            el("span", { class: "item-nome", text: s.nome }),
+            el(
+              "span",
+              { class: "item-regiao" },
+              el("span", {
+                class: "status status-" + s.status,
+                text: ROTULO_STATUS[s.status] || s.status,
+              }),
+              " · " + data(s.criado),
+            ),
+            s.status === "recusada" && s.motivo
+              ? el("span", {
+                  class: "minha-motivo",
+                  text: "Motivo: " + s.motivo,
+                })
+              : null,
+          ),
+          s.status === "aprovada" && s.ponto_id
+            ? el("button", {
+                type: "button",
+                class: "btn btn-fantasma btn-peq",
+                text: "Ver",
+                onclick: () => abrirPonto(s.ponto_id, true),
+              })
+            : s.status === "pendente"
+              ? el("button", {
+                  type: "button",
+                  class: "btn btn-fantasma btn-peq",
+                  text: "Apagar",
+                  "aria-label": "Apagar a sugestão " + s.nome,
+                  onclick: async () => {
+                    const ok = await perguntar({
+                      titulo: "Apagar sugestão?",
+                      texto:
+                        "A sugestão e o print dela serão apagados. Não dá para desfazer.",
+                      confirmar: "Apagar",
+                      perigo: true,
+                    });
+                    if (!ok) return;
+                    try {
+                      await api.apagarSugestao(s);
+                      aviso("Sugestão apagada.");
+                      carregarMinhas();
+                    } catch (e) {
+                      aviso(textoErro(e), "erro");
+                    }
+                  },
+                })
+              : null,
+        ),
+      );
+    }
+  }
+  $("#menu-minhas").addEventListener("click", () => {
+    document.body.classList.add("lista-aberta");
+    $("#btn-lista").setAttribute("aria-expanded", "true");
+    $("#bloco-minhas").scrollIntoView({ block: "start" });
+  });
+
+  // ---------- Ofertas e patrocínio ----------
+  function imagemOferta(src, alt) {
+    const ok = imagemSegura(src || "");
+    return ok
+      ? el("img", {
+          src: ok,
+          alt: alt || "",
+          loading: "lazy",
+          width: 56,
+          height: 56,
+        })
+      : null;
+  }
+  async function carregarOfertas() {
+    try {
+      const [pat, ofs] = await Promise.all([api.patrocinio(), api.afiliados()]);
+      const ul = limpar($("#lista-ofertas"));
+      for (const o of ofs || []) {
+        const link = linkSeguro(o.link);
+        if (!link) continue; // link que não é https não aparece
+        ul.append(
+          el(
+            "li",
+            null,
+            el(
+              "a",
+              {
+                class: "oferta",
+                href: link,
+                target: "_blank",
+                rel: "sponsored noopener noreferrer",
+              },
+              imagemOferta(o.imagem, ""),
+              el(
+                "span",
+                { class: "oferta-texto" },
+                el("strong", { text: o.titulo }),
+                o.descricao ? el("span", { text: o.descricao }) : null,
+                el("span", {
+                  class: "oferta-loja",
+                  text: [o.loja, o.preco_texto].filter(Boolean).join(" · "),
+                }),
+              ),
+            ),
+          ),
+        );
+      }
+      $("#bloco-ofertas").hidden = !ul.children.length;
+
+      const caixa = limpar($("#patrocinio"));
+      const link = pat && linkSeguro(pat.link);
+      if (pat && pat.texto && link) {
+        caixa.append(
+          el("span", { class: "patrocinio-rotulo", text: "Patrocínio" }),
+          el(
+            "a",
+            {
+              class: "patrocinio-link",
+              href: link,
+              target: "_blank",
+              rel: "sponsored noopener noreferrer",
+            },
+            imagemOferta(pat.imagem, ""),
+            el("span", { text: pat.texto }),
+          ),
+        );
+        caixa.hidden = false;
+      } else caixa.hidden = true;
+    } catch (e) {
+      /* ofertas são opcionais: se falhar, só não aparecem */
+    }
+  }
+
+  // ---------- Celular: lista ----------
+  $("#btn-lista").addEventListener("click", () => {
+    const aberto = document.body.classList.toggle("lista-aberta");
+    $("#btn-lista").setAttribute("aria-expanded", String(aberto));
+  });
+
+  // ---------- Conta ----------
+  await window.Conta.iniciar(api, (p) => {
+    perfil = p;
+    $("#aviso-banido").hidden = !(p && p.banido);
+    carregarMinhas();
+  });
+  await carregarPontos();
+  carregarOfertas();
+  if (veioDeLink) {
+    const nVisiveis = pontos.filter(visivel).length;
+    aviso(
+      nVisiveis
+        ? "Filtro aplicado: " +
+            nVisiveis +
+            " ponto(s). Toque nas categorias para ver tudo."
+        : "Ainda não há pontos disso no mapa. Toque nas categorias para ver tudo.",
+    );
+  }
+
+  // Para os testes automáticos saberem que a página terminou de carregar.
+  document.documentElement.dataset.pronto = "1";
+})();

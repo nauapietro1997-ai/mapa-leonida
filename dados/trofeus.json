@@ -1,0 +1,1501 @@
+{
+  "trofeus": [
+    {
+      "n": 1,
+      "nome_original": "Vice Got a Price!",
+      "nome_pt": "O Vício Tem Seu Preço!",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "platina",
+      "gamerscore_xbox": 0,
+      "oculto": false,
+      "descricao": "Conquiste todos os outros troféus.",
+      "como_conseguir": "Pegue os outros 54 troféus. Tudo é offline/single-player; sem DLC.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": null,
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/",
+        "https://www.ggrecon.com/articles/gta-6-trophies-achievements-list-platinum/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 2,
+      "nome_original": "Just Like Paradise",
+      "nome_pt": "Igualzinho ao Paraíso",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 5,
+      "oculto": true,
+      "descricao": "Conclua a missão \"Gone Fishing\".",
+      "como_conseguir": "Automático na história (missão de abertura, Capítulo 1).",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 3,
+      "nome_original": "Paradise Lost",
+      "nome_pt": "Paraíso Perdido",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": true,
+      "descricao": "Conclua o Capítulo 1.",
+      "como_conseguir": "Automático na história.",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 4,
+      "nome_original": "T**s Ass Drug Money",
+      "nome_pt": "Dinheiro de Droga de P*** e B*** (tradução livre; título com palavrão censurado)",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": true,
+      "descricao": "Conclua o Capítulo 2.",
+      "como_conseguir": "Automático na história.",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 5,
+      "nome_original": "Vice City, Baby!",
+      "nome_pt": "Vice City, Meu Bem!",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": true,
+      "descricao": "Conclua o Capítulo 3.",
+      "como_conseguir": "Automático na história.",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 6,
+      "nome_original": "Top Of The World, Ma",
+      "nome_pt": "No Topo do Mundo, Mãe",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": true,
+      "descricao": "Conclua o Capítulo 4.",
+      "como_conseguir": "Automático na história.",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 7,
+      "nome_original": "You Gotta Know When to Get Off",
+      "nome_pt": "Tem Que Saber a Hora de Descer",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "ouro",
+      "gamerscore_xbox": 50,
+      "oculto": true,
+      "descricao": "Conclua a missão final da história.",
+      "como_conseguir": "Automático ao terminar a história (Capítulo 5).",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 8,
+      "nome_original": "Trust",
+      "nome_pt": "Confiança",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 10,
+      "oculto": true,
+      "descricao": "Conclua a missão \"Breakfast Run\".",
+      "como_conseguir": "Automático na história (Capítulo 2).",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 9,
+      "nome_original": "Break the Bank",
+      "nome_pt": "Quebrar a Banca",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 25,
+      "oculto": true,
+      "descricao": "Conclua \"The Cartel Heist\".",
+      "como_conseguir": "Automático na história.",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 10,
+      "nome_original": "Family Matters",
+      "nome_pt": "Assuntos de Família",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 15,
+      "oculto": true,
+      "descricao": "Conclua \"Child's Play\".",
+      "como_conseguir": "Automático na história.",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 11,
+      "nome_original": "DWNFALL",
+      "nome_pt": "QUEDA (DWNFALL)",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 15,
+      "oculto": true,
+      "descricao": "Conclua \"Headliners\".",
+      "como_conseguir": "Automático na história.",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 12,
+      "nome_original": "Hi-Jacked",
+      "nome_pt": "Sequestrado",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 25,
+      "oculto": true,
+      "descricao": "Conclua \"VCIA Takedown\".",
+      "como_conseguir": "Automático na história.",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 13,
+      "nome_original": "Snow Storm",
+      "nome_pt": "Tempestade de Neve",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 25,
+      "oculto": true,
+      "descricao": "Conclua \"Operation Savage Glory\".",
+      "como_conseguir": "Automático na história.",
+      "spoiler": true,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "história",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 14,
+      "nome_original": "A Long Road",
+      "nome_pt": "Uma Longa Estrada",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "ouro",
+      "gamerscore_xbox": 100,
+      "oculto": false,
+      "descricao": "Alcance 100% de conclusão.",
+      "como_conseguir": "Lista de 100% abre depois da história (Progresso > Estatísticas). É ~60% do conteúdo real: precisa de todos os assaltos exigidos, 33 achados submarinos, 42 ouros no estande, 42 corridas de drone, 15 baralhos de alvos do Bret, 300 acrobacias, 70 de 80 desafios, 15 de 18 coleções de cartas, 100 WAiNK, 100 de 125 flamingos, 200 de 277 veículos, 50 de 66 armas, 100 de 255 animais, 30 de 40 corridas, lavagem/receptação (US$ 100 mil narcóticos, 100 mil joias, 250 mil notas marcadas, 200 mil veículos).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "100% (tudo)",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.ggrecon.com/articles/gta-6-trophies-achievements-list-platinum/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 15,
+      "nome_original": "Cunning Stunts",
+      "nome_pt": "Acrobacias Astutas",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "prata",
+      "gamerscore_xbox": 40,
+      "oculto": false,
+      "descricao": "Complete 250 acrobacias.",
+      "como_conseguir": "250 de 397 (130 saltos, 202 sob pontes, 40 voo de faca, 25 base jump). Sob pontes é o mais rápido. Para o 100% são 300.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "saltos/acrobacias",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 16,
+      "nome_original": "Master of None",
+      "nome_pt": "Mestre de Nada",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": false,
+      "descricao": "Experimente os 9 tipos de atividade.",
+      "como_conseguir": "Uma vez cada: pesca, caça, golfe, estande de tiro, sinuca, basquete, fliperama, corrida ou corrida de drone, acrobacia.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "atividades",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.ggrecon.com/articles/gta-6-trophies-achievements-list-platinum/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 17,
+      "nome_original": "The Shootist",
+      "nome_pt": "O Atirador",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "prata",
+      "gamerscore_xbox": 40,
+      "oculto": false,
+      "descricao": "Ouro em todos os desafios do estande de tiro.",
+      "como_conseguir": "42 medalhas de ouro em 12 estandes.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "estande de tiro",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 18,
+      "nome_original": "Top Fun",
+      "nome_pt": "Diversão Total",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 15,
+      "oculto": false,
+      "descricao": "Vença uma corrida de drone Top Fun em cada local.",
+      "como_conseguir": "14 locais (42 corridas no total; para o 100% são todas).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "drone (Top Fun)",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 19,
+      "nome_original": "Earn Cash, Not Kudos",
+      "nome_pt": "Ganhe Grana, Não Elogios",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": false,
+      "descricao": "Vença 20 corridas diferentes.",
+      "como_conseguir": "20 de 40 corridas únicas (100% pede 30).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "corridas",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.ggrecon.com/articles/gta-6-trophies-achievements-list-platinum/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 20,
+      "nome_original": "Baited My Tackle",
+      "nome_pt": "Mordeu a Isca",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 10,
+      "oculto": false,
+      "descricao": "Vença o Cal num desafio de pesca.",
+      "como_conseguir": "Depois da missão \"Feng Shui\" o Cal manda mensagem; ponto a oeste de Key Lento.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "pesca",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 21,
+      "nome_original": "Stick Fiddler",
+      "nome_pt": "Mexedor de Alavanca",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 10,
+      "oculto": false,
+      "descricao": "Termine um jogo de fliperama.",
+      "como_conseguir": "Termine todas as fases de 1 dos 4 jogos de fliperama (não precisa dos desafios).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "fliperama",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 22,
+      "nome_original": "Road to Rehabilitation",
+      "nome_pt": "Caminho da Reabilitação",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 15,
+      "oculto": true,
+      "descricao": "Conclua a última missão do Andy.",
+      "como_conseguir": "Só com a Lucia; 5 missões a partir do Capítulo 3.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "missões de personagem",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 23,
+      "nome_original": "This Was No Boat Accident",
+      "nome_pt": "Isso Não Foi Acidente de Barco",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 15,
+      "oculto": true,
+      "descricao": "Conclua a última missão do Kenton.",
+      "como_conseguir": "7 naufrágios, marcados após o Capítulo 1. Kenton some por um tempo e volta nos Caps. 2-3.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "naufrágios / submarino",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 24,
+      "nome_original": "The Lone Rider",
+      "nome_pt": "O Cavaleiro Solitário",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 15,
+      "oculto": true,
+      "descricao": "Conclua a última missão do Billy.",
+      "como_conseguir": "5 missões, a partir do fim do Capítulo 2.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "missões de personagem",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 25,
+      "nome_original": "Strangers & Freaks",
+      "nome_pt": "Estranhos e Malucos",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "prata",
+      "gamerscore_xbox": 30,
+      "oculto": false,
+      "descricao": "Conclua 8 linhas de missões de estranhos.",
+      "como_conseguir": "Só algumas linhas contam. Confirmadas: Kirk, Kyle, Yago, Pilot Pete; PowerPyx cita também Dr. Merle e Freddie; as 2 restantes não estão confirmadas. NÃO contam: Shirley, Moses, Billy, Andy, Yasmani, Tyrone, Eddie. Dica: olhe o contador do troféu antes/depois de cada final. Continuam disponíveis após a história.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "estranhos (Strangers & Freaks)",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://alcasthq.com/?p=87611",
+        "https://gmtreks.com/gta6/page/01M7QVGK6BDTA8232FS0MEXMBE"
+      ],
+      "confianca": "1-2 fontes"
+    },
+    {
+      "n": 26,
+      "nome_original": "Supply & Demand",
+      "nome_pt": "Oferta e Procura",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": true,
+      "descricao": "Conclua a última missão do Randy.",
+      "como_conseguir": "Entregue os 16 carros esportivos da lista de desejos (ache e escaneie com o WAiNK).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "veículos",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 27,
+      "nome_original": "Spin On This!",
+      "nome_pt": "Gira Nisso Aqui!",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 15,
+      "oculto": true,
+      "descricao": "Conclua a última missão do Tyrone.",
+      "como_conseguir": "Só com o Jason: destruir os laboratórios de \"areia de gato\" em Vice City.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "missões de personagem",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 28,
+      "nome_original": "Positive Mental Attitude",
+      "nome_pt": "Atitude Mental Positiva",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 10,
+      "oculto": false,
+      "descricao": "Medite em todos os pontos.",
+      "como_conseguir": "18 pontos em 10 locais; o último exige os dois personagens (após Cap. 2). A 1ª meditação (varanda da casa do Jason, oferecida pela Lucia na manhã depois de \"Down to Earth\") NÃO aparece como ponto e some depois do Capítulo 1: faça por garantia.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": true,
+        "motivo": "Possivelmente perdível: meditação da Lucia na varanda do Jason fica indisponível depois do Capítulo 1; não se sabe se é exigida.",
+        "ate_quando": "antes do fim do Capítulo 1"
+      },
+      "categoria": "meditação",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.ggrecon.com/articles/gta-6-trophies-achievements-list-platinum/",
+        "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/"
+      ],
+      "confianca": "1-2 fontes"
+    },
+    {
+      "n": 29,
+      "nome_original": "Fair Game",
+      "nome_pt": "Caça Justa",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 15,
+      "oculto": true,
+      "descricao": "Cace um animal único para o Bret.",
+      "como_conseguir": "Só com o Jason; faz parte dos 15 baralhos de alvos do Bret. Qual animal dispara não está confirmado.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "caça / animais",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "1-2 fontes"
+    },
+    {
+      "n": 30,
+      "nome_original": "Don't Touch My Deck",
+      "nome_pt": "Não Toca no Meu Baralho",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "prata",
+      "gamerscore_xbox": 30,
+      "oculto": false,
+      "descricao": "Complete 3 coleções de Cartas Colecionáveis.",
+      "como_conseguir": "Quaisquer 3 coleções completas (18 locais de coleções; 100% pede 15 de 18).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "cartas",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements",
+        "https://www.ggrecon.com/articles/gta-6-trophies-achievements-list-platinum/"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 31,
+      "nome_original": "You WAiNKer!",
+      "nome_pt": "Seu WAiNKer!",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "prata",
+      "gamerscore_xbox": 30,
+      "oculto": false,
+      "descricao": "Use o WAiNK em 100 locais.",
+      "como_conseguir": "100 escaneamentos: 31 pontos turísticos, 35 curiosidades, 23 esculturas, pichações \"No Flusher\".",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "WAiNK",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 32,
+      "nome_original": "One Last Thing",
+      "nome_pt": "Só Mais Uma Coisa",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 5,
+      "oculto": false,
+      "descricao": "Complete 50 desafios.",
+      "como_conseguir": "80 desafios existem; deixe para o fim (o 100% pede 70).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "desafios",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 33,
+      "nome_original": "Hot Together",
+      "nome_pt": "Quentes Juntos",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": false,
+      "descricao": "Escape de 4 estrelas de procurado com o parceiro.",
+      "como_conseguir": "Túnel de trem ao norte de Ambrosia; costuma sair sozinho nos roubos a banco do Capítulo 4.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": null,
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 34,
+      "nome_original": "Retail Therapy",
+      "nome_pt": "Terapia de Compras",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": false,
+      "descricao": "Roube 3 lojas seguidas com o parceiro.",
+      "como_conseguir": "Sem perder a estrela entre uma e outra; sai ~30 s após a 3ª. Use as joalherias ao norte de Vice City.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "assaltos",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 35,
+      "nome_original": "Whip It Good",
+      "nome_pt": "Máquina Boa",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": false,
+      "descricao": "Descubra 100 veículos.",
+      "como_conseguir": "Escaneie veículos com o WAiNK (100% pede 200 de 277).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "veículos",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 36,
+      "nome_original": "Gunslinger",
+      "nome_pt": "Pistoleiro",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 10,
+      "oculto": false,
+      "descricao": "Derrube 5 inimigos numa só ativação do Foco de Combate.",
+      "como_conseguir": "Use em inimigos de operações de gangue (não soldado/polícia/civil), com fuzil de assalto.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": null,
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 37,
+      "nome_original": "Catch Me If You Can",
+      "nome_pt": "Prenda-me Se For Capaz",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 10,
+      "oculto": true,
+      "descricao": "Faça uma \"partida não programada\" no aeroporto VCIA.",
+      "como_conseguir": "Roube um avião de passageiros parado na ponte de embarque e voe 1 km.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": null,
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 38,
+      "nome_original": "Challenging Tank",
+      "nome_pt": "Tanque Desafiador",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 10,
+      "oculto": true,
+      "descricao": "Roube um tanque militar.",
+      "como_conseguir": "Na Mile Zero Air Station.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "veículos",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "1-2 fontes"
+    },
+    {
+      "n": 39,
+      "nome_original": "Sneakthief",
+      "nome_pt": "Ladrão Furtivo",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 10,
+      "oculto": false,
+      "descricao": "Roube uma joalheria sem ser detectado.",
+      "como_conseguir": "Precisa da Snap Gun (Capítulo 3); o código do cofre fica na sala dos fundos.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "assaltos",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 40,
+      "nome_original": "Maximum Withdrawal",
+      "nome_pt": "Saque Máximo",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "prata",
+      "gamerscore_xbox": 40,
+      "oculto": false,
+      "descricao": "Roube 5 cofres de banco e fuja.",
+      "como_conseguir": "8 bancos grandes; libera numa missão opcional do Capítulo 4.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "assaltos",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 41,
+      "nome_original": "A Classic Blitz Play",
+      "nome_pt": "Uma Jogada-Relâmpago Clássica",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 10,
+      "oculto": false,
+      "descricao": "Roube um carro-forte e fuja.",
+      "como_conseguir": "Sai sozinho na missão de cofre de banco.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "assaltos",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 42,
+      "nome_original": "The Goodtime State",
+      "nome_pt": "O Estado da Boa Vida",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": false,
+      "descricao": "Explore toda Leonida.",
+      "como_conseguir": "Revele o mapa inteiro (melhor de avião).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "exploração",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 43,
+      "nome_original": "Pest Control",
+      "nome_pt": "Controle de Pragas",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": false,
+      "descricao": "Roube uma operação ilegal de cada gangue.",
+      "como_conseguir": "1 de cada uma das 9 gangues (39 operações; 100% pede todas).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "operações de gangue",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 44,
+      "nome_original": "In The Beginning…",
+      "nome_pt": "No Princípio…",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 5,
+      "oculto": true,
+      "descricao": "Tome um drinque com vista em Ocean Beach.",
+      "como_conseguir": "Bar do terraço Ocean View: peça um Apple Martini e beba de pé ao lado do balcão.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": null,
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/"
+      ],
+      "confianca": "1-2 fontes"
+    },
+    {
+      "n": 45,
+      "nome_original": "Capital Offense",
+      "nome_pt": "Crime Capital",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 5,
+      "oculto": true,
+      "descricao": "Saia quebrando a vitrine de uma concessionária.",
+      "como_conseguir": "Só com o Banshee azul no sul de Vice City; precisa do Key Cloner.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "veículos",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/"
+      ],
+      "confianca": "1-2 fontes"
+    },
+    {
+      "n": 46,
+      "nome_original": "Let's Go Bowling",
+      "nome_pt": "Bora Jogar Boliche",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 5,
+      "oculto": true,
+      "descricao": "Leve até o fim o roubo do boliche.",
+      "como_conseguir": "Missão opcional do Capítulo 2 (Kingpin Bowling): roube os 3 objetos-chave e fuja da polícia. Dá para voltar depois.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "assaltos",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "1-2 fontes"
+    },
+    {
+      "n": 47,
+      "nome_original": "Personal Best",
+      "nome_pt": "Recorde Pessoal",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 5,
+      "oculto": true,
+      "descricao": "Força máxima com os dois personagens.",
+      "como_conseguir": "Academia juntos; disponível após o Capítulo 2.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": null,
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 48,
+      "nome_original": "Actions Speak Louder",
+      "nome_pt": "Ações Falam Mais Alto",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 5,
+      "oculto": true,
+      "descricao": "500 ações de perfil criminal.",
+      "como_conseguir": "Sai naturalmente; se faltar, atropele civis. Evite o perfil \"Irredeemable\" (permanente, polícia mais agressiva).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": null,
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 49,
+      "nome_original": "Bad Luck, I Guess",
+      "nome_pt": "Azar, Né",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 5,
+      "oculto": true,
+      "descricao": "\"Na segunda dá certo.\"",
+      "como_conseguir": "Após o Capítulo 3: roube a Payday Loans de Little Cuba só com a Lucia e fuja A PÉ (fuga de carro não conta). Troféu demora a aparecer.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "assaltos",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/"
+      ],
+      "confianca": "1-2 fontes"
+    },
+    {
+      "n": 50,
+      "nome_original": "The Truth Is Out There",
+      "nome_pt": "A Verdade Está Lá Fora",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 5,
+      "oculto": true,
+      "descricao": "\"Que diabos acabou de acontecer?\"",
+      "como_conseguir": "Easter egg do OVNI: estrada a noroeste do Starlet Motel (Kelly County), depois das 2h, sozinho; aparição aleatória.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "mistérios / easter egg",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/"
+      ],
+      "confianca": "1-2 fontes"
+    },
+    {
+      "n": 51,
+      "nome_original": "Ten Pin",
+      "nome_pt": "Strike",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 5,
+      "oculto": true,
+      "descricao": "Derrube pessoas com ataque corpo a corpo de moto.",
+      "como_conseguir": "Chute 10 pedestres de moto/bicicleta em 60 s em área cheia (Vice City, Ocean Beach).",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": null,
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/"
+      ],
+      "confianca": "1-2 fontes"
+    },
+    {
+      "n": 52,
+      "nome_original": "Dime on the Dollar",
+      "nome_pt": "Dez Centavos por Dólar",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 20,
+      "oculto": false,
+      "descricao": "Lave US$ 250.000 em notas marcadas.",
+      "como_conseguir": "Após o Capítulo 3; é cumulativo. O Yasmani paga mais.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "lavagem / receptação",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 53,
+      "nome_original": "Treat Yo Self",
+      "nome_pt": "Se Dá um Mimo",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 15,
+      "oculto": false,
+      "descricao": "Gaste US$ 100.000 nas lojas.",
+      "como_conseguir": "Armas, tuning e tatuagens são o mais rápido.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "lojas",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 54,
+      "nome_original": "Little Boxes",
+      "nome_pt": "Caixinhas",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 15,
+      "oculto": false,
+      "descricao": "Compre as 8 garagens à venda.",
+      "como_conseguir": "US$ 160 mil no total; após o Capítulo 2.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "imóveis / garagens",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    },
+    {
+      "n": 55,
+      "nome_original": "On the Spot",
+      "nome_pt": "Na Hora",
+      "nome_pt_status": "tradução (sem nome oficial PT-BR confirmado)",
+      "tipo": "bronze",
+      "gamerscore_xbox": 15,
+      "oculto": false,
+      "descricao": "Registre 10 veículos no app Scooter Bros.",
+      "como_conseguir": "Precisa de vagas de garagem; registre na garagem do Moses em Port Gellhorn.",
+      "spoiler": false,
+      "perdivel": {
+        "perdivel": false
+      },
+      "categoria": "veículos",
+      "online": false,
+      "raridade": null,
+      "fontes": [
+        "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+        "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+        "https://www.gtabase.com/gta-6/achievements"
+      ],
+      "confianca": "confirmado (3+ fontes)"
+    }
+  ],
+  "roteiro": {
+    "dificuldade": "4/10 (PowerPyx, KeenGamer)",
+    "horas": "~200 h (PowerPyx); história sozinha ~60-80 h",
+    "jogadas": 1,
+    "novo_jogo_plus": false,
+    "replay_de_missao": false,
+    "free_roam_pos_historia": true,
+    "trapacas": "Usar cheats desliga troféus e salvamento na sessão.",
+    "perdiveis_resumo": "Só 1 possivelmente perdível: Positive Mental Attitude (meditação da Lucia na varanda do Jason, Cap. 1, depois de \"Down to Earth\"). Conteúdo perdível sem troféu: algumas missões opcionais expiram, algumas revistas em prédios da história ficam inacessíveis (aparecem em outro lugar), missões com ampulheta falham com o tempo, missões da Shirley (não contam). Evite o perfil criminal \"Irredeemable\".",
+    "etapas": [
+      {
+        "etapa": 1,
+        "nome": "História + missões opcionais (com cuidado no perdível)",
+        "horas": "60-80",
+        "o_que": "Jogue os 5 capítulos e as opcionais que aparecerem. No Cap. 1 faça a meditação da Lucia na varanda. Já vá escaneando veículos (WAiNK) e estudando animais. Faça o roubo do boliche (Cap. 2) e o cofre de banco do Cap. 4."
+      },
+      {
+        "etapa": 2,
+        "nome": "Checklist de 100% + desafios",
+        "horas": "~100",
+        "o_que": "Depois da história abre a lista de 100% em Progresso > Estatísticas. Assaltos, achados submarinos, estandes de tiro (42 ouros), drones (42), baralhos do Bret (15), cartas, flamingos, WAiNK, armas, acrobacias (300), 70 de 80 desafios, lavagem e receptação."
+      },
+      {
+        "etapa": 3,
+        "nome": "Estranhos e Malucos + limpeza",
+        "horas": "10-20",
+        "o_que": "Feche as 8 linhas de estranhos que contam, meditações restantes, troféus ocultos variados (OVNI, Payday Loans só com Lucia a pé, Apple Martini, Banshee azul, chutes de moto, garagens, Scooter Bros). Platina por último."
+      }
+    ],
+    "trofeus_online": "Nenhum (0 online).",
+    "bugados": "Nenhum confirmado até 22/11/2026.",
+    "troféu_mais_dificil": "A Long Road (100%)"
+  },
+  "totais": {
+    "bronze": 46,
+    "prata": 6,
+    "ouro": 2,
+    "platina": 1
+  },
+  "xbox": {
+    "conquistas": 55,
+    "gamerscore_total": 1000,
+    "observacao": "Equivalência 1:1. A platina vira conquista \"Mythic\" de 0G no Xbox; as outras 54 somam 1000G (valores por conquista da GTABase)."
+  },
+  "observacoes": "Pesquisa em 22/11/2026 (jogo saiu 19/11). Lista de 55 (46 bronze, 6 prata, 2 ouro, 1 platina) bate em GTABase, PowerPyx, KeenGamer, GamerFuzion, GGRecon. Nomes em PT-BR: nenhum nome oficial da PSN/jogo foi confirmado (Gamevicio diz que ainda não dá para confirmar); GTABase PT e Tecnoblog usam traduções próprias e divergentes (ex.: platina \"O vício tem um preço!\" / \"Vice City tem seu preço!\" / \"Vício Tem Preço!\"); aqui as traduções são minhas, fiéis ao sentido. Raridade: nenhuma fonte tem % ainda (PSNProfiles/Exophase sem dados do GTA VI acessíveis). Contagem de ocultos diverge entre fontes (28 GTABase vs 15 Noping). Métodos de alguns ocultos vêm só da PowerPyx (Bad Luck I Guess, The Truth Is Out There, Ten Pin, Capital Offense, In The Beginning) e outros guias dizem \"não confirmado\". KeenGamer parece derivar da PowerPyx (não é fonte independente). Strangers & Freaks: só 4-6 das 8 linhas confirmadas. Fair Game: animal não confirmado. Cuidado: houve lista falsa \"vazada\" de 55 troféus em 7-10/11; usar só guias pós-lançamento. Campo spoiler=true marcado nos troféus de história (nomes de missão/capítulo); descrições das missões não revelam enredo.",
+  "fontes_gerais": [
+    "https://www.powerpyx.com/gta-6-grand-theft-auto-vi/",
+    "https://www.gtabase.com/gta-6/achievements",
+    "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/",
+    "https://www.gamerfuzion.com/gta-6-trophy-list-all-55-trophies-achievements/",
+    "https://www.ggrecon.com/articles/gta-6-trophies-achievements-list-platinum/",
+    "https://www.gtabase.com/pt/gta-6/achievements",
+    "https://alcasthq.com/?p=87611",
+    "https://gmtreks.com/gta6/page/01M7QVGK6BDTA8232FS0MEXMBE",
+    "https://tecnoblog.net/responde/trofeus-e-conquistas-de-gta-6-veja-lista-de-desafios-para-platinar-o-jogo",
+    "https://www.gamevicio.com/?p=479544"
+  ],
+  "gerado_em": "2026-11-22",
+  "mapa_links": {
+    "cartas": {
+      "categoria": "colecionaveis",
+      "busca": "carta"
+    },
+    "WAiNK": {
+      "categoria": "colecionaveis"
+    },
+    "veículos": {
+      "categoria": "veiculos"
+    },
+    "lojas": {
+      "categoria": "lojas"
+    },
+    "assaltos": {
+      "categoria": "dinheiro"
+    },
+    "mistérios / easter egg": {
+      "categoria": "misterios",
+      "busca": "ovni"
+    },
+    "naufrágios / submarino": {
+      "busca": "naufragado"
+    },
+    "100% (tudo)": {
+      "categoria": "colecionaveis"
+    }
+  },
+  "mapa_links_trofeu": {
+    "38": {
+      "categoria": "veiculos",
+      "busca": "rhino"
+    },
+    "45": {
+      "categoria": "veiculos",
+      "busca": "banshee"
+    }
+  },
+  "contagens": {
+    "15": [
+      "250 de 397 acrobacias (100%: 300)"
+    ],
+    "17": [
+      "42 medalhas de ouro em 12 estandes"
+    ],
+    "18": [
+      "14 locais · 42 corridas"
+    ],
+    "19": [
+      "20 de 40 corridas (100%: 30)"
+    ],
+    "23": [
+      "7 naufrágios"
+    ],
+    "26": [
+      "16 carros da lista de desejos"
+    ],
+    "28": [
+      "18 pontos em 10 locais"
+    ],
+    "30": [
+      "3 coleções completas (100%: 15 de 18)"
+    ],
+    "31": [
+      "100 escaneamentos"
+    ],
+    "32": [
+      "80 desafios (100%: 70)"
+    ],
+    "35": [
+      "100%: 200 de 277 veículos"
+    ],
+    "40": [
+      "8 bancos grandes"
+    ],
+    "43": [
+      "9 gangues · 39 operações"
+    ],
+    "54": [
+      "US$ 160 mil em imóveis"
+    ]
+  },
+  "lista_100": [
+    "Todos os assaltos exigidos",
+    "33 achados submarinos",
+    "42 medalhas de ouro nos estandes de tiro",
+    "42 corridas de drone",
+    "15 baralhos de alvos do Bret",
+    "300 acrobacias",
+    "70 de 80 desafios",
+    "15 de 18 coleções de cartas",
+    "100 escaneamentos WAiNK",
+    "100 de 125 flamingos",
+    "200 de 277 veículos",
+    "50 de 66 armas",
+    "100 de 255 animais",
+    "30 de 40 corridas",
+    "Lavagem/receptação: US$ 100 mil em narcóticos",
+    "Lavagem/receptação: US$ 100 mil em joias",
+    "Lavagem/receptação: US$ 250 mil em notas marcadas",
+    "Lavagem/receptação: US$ 200 mil em veículos"
+  ]
+}
