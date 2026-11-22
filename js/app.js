@@ -37,6 +37,31 @@
 
   let pontos = [];
   let prints = {};
+  // Fotos dos sites de guia (decisão do dono, 22/11): img/guias/<id>.webp + creditos.json,
+  // casadas pelo "slug" do ponto. Print de seguidor aprovado tem prioridade.
+  let fotosGuia = {};
+  const pedidoFotosGuia = fetch("img/guias/creditos.json")
+    .then((r) => (r.ok ? r.json() : {}))
+    .then((c) => {
+      const m = {};
+      for (const [id, v] of Object.entries(c || {})) {
+        if (!v || typeof v !== "object") continue;
+        const arq = String(v.arquivo || "");
+        const chave = String(v.slug || id);
+        const url = linkSeguro(v.url || "");
+        if (!/^[a-z0-9-]+\.webp$/.test(arq) || typeof v.site !== "string")
+          continue;
+        m[chave] = {
+          src: "img/guias/" + arq,
+          site: v.site.slice(0, 60),
+          url,
+        };
+      }
+      fotosGuia = m;
+    })
+    .catch(() => {
+      /* sem fotos de guia: o painel só não mostra a foto */
+    });
   const marcadores = {};
   const filtros = new Set(Object.keys(CATEGORIAS));
   let busca = "";
@@ -65,19 +90,73 @@
   // ---------- Painel lateral direito (detalhe ou formulário) ----------
   const detalhe = $("#detalhe");
   const conteudo = $("#detalhe-conteudo");
-  function abrirPainel(rotulo) {
+  // Botão "voltar" do celular/navegador: abrir a lista ou o painel cria UMA entrada no
+  // histórico; o "voltar" fecha o que estiver aberto em vez de sair do site.
+  // historico: null | "lista" | "painel" (abrir um ponto da lista reaproveita a entrada).
+  let historico = null;
+  let ignorarPop = 0;
+  function marcarHistorico(oque) {
+    if (!historico) {
+      try {
+        history.pushState({ mapaCamada: true }, "");
+      } catch (e) {
+        return;
+      }
+    }
+    historico = oque;
+  }
+  function desfazerHistorico(oque) {
+    if (historico !== oque) return;
+    historico = null;
+    ignorarPop++;
+    history.back();
+  }
+  window.addEventListener("popstate", () => {
+    if (ignorarPop > 0) {
+      ignorarPop--;
+      return;
+    }
+    const era = historico;
+    historico = null;
+    if (era === "painel" && !detalhe.hidden) fecharPainelAgora();
+    else if (era === "lista") fecharListaAgora();
+  });
+
+  function abrirPainel(rotulo, tipo) {
     detalhe.hidden = false;
+    detalhe.dataset.tipo = tipo || "ponto";
     detalhe.setAttribute("aria-label", rotulo);
     detalhe.scrollTop = 0;
+    conteudo.scrollTop = 0;
+    marcarHistorico("painel");
   }
-  function fecharPainel() {
+  function fecharPainelAgora() {
     detalhe.hidden = true;
     selecionado = null;
     cancelarEscolha();
     atualizarPinos();
     marcarLista();
   }
+  function fecharPainel() {
+    desfazerHistorico("painel");
+    fecharPainelAgora();
+  }
   $("#detalhe-fechar").addEventListener("click", fecharPainel);
+
+  // ---------- Celular: lista ----------
+  function abrirLista() {
+    document.body.classList.add("lista-aberta");
+    $("#btn-lista").setAttribute("aria-expanded", "true");
+    marcarHistorico("lista");
+  }
+  function fecharListaAgora() {
+    document.body.classList.remove("lista-aberta");
+    $("#btn-lista").setAttribute("aria-expanded", "false");
+  }
+  function fecharLista() {
+    desfazerHistorico("lista");
+    fecharListaAgora();
+  }
   document.addEventListener("keydown", (ev) => {
     if (
       ev.key === "Escape" &&
@@ -217,6 +296,74 @@
     );
   }
 
+  // Foto ampliada: <dialog> simples (fecha com Esc, botão ou clique fora)
+  function ampliarFoto(src, alt, legenda) {
+    const dlg = el(
+      "dialog",
+      { class: "dialogo dialogo-foto", "aria-label": alt },
+      el("img", { src, alt, decoding: "async" }),
+      el(
+        "div",
+        { class: "dialogo-foto-rodape" },
+        legenda,
+        el("button", {
+          type: "button",
+          class: "btn btn-fantasma",
+          text: "Fechar",
+          onclick: () => dlg.close(),
+        }),
+      ),
+    );
+    dlg.addEventListener("click", (ev) => {
+      if (ev.target === dlg) dlg.close();
+    });
+    dlg.addEventListener("close", () => dlg.remove());
+    document.body.append(dlg);
+    dlg.showModal();
+  }
+
+  function creditoFoto(foto) {
+    return el(
+      "span",
+      { class: "credito-foto" },
+      "Foto: ",
+      foto.url
+        ? el("a", {
+            href: foto.url,
+            target: "_blank",
+            rel: "noopener noreferrer nofollow",
+            text: foto.site,
+          })
+        : foto.site,
+    );
+  }
+
+  function figuraGuia(p, foto) {
+    const alt = "Foto do local: " + p.nome;
+    const fig = el(
+      "figure",
+      { class: "det-img det-img-guia" },
+      el(
+        "button",
+        {
+          type: "button",
+          class: "det-img-ampliar",
+          "aria-label": "Ampliar a foto de " + p.nome,
+          onclick: () => ampliarFoto(foto.src, alt, creditoFoto(foto)),
+        },
+        el("img", {
+          src: foto.src,
+          alt,
+          loading: "lazy",
+          decoding: "async",
+          onerror: () => fig.remove(),
+        }),
+      ),
+      el("figcaption", null, creditoFoto(foto)),
+    );
+    return fig;
+  }
+
   function abrirPonto(id, centralizar) {
     const p = pontos.find((x) => x.id === id);
     if (!p) return;
@@ -227,6 +374,7 @@
     const autor = p.autor && p.autor.nome ? "@" + p.autor.nome : "Equipe Nauã";
     const fontes = (p.fontes || []).map((f) => linkSeguro(f)).filter(Boolean);
     const urlPrint = p.print_path && prints[p.print_path];
+    const fotoGuia = !urlPrint && p.slug ? fotosGuia[p.slug] : null;
 
     conteudo.append(
       ...[
@@ -260,7 +408,9 @@
               }),
               el("figcaption", { text: "Print enviado por " + autor }),
             )
-          : null,
+          : fotoGuia
+            ? figuraGuia(p, fotoGuia)
+            : null,
         p.regiao ? campo("Região", el("p", { text: p.regiao })) : null,
         p.referencia
           ? campo("Onde fica", el("p", { text: p.referencia }))
@@ -324,11 +474,10 @@
         ),
       ].filter(Boolean),
     ); // sem os campos vazios (append de null escreveria "null")
-    abrirPainel("Detalhes de " + p.nome);
+    fecharListaAgora();
+    abrirPainel("Detalhes de " + p.nome, "ponto");
     atualizarPinos();
     marcarLista();
-    document.body.classList.remove("lista-aberta");
-    $("#btn-lista").setAttribute("aria-expanded", "false");
     if (centralizar && p.x !== null && p.x !== undefined)
       mapa.flyTo(paraLatLng(p.x, p.y), Math.max(mapa.getZoom(), -1.5), {
         duration: 0.5,
@@ -418,17 +567,19 @@
       aviso("Sua conta está suspensa e não pode enviar sugestões.", "erro");
       return;
     }
-    detalhe.hidden = true;
-    selecionado = null;
-    atualizarPinos();
-    document.body.classList.remove("lista-aberta");
+    if (!detalhe.hidden) fecharPainel();
+    fecharLista();
     escolhendo = true;
     $("#escolher").hidden = false;
     $("#mapa").classList.add("escolhendo");
   });
 
   mapa.on("click", (ev) => {
-    if (!escolhendo) return;
+    // tocar no mapa (fora do painel) fecha o ponto aberto; o formulário não fecha sozinho
+    if (!escolhendo) {
+      if (!detalhe.hidden && detalhe.dataset.tipo === "ponto") fecharPainel();
+      return;
+    }
     escolhendo = false;
     $("#escolher").hidden = true;
     $("#mapa").classList.remove("escolhendo");
@@ -686,7 +837,7 @@
     });
 
     conteudo.append(form);
-    abrirPainel("Sugerir lugar");
+    abrirPainel("Sugerir lugar", "formulario");
     setTimeout(() => $("#f-nome").focus(), 50);
   }
 
@@ -786,8 +937,7 @@
     }
   }
   $("#menu-minhas").addEventListener("click", () => {
-    document.body.classList.add("lista-aberta");
-    $("#btn-lista").setAttribute("aria-expanded", "true");
+    abrirLista();
     $("#bloco-minhas").scrollIntoView({ block: "start" });
   });
 
@@ -864,10 +1014,9 @@
     }
   }
 
-  // ---------- Celular: lista ----------
   $("#btn-lista").addEventListener("click", () => {
-    const aberto = document.body.classList.toggle("lista-aberta");
-    $("#btn-lista").setAttribute("aria-expanded", String(aberto));
+    if (document.body.classList.contains("lista-aberta")) fecharLista();
+    else abrirLista();
   });
 
   // ---------- Conta ----------
@@ -876,6 +1025,7 @@
     $("#aviso-banido").hidden = !(p && p.banido);
     carregarMinhas();
   });
+  await pedidoFotosGuia;
   await carregarPontos();
   carregarOfertas();
   if (veioDeLink) {

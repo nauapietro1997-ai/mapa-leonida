@@ -4,7 +4,7 @@
   "use strict";
 
   const COLUNAS_PONTO =
-    "id,nome,categoria,subtipo,regiao,referencia,o_que_tem,valor,como_pegar,codigo,x,y,precisao,confianca,observacoes,fontes,print_path,descoberto_em,autor:perfis!pontos_autor_id_fkey(nome)";
+    "id,slug,nome,categoria,subtipo,regiao,referencia,o_que_tem,valor,como_pegar,codigo,x,y,precisao,confianca,observacoes,fontes,print_path,descoberto_em,autor:perfis!pontos_autor_id_fkey(nome)";
 
   function checar({ data, error }) {
     if (error) throw error;

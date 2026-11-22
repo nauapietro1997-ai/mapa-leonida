@@ -2,7 +2,9 @@
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Página do mapa: a pinça dá zoom só no MAPA (Leaflet), nunca na página inteira
+         (o zoom da página bagunçava o layout no celular). As outras páginas aceitam zoom. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     <!-- Segurança: só carrega coisas do próprio site e do Supabase configurado.
          O id do projeto é gravado aqui por ferramentas/configurar-dominio.js. -->
     <meta
@@ -30,8 +32,8 @@
       <nav class="canais canais-topo" data-canais aria-label="Canais do Nauã Pietro"></nav>
       <span class="selo-demo" title="Dados de mentira, só para testar"><span class="selo-longo">Demonstração</span><span class="selo-curto">Demo</span></span>
       <div class="topo-acoes">
-        <button type="button" class="btn btn-primario" id="btn-sugerir">
-          Sugerir lugar
+        <button type="button" class="btn btn-primario" id="btn-sugerir" aria-label="Sugerir lugar">
+          <span class="txt-longo">Sugerir lugar</span><span class="txt-curto" aria-hidden="true">+ Sugerir</span>
         </button>
         <button
           type="button"
@@ -39,12 +41,13 @@
           id="btn-lista"
           aria-controls="lateral"
           aria-expanded="false"
+          aria-label="Lista de pontos"
         >
-          Lista
+          <span class="lista-ic" aria-hidden="true">☰</span><span class="lista-txt-fechada">Lista</span><span class="lista-txt-aberta">Mapa</span>
         </button>
         <div class="conta" id="conta">
-          <button type="button" class="btn btn-discord" id="btn-entrar">
-            Entrar com Discord
+          <button type="button" class="btn btn-discord" id="btn-entrar" aria-label="Entrar com Discord">
+            <span class="txt-longo">Entrar com Discord</span><span class="txt-curto" aria-hidden="true">Entrar</span>
           </button>
           <div class="conta-logado" id="conta-logado" hidden>
             <button
@@ -193,9 +196,11 @@
       </div>
 
       <aside class="detalhe" id="detalhe" aria-label="Detalhes" hidden>
-        <button type="button" class="detalhe-fechar" id="detalhe-fechar">
-          Fechar
-        </button>
+        <div class="detalhe-barra">
+          <button type="button" class="detalhe-fechar" id="detalhe-fechar" aria-label="Fechar e voltar ao mapa">
+            <span class="so-celular" aria-hidden="true">← Voltar ao mapa</span><span class="so-pc" aria-hidden="true">Fechar</span>
+          </button>
+        </div>
         <div class="detalhe-conteudo" id="detalhe-conteudo"></div>
       </aside>
     </main>
