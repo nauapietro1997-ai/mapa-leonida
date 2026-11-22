@@ -38,21 +38,37 @@
   // Estilo mapa do GTA (js/camadas-gta.js, cópia do mapa da live): nomes que trocam com o
   // zoom, pinos agrupados de longe e ponto aberto em destaque.
   const GTA = window.CamadasGTA;
+  // De perto, o fundo troca para a cópia sem os nomes pintados (os nomes vêm do nosso texto)
+  let nomesGTA = null;
+  const fundoLimpo = camada.opcoesTiles
+    ? GTA.criarFundoLimpo(L, mapa, {
+        url: window.CONFIG.MAPA_TILES_SEM_NOMES,
+        opcoesTiles: camada.opcoesTiles,
+        aoFalhar: () => nomesGTA && nomesGTA.atualizar(),
+      })
+    : null;
+  camada.on("reserva", () => fundoLimpo && fundoLimpo.remover());
   const agrupamento = GTA.criarAgrupamento(L, mapa, {
     corMarca:
       getComputedStyle(document.documentElement)
         .getPropertyValue("--rosa")
         .trim() || "#ff2e88",
   });
-  fetch("dados/lugares.json")
-    .then((r) => (r.ok ? r.json() : null))
-    .then((j) => {
+  const lerJson = (url) =>
+    fetch(url)
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null);
+  Promise.all([lerJson("dados/lugares.json"), lerJson("dados/nomes-preservados.json")])
+    .then(([j, pintados]) => {
       if (!j || !Array.isArray(j.lugares)) return;
-      // nomes grandes desviam das bolinhas de grupo e dos pinos (no celular cobriam)
-      const nomes = GTA.criarNomes(L, mapa, j.lugares, {
+      // sem o nosso nome onde o nome pintado ficou no pôster (não duplica);
+      // nomes desviam das bolinhas de grupo e dos pinos (no celular cobriam)
+      const nomes = GTA.criarNomes(L, mapa, GTA.semPintados(j.lugares, pintados), {
         paraLatLng: (l) => paraLatLng(l.x, l.y),
         obstaculos: agrupamento.retangulos,
+        faixas: () => (fundoLimpo ? fundoLimpo.faixas() : GTA.FAIXAS_SEM_FUNDO_LIMPO),
       });
+      nomesGTA = nomes;
       agrupamento.aoMudar(nomes.atualizar);
     })
     .catch(() => {

@@ -14,6 +14,9 @@ window.CONFIG = Object.freeze({
   // (ou ferramentas/preparar-mapa.js); não ficam no git deste projeto, só na pasta dist/.
   // MAPA_IMAGEM = imagem única de reserva (se os ladrilhos faltarem).
   MAPA_TILES: "img/tiles/{z}/{x}/{y}.webp",
+  // Cópia do pôster SEM os nomes pintados: aparece de perto (o nome vem do nosso texto).
+  // Faltando a pasta, o site continua só com o original.
+  MAPA_TILES_SEM_NOMES: "img/tiles-sem-nomes/{z}/{x}/{y}.webp",
   MAPA_TILES_LARGURA: 5775,
   MAPA_TILES_ALTURA: 7900,
   MAPA_TILES_NIVEL: 5, // nível do tamanho real (0 = 1 ladrilho só)

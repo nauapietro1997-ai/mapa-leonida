@@ -23,16 +23,18 @@
   position: absolute;
   left: 0;
   top: 0;
-  /* --dx/--dy: o nome desliza para sair de baixo de um grupo/pino (js/camadas-gta.js) */
-  transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) scale(0.96);
+  /* --dx/--dy: o nome desliza para sair de baixo de um grupo/pino (js/camadas-gta.js)
+     --a: opacidade (0 a 1) que o js calcula pelo zoom; o nome some/aparece aos poucos */
+  transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px)))
+    scale(calc(0.94 + 0.06 * var(--a, 0)));
   white-space: nowrap;
   color: #fff;
-  opacity: 0;
+  opacity: var(--a, 0);
   visibility: hidden;
   transition:
-    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    visibility 0s linear 0.45s;
+    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 0.3s;
   /* contorno escuro para ler em cima do pôster */
   text-shadow:
     0 0 2px rgb(8 2 22 / 0.95),
@@ -41,12 +43,10 @@
   user-select: none;
 }
 .nome-gta.visivel {
-  opacity: 1;
   visibility: visible;
-  transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) scale(1);
   transition:
-    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     visibility 0s;
 }
 /* nome que não tem como sair de baixo de uma bolinha de grupo: vai por cima dos pinos,
@@ -103,13 +103,17 @@
   letter-spacing: 0.2em;
   color: rgb(255 246 251 / 0.75);
 }
-/* nível 3: detalhe */
+/* nível 3: bairro pequeno (como no mapa do jogo): letra fina e pequena, branca,
+   com contorno escuro leve */
 .nome-n3 {
   font:
-    700 12px/1 "Montserrat",
+    500 11px/1 "Montserrat",
     sans-serif;
-  letter-spacing: 0.02em;
-  color: rgb(255 246 251 / 0.92);
+  letter-spacing: 0.03em;
+  color: rgb(255 255 255 / 0.95);
+  text-shadow:
+    0 0 1px rgb(8 2 22 / 0.9),
+    0 0 3px rgb(8 2 22 / 0.55);
 }
 @media (max-width: 600px) {
   .nome-n1.nome-regiao {
@@ -126,7 +130,7 @@
     font-size: 10px;
   }
   .nome-n3 {
-    font-size: 11px;
+    font-size: 10.5px;
   }
 }
 
@@ -181,9 +185,22 @@
     opacity: 0;
   }
 }
-/* pinos aparecem com um esmaecer curto quando um grupo se desfaz */
-.leaflet-marker-icon.pino-wrap {
-  animation: gta-aparecer 0.25s ease-out;
+/* quando um grupo se desfaz: os pinos entram esmaecendo e crescendo de leve (o js põe
+   .gta-entra só por um instante) e as bolinhas saem esmaecendo (.gta-saindo).
+   A animação é no miolo (.pino): o invólucro é posicionado pelo Leaflet com transform. */
+.leaflet-marker-icon.gta-entra > .pino:not(.sel) {
+  animation: gta-pino-entra 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes gta-pino-entra {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+.grupo-gta-wrap.gta-saindo {
+  opacity: 0 !important;
+  transition: opacity 0.2s ease-out;
+  pointer-events: none;
 }
 
 /* ---------- Ponto selecionado ---------- */
@@ -252,5 +269,9 @@
   .nome-gta,
   .nome-gta.visivel {
     transition: none;
+  }
+  .leaflet-marker-icon.gta-entra > .pino,
+  .grupo-gta-wrap {
+    animation: none;
   }
 }

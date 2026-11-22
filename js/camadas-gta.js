@@ -6,16 +6,41 @@
 //   CamadasGTA.criarAgrupamento(L, mapa, opcoes)          -> bolinhas com o número de pontos
 //   CamadasGTA.centralizar(L, mapa, latlng, opcoes)       -> centraliza descontando o painel aberto
 //   CamadasGTA.destacar(mapa, ligado)                     -> apaga os outros pinos quando há um selecionado
+//   CamadasGTA.criarFundoLimpo(L, mapa, opcoes)           -> de perto, troca o pôster pela cópia SEM os nomes pintados
+//   CamadasGTA.semPintados(lugares, preservados)          -> tira os nossos nomes cujo nome pintado ficou no pôster
 (function () {
   // Faixas de zoom de cada nível de nome: [a partir de, até] (zoom do Leaflet; -4.5 longe ... 0.5 perto).
-  // 1 = região/condado (nome grande), 2 = cidade/bairro/ilha, 3 = detalhe.
-  // O pôster já tem os nomes impressos, legíveis a partir de ~-1.5: cada nível some quando o
-  // nome impresso fica grande o bastante para ler, para não aparecer o mesmo nome duas vezes.
+  // 1 = região/condado (nome grande), 2 = cidade/bairro/ilha, 3 = bairro pequeno/detalhe.
+  // Igual ao mapa do GTA: de longe, os nomes grandes; ao aproximar eles SOMEM aos poucos e
+  // aparecem os de cidade e bairro. Na mesma hora o fundo troca do pôster original para a cópia
+  // sem os nomes pintados (criarFundoLimpo, ZOOM_FUNDO_LIMPO), então de perto só ficam os nossos.
   const FAIXAS_ZOOM = {
+    1: [-Infinity, -2.5],
+    2: [-2.5, Infinity],
+    3: [-2.0, Infinity],
+  };
+  // Sem a cópia sem nomes (ladrilhos faltando): os nossos somem quando os nomes IMPRESSOS no
+  // pôster ficam legíveis (~-1.5), para não aparecer o mesmo nome duas vezes.
+  const FAIXAS_SEM_FUNDO_LIMPO = {
     1: [-Infinity, -2.5],
     2: [-2.5, -1.75],
     3: [-2.0, -1.5],
   };
+  // Largura (em zoom) do esmaecer na borda de cada faixa: o nome some/aparece aos poucos.
+  const FADE = 0.35;
+  // Zoom em que o fundo troca para a cópia sem nomes (no meio do esmaecer dos nomes grandes).
+  const ZOOM_FUNDO_LIMPO = -2.5;
+  const reduzMovimento = () =>
+    !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const limitar = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
+  // Opacidade (0 a 1) de um nível de nome no zoom z: sobe e desce suave nas bordas da faixa.
+  function opacidadeFaixa(f, z) {
+    if (!f) return 0;
+    let a = 1;
+    if (isFinite(f[0])) a *= limitar((z - (f[0] - FADE / 2)) / FADE);
+    if (isFinite(f[1])) a *= limitar((f[1] + FADE / 2 - z) / FADE);
+    return a;
+  }
   // Grupos de pinos: até este zoom (exclusivo) os pinos perto viram uma bolinha com o número.
   const ZOOM_SEM_GRUPOS = -1.25;
   const CELULA_GRUPO = 56; // px da grade do agrupamento
@@ -81,9 +106,28 @@
       })
       .sort((a, b) => a.ordem - b.ordem);
 
+    const faixas = () =>
+      typeof op.faixas === "function" ? op.faixas() : op.faixas;
+    // Entra na conta de espaço (quem encosta em quem) se já aparece ou vai aparecer logo
+    // (até meio zoom antes), para o nome já ter lugar reservado quando começar a surgir.
     function naFaixa(nivel, z) {
-      const f = op.faixas[nivel];
-      return f && z >= f[0] - 1e-9 && z < f[1] - 1e-9;
+      const f = faixas()[nivel];
+      return !!f && z >= f[0] - FADE / 2 - 0.5 && z < f[1] + FADE / 2 + 0.5;
+    }
+    // Só mexe na opacidade (barato): roda a cada quadro do zoom animado.
+    function aplicarOpacidade(z) {
+      const fx = faixas();
+      for (const it of itens) {
+        const el = it.el();
+        if (!el) continue;
+        const a = it.permitido
+          ? Math.round(opacidadeFaixa(fx[it.l.nivel], z) * 50) / 50
+          : 0;
+        if (it.a === a) continue;
+        it.a = a;
+        el.style.setProperty("--a", String(a));
+        el.classList.toggle("visivel", a > 0);
+      }
     }
     // Camada de cima (acima dos pinos) para o nome que não tem como sair de baixo de um grupo.
     const paneCima = op.pane + "Cima";
@@ -104,7 +148,13 @@
       const obst =
         typeof op.obstaculos === "function" ? op.obstaculos() || [] : [];
       const grupos = obst.filter((o) => o.grupo);
-      for (const it of itens) {
+      // quem já está aparecendo escolhe lugar primeiro; os que ainda vão surgir depois
+      const fx = faixas();
+      const ordem = itens
+        .map((it) => ({ it, ja: opacidadeFaixa(fx[it.l.nivel], z) > 0 ? 0 : 1 }))
+        .sort((a, b) => a.ja - b.ja || a.it.ordem - b.it.ordem)
+        .map((x) => x.it);
+      for (const it of ordem) {
         const el = it.el();
         if (!el) continue;
         let mostrar = naFaixa(it.l.nivel, z);
@@ -131,7 +181,7 @@
             const livre = (c, lista) =>
               !lista.some((o) => encosta(c, o)) &&
               !ocupado.some((o) => encosta(c, o));
-            if (it.l.nivel <= 2 && obst.some((o) => encosta(r, o))) {
+            if (obst.some((o) => encosta(r, o))) {
               // posições candidatas: encostar em cada borda de cada obstáculo próximo
               const cand = [];
               for (const o of obst) {
@@ -161,17 +211,26 @@
                     Math.abs(u[0]) * 1.5 + Math.abs(u[1]) -
                     (Math.abs(v[0]) * 1.5 + Math.abs(v[1])),
                 );
+              // nome grande de região (nível 1, só de longe): pode ficar em cima de pino solto
+              // e, sem saída, vai por cima com tarja. Cidade/bairro (de perto): NUNCA em cima de
+              // pino nem de grupo; sem lugar livre, some (esmaece).
+              const grande = it.l.nivel === 1;
               const escolha =
                 perto.find(([a, b]) => livre(caixa(a, b), obst)) ||
-                (livre(r, grupos)
-                  ? [0, 0]
-                  : perto.find(([a, b]) => livre(caixa(a, b), grupos)));
+                (grande
+                  ? livre(r, grupos)
+                    ? [0, 0]
+                    : perto.find(([a, b]) => livre(caixa(a, b), grupos))
+                  : null);
               if (escolha) {
                 [dx, dy] = escolha.map(Math.round);
                 r = caixa(dx, dy);
-              } else porCima = grupos.some((o) => encosta(r, o));
+              } else if (grande) porCima = grupos.some((o) => encosta(r, o));
+              else mostrar = false;
             }
-            if (ocupado.some((o) => encosta(r, o))) mostrar = false;
+            if (!mostrar) {
+              /* sem lugar livre de pinos: some */
+            } else if (ocupado.some((o) => encosta(r, o))) mostrar = false;
             else ocupado.push(r);
           }
         }
@@ -189,10 +248,14 @@
         const wrap = el.parentNode;
         const destino = mapa.getPane(mostrar && porCima ? paneCima : op.pane);
         if (wrap && wrap.parentNode !== destino) destino.appendChild(wrap);
-        el.classList.toggle("visivel", mostrar);
+        it.permitido = mostrar;
       }
+      aplicarOpacidade(z);
     }
     mapa.on("zoomend moveend resize", atualizar);
+    // durante o zoom (pinça, roda, voo): só a opacidade, sem medir nada (não trava)
+    mapa.on("zoom", () => aplicarOpacidade(mapa.getZoom()));
+    mapa.on("zoomanim", (e) => aplicarOpacidade(e.zoom));
     // as fontes podem chegar depois: mede de novo
     if (document.fonts && document.fonts.ready)
       document.fonts.ready.then(atualizar);
@@ -319,13 +382,28 @@
           m.remove();
           naTela.delete(m);
         }
+      const animar = !reduzMovimento();
       for (const m of querer)
         if (!naTela.has(m)) {
           m.addTo(mapa);
           naTela.add(m);
+          // pino que sai de um grupo: entra com esmaecer + leve crescimento (css .gta-entra)
+          const e = m.getElement && m.getElement();
+          if (e && animar) {
+            e.classList.remove("gta-entra");
+            void e.offsetWidth; // reinicia a animação
+            e.classList.add("gta-entra");
+            setTimeout(() => e.classList.remove("gta-entra"), 320);
+          }
         }
-      // grupos: refeitos a cada zoom (são poucos)
-      grupos.forEach((g) => g.remove());
+      // grupos: refeitos a cada zoom (são poucos); os velhos saem esmaecendo
+      grupos.forEach((g) => {
+        const e = g.getElement && g.getElement();
+        if (!animar || !e) return g.remove();
+        e.classList.add("gta-saindo");
+        g.off();
+        setTimeout(() => g.remove(), 220);
+      });
       grupos = novosGrupos.map((membros) => {
         let la = 0,
           ln = 0;
@@ -366,12 +444,13 @@
         if (!e) continue;
         const r = e.getBoundingClientRect();
         if (!r.width) continue;
+        const folga = 4; // o anel/sombra do pino passa um pouco da caixa
         saida.push({
           grupo: grupos.includes(m),
-          x1: r.left - caixa.left,
-          y1: r.top - caixa.top,
-          x2: r.right - caixa.left,
-          y2: r.bottom - caixa.top,
+          x1: r.left - caixa.left - folga,
+          y1: r.top - caixa.top - folga,
+          x2: r.right - caixa.left + folga,
+          y2: r.bottom - caixa.top + folga,
         });
       }
       return saida;
@@ -476,8 +555,87 @@
     if (!ligado) prenderLimites(mapa);
   }
 
+  // ---------- Fundo sem os nomes pintados (de perto) ----------
+  // Põe por cima do pôster original uma 2ª camada de ladrilhos (cópia do pôster com os nomes
+  // apagados, ferramentas/apagar-nomes.py). Ela surge aos poucos em volta de ZOOM_FUNDO_LIMPO,
+  // junto com o sumiço dos nomes grandes. O original fica embaixo: ladrilho que faltar mostra o
+  // original. Se a pasta inteira faltar, a camada sai sozinha e chama opcoes.aoFalhar().
+  // opcoes: {url, opcoesTiles (as mesmas do original), zoom, aoFalhar}
+  function criarFundoLimpo(L, mapa, opcoes) {
+    const op = Object.assign({ zoom: ZOOM_FUNDO_LIMPO }, opcoes);
+    let ativo = !!op.url;
+    let camada = null;
+    let erros = 0,
+      carregados = 0;
+    const opacidade = (z) => limitar((z - (op.zoom - FADE / 2)) / FADE);
+    function falhou() {
+      if (!ativo) return;
+      ativo = false;
+      if (camada) camada.remove();
+      camada = null;
+      if (typeof op.aoFalhar === "function") op.aoFalhar();
+    }
+    function criar() {
+      camada = L.tileLayer(
+        op.url,
+        Object.assign({}, op.opcoesTiles, { zIndex: 2, opacity: 0 }),
+      );
+      camada.on("tileload", () => carregados++);
+      camada.on("tileerror", () => {
+        erros++;
+        if ((carregados === 0 && erros >= 2) || erros >= 6) falhou();
+      });
+    }
+    function aplicar(z) {
+      if (!ativo) return;
+      // de longe nem fica no mapa (não baixa ladrilho à toa); entra meio zoom antes de surgir
+      if (z < op.zoom - FADE / 2 - 0.5) {
+        if (camada && mapa.hasLayer(camada)) camada.remove();
+        return;
+      }
+      if (!camada) criar();
+      if (!mapa.hasLayer(camada)) {
+        camada.addTo(mapa);
+        const c = camada.getContainer();
+        if (c && !reduzMovimento())
+          c.style.transition = "opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1)";
+      }
+      camada.setOpacity(Math.round(opacidade(z) * 50) / 50);
+    }
+    if (ativo) {
+      mapa.on("zoom zoomend", () => aplicar(mapa.getZoom()));
+      mapa.on("zoomanim", (e) => aplicar(e.zoom));
+      aplicar(mapa.getZoom());
+    }
+    return {
+      ativo: () => ativo,
+      remover: () => {
+        ativo = false;
+        if (camada) camada.remove();
+      },
+      // faixas de nomes certas para o fundo atual
+      faixas: () => (ativo ? FAIXAS_ZOOM : FAIXAS_SEM_FUNDO_LIMPO),
+    };
+  }
+
+  // Nomes que ficaram PINTADOS na cópia sem nomes (dados/nomes-preservados.json, gerado por
+  // ferramentas/apagar-nomes.py): o nosso nome do mesmo lugar (cidade/bairro) sai, senão aparece
+  // duplicado de perto. Lista vazia ou ausente = todos os nossos nomes voltam.
+  function semPintados(lugares, preservados) {
+    const norm = (t) => String(t || "").trim().toLowerCase();
+    const pintados = new Set();
+    for (const it of (preservados && preservados.nomes) || [])
+      for (const n of String((it && it.nome) || "").split(" + ")) if (norm(n)) pintados.add(norm(n));
+    if (!pintados.size) return lugares;
+    return lugares.filter((l) => !(Number(l.nivel) >= 2 && pintados.has(norm(l.nome))));
+  }
+
   window.CamadasGTA = {
+    semPintados,
     FAIXAS_ZOOM,
+    FAIXAS_SEM_FUNDO_LIMPO,
+    ZOOM_FUNDO_LIMPO,
+    criarFundoLimpo,
     ZOOM_SEM_GRUPOS,
     criarNomes,
     criarAgrupamento,

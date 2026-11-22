@@ -37,7 +37,7 @@
   function camadaMapa(mapa, c, limites) {
     const avisos = new L.Evented();
     const n = c.MAPA_TILES_NIVEL;
-    const tiles = L.tileLayer(c.MAPA_TILES, {
+    const opcoesTiles = {
       tileSize: 256,
       zoomOffset: n,
       minZoom: -n - 5,
@@ -47,7 +47,9 @@
       noWrap: true,
       bounds: L.latLngBounds(limites),
       keepBuffer: 4,
-    });
+    };
+    const tiles = L.tileLayer(c.MAPA_TILES, opcoesTiles);
+    avisos.opcoesTiles = opcoesTiles; // para a camada sem nomes usar as mesmas
     let erros = 0,
       carregados = 0,
       trocou = false;
@@ -55,6 +57,7 @@
       if (trocou) return;
       trocou = true;
       tiles.remove();
+      avisos.fire("reserva");
       const img = L.imageOverlay(c.MAPA_IMAGEM, limites, {
         alt: "Pôster do mapa de Leonida",
       }).addTo(mapa);
