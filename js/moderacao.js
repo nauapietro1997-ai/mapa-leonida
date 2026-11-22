@@ -289,7 +289,7 @@
     setTimeout(() => {
       if (mini && mini.mapa === esteMapa) {
         esteMapa.invalidateSize({ animate: false });
-        esteMapa.setView(paraLatLng(s.x, s.y), -1, { animate: false });
+        esteMapa.setView(paraLatLng(s.x, s.y), -1.5, { animate: false });
       }
     }, 50);
 

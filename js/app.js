@@ -330,7 +330,7 @@
     document.body.classList.remove("lista-aberta");
     $("#btn-lista").setAttribute("aria-expanded", "false");
     if (centralizar && p.x !== null && p.x !== undefined)
-      mapa.flyTo(paraLatLng(p.x, p.y), Math.max(mapa.getZoom(), -1), {
+      mapa.flyTo(paraLatLng(p.x, p.y), Math.max(mapa.getZoom(), -1.5), {
         duration: 0.5,
       });
   }

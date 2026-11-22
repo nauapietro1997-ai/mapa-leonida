@@ -10,8 +10,15 @@ window.CONFIG = Object.freeze({
   SUPABASE_URL: "https://klqsnsdhavjslghxeovw.supabase.co",
   SUPABASE_ANON_KEY: "sb_publishable_DWjRy7pDyAS_9LhLlNEBuQ_5DTovkvf",
 
-  // Imagem do mapa (gerada por ferramentas/preparar-mapa.js; não fica no git deste projeto).
+  // Mapa: ladrilhos (tiles) do pôster original 5775x7900, gerados por ../ferramentas/gerar-tiles.py
+  // (ou ferramentas/preparar-mapa.js); não ficam no git deste projeto, só na pasta dist/.
+  // MAPA_IMAGEM = imagem única de reserva (se os ladrilhos faltarem).
+  MAPA_TILES: "img/tiles/{z}/{x}/{y}.webp",
+  MAPA_TILES_LARGURA: 5775,
+  MAPA_TILES_ALTURA: 7900,
+  MAPA_TILES_NIVEL: 5, // nível do tamanho real (0 = 1 ladrilho só)
   MAPA_IMAGEM: "img/mapa-leonida.jpg",
+  // Posições (x, y) dos pontos ficam em pixels da cópia 4000x5472 (banco e sugestões); não mudar.
   MAPA_LARGURA: 4000,
   MAPA_ALTURA: 5472,
 
