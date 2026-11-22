@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <!-- Página do mapa: a pinça dá zoom só no MAPA (Leaflet), nunca na página inteira
          (o zoom da página bagunçava o layout no celular). As outras páginas aceitam zoom. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
     <!-- Segurança: só carrega coisas do próprio site e do Supabase configurado.
          O id do projeto é gravado aqui por ferramentas/configurar-dominio.js. -->
     <meta
@@ -20,20 +23,43 @@
     <meta name="color-scheme" content="dark" />
     <link rel="icon" type="image/png" href="assets/marca/np-monograma.png" />
     <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="css/camadas-gta.css" />
     <link rel="stylesheet" href="css/publico.css" />
   </head>
   <body class="pagina-mapa">
     <header class="topo">
       <a class="marca" href="index.html">
-        <img class="marca-logo" src="assets/marca/logo-np-96.png" width="104" height="96" alt="Nauã Pietro" />
-        <span class="marca-texto"><span class="marca-titulo">Mapa de Leonida</span><span class="marca-sub">por Nauã Pietro</span></span>
+        <img
+          class="marca-logo"
+          src="assets/marca/logo-np-96.png"
+          width="104"
+          height="96"
+          alt="Nauã Pietro"
+        />
+        <span class="marca-texto"
+          ><span class="marca-titulo">Mapa de Leonida</span
+          ><span class="marca-sub">por Nauã Pietro</span></span
+        >
       </a>
       <nav class="nav-site" data-paginas aria-label="Páginas do site"></nav>
-      <nav class="canais canais-topo" data-canais aria-label="Canais do Nauã Pietro"></nav>
-      <span class="selo-demo" title="Dados de mentira, só para testar"><span class="selo-longo">Demonstração</span><span class="selo-curto">Demo</span></span>
+      <nav
+        class="canais canais-topo"
+        data-canais
+        aria-label="Canais do Nauã Pietro"
+      ></nav>
+      <span class="selo-demo" title="Dados de mentira, só para testar"
+        ><span class="selo-longo">Demonstração</span
+        ><span class="selo-curto">Demo</span></span
+      >
       <div class="topo-acoes">
-        <button type="button" class="btn btn-primario" id="btn-sugerir" aria-label="Sugerir lugar">
-          <span class="txt-longo">Sugerir lugar</span><span class="txt-curto" aria-hidden="true">+ Sugerir</span>
+        <button
+          type="button"
+          class="btn btn-primario"
+          id="btn-sugerir"
+          aria-label="Sugerir lugar"
+        >
+          <span class="txt-longo">Sugerir lugar</span
+          ><span class="txt-curto" aria-hidden="true">+ Sugerir</span>
         </button>
         <button
           type="button"
@@ -43,11 +69,19 @@
           aria-expanded="false"
           aria-label="Lista de pontos"
         >
-          <span class="lista-ic" aria-hidden="true">☰</span><span class="lista-txt-fechada">Lista</span><span class="lista-txt-aberta">Mapa</span>
+          <span class="lista-ic" aria-hidden="true">☰</span
+          ><span class="lista-txt-fechada">Lista</span
+          ><span class="lista-txt-aberta">Mapa</span>
         </button>
         <div class="conta" id="conta">
-          <button type="button" class="btn btn-discord" id="btn-entrar" aria-label="Entrar com Discord">
-            <span class="txt-longo">Entrar com Discord</span><span class="txt-curto" aria-hidden="true">Entrar</span>
+          <button
+            type="button"
+            class="btn btn-discord"
+            id="btn-entrar"
+            aria-label="Entrar com Discord"
+          >
+            <span class="txt-longo">Entrar com Discord</span
+            ><span class="txt-curto" aria-hidden="true">Entrar</span>
           </button>
           <div class="conta-logado" id="conta-logado" hidden>
             <button
@@ -168,7 +202,11 @@
           ></aside>
 
           <footer class="rodape">
-            <nav class="canais canais-rodape" data-canais aria-label="Canais do Nauã Pietro"></nav>
+            <nav
+              class="canais canais-rodape"
+              data-canais
+              aria-label="Canais do Nauã Pietro"
+            ></nav>
             <p>
               Fan site não oficial; GTA e Leonida são marcas da Rockstar Games.
             </p>
@@ -197,8 +235,14 @@
 
       <aside class="detalhe" id="detalhe" aria-label="Detalhes" hidden>
         <div class="detalhe-barra">
-          <button type="button" class="detalhe-fechar" id="detalhe-fechar" aria-label="Fechar e voltar ao mapa">
-            <span class="so-celular" aria-hidden="true">← Voltar ao mapa</span><span class="so-pc" aria-hidden="true">Fechar</span>
+          <button
+            type="button"
+            class="detalhe-fechar"
+            id="detalhe-fechar"
+            aria-label="Fechar e voltar ao mapa"
+          >
+            <span class="so-celular" aria-hidden="true">← Voltar ao mapa</span
+            ><span class="so-pc" aria-hidden="true">Fechar</span>
           </button>
         </div>
         <div class="detalhe-conteudo" id="detalhe-conteudo"></div>
@@ -213,6 +257,7 @@
     <script src="js/api.js"></script>
     <script src="js/imagem.js"></script>
     <script src="js/mapa.js"></script>
+    <script src="js/camadas-gta.js"></script>
     <script src="js/conta.js"></script>
     <script src="js/app.js"></script>
   </body>

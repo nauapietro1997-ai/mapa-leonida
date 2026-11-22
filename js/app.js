@@ -35,6 +35,30 @@
       "A imagem do mapa não carregou. Os pontos aparecem mesmo assim.";
   });
 
+  // Estilo mapa do GTA (js/camadas-gta.js, cópia do mapa da live): nomes que trocam com o
+  // zoom, pinos agrupados de longe e ponto aberto em destaque.
+  const GTA = window.CamadasGTA;
+  const agrupamento = GTA.criarAgrupamento(L, mapa, {
+    corMarca:
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--rosa")
+        .trim() || "#ff2e88",
+  });
+  fetch("dados/lugares.json")
+    .then((r) => (r.ok ? r.json() : null))
+    .then((j) => {
+      if (!j || !Array.isArray(j.lugares)) return;
+      // nomes grandes desviam das bolinhas de grupo e dos pinos (no celular cobriam)
+      const nomes = GTA.criarNomes(L, mapa, j.lugares, {
+        paraLatLng: (l) => paraLatLng(l.x, l.y),
+        obstaculos: agrupamento.retangulos,
+      });
+      agrupamento.aoMudar(nomes.atualizar);
+    })
+    .catch(() => {
+      /* sem os nomes: o pôster já tem os nomes impressos */
+    });
+
   let pontos = [];
   let prints = {};
   // Fotos dos sites de guia (decisão do dono, 22/11): img/guias/<id>.webp + creditos.json,
@@ -174,18 +198,55 @@
     return busca.split(/\s+/).every((b) => t.includes(b));
   }
 
+  // Quem põe/tira os pinos do mapa é o agrupamento (de longe, pinos perto viram bolinha).
+  // O ponto aberto nunca entra em grupo e fica em destaque; os outros ficam apagados.
+  const classesAtuais = {};
   function atualizarPinos() {
+    const lista = [];
     for (const p of pontos) {
       const m = marcadores[p.id];
-      if (!m) continue;
-      if (visivel(p)) {
-        m.setIcon(
-          iconePino(p.categoria, selecionado === p.id ? "sel" : "", p.subtipo),
-        );
-        m.setZIndexOffset(selecionado === p.id ? 1000 : 0);
-        if (!mapa.hasLayer(m)) m.addTo(mapa);
-      } else if (mapa.hasLayer(m)) m.remove();
+      if (!m || !visivel(p)) continue;
+      const cl = selecionado === p.id ? "sel" : "";
+      // só troca o ícone quando muda (assim o "apagar os outros" anima suave)
+      if (classesAtuais[p.id] !== cl) {
+        m.setIcon(iconePino(p.categoria, cl, p.subtipo));
+        classesAtuais[p.id] = cl;
+      }
+      m.setZIndexOffset(selecionado === p.id ? 1000 : 0);
+      lista.push({
+        id: p.id,
+        marcador: m,
+        latlng: m.getLatLng(),
+        pego: false,
+        fixo: selecionado === p.id,
+      });
     }
+    agrupamento.definir(lista);
+    GTA.destacar(mapa, selecionado && lista.some((x) => x.id === selecionado));
+  }
+
+  // Põe o ponto aberto no meio da parte livre do mapa: acima da folha (celular) ou à
+  // esquerda do painel (PC). manterZoom = clique no pino; senão aproxima até -1.5.
+  function centralizarPonto(p, manterZoom) {
+    if (p.x === null || p.x === undefined) return;
+    GTA.centralizar(L, mapa, paraLatLng(p.x, p.y), {
+      zoom: manterZoom ? null : Math.max(mapa.getZoom(), -1.5),
+      painel: detalhe,
+    });
+  }
+  // A folha do celular cresce depois de abrir (foto carregando): se cobrir o pino, ajusta.
+  if (window.ResizeObserver) {
+    let espera = null;
+    new ResizeObserver(() => {
+      clearTimeout(espera);
+      espera = setTimeout(() => {
+        if (detalhe.hidden || !selecionado) return;
+        const p = pontos.find((x) => x.id === selecionado);
+        if (!p || p.x === null || p.x === undefined) return;
+        if (GTA.coberto(mapa, L.latLng(paraLatLng(p.x, p.y)), detalhe))
+          centralizarPonto(p, true);
+      }, 150);
+    }).observe(detalhe);
   }
 
   function itemLista(p) {
@@ -478,10 +539,9 @@
     abrirPainel("Detalhes de " + p.nome, "ponto");
     atualizarPinos();
     marcarLista();
-    if (centralizar && p.x !== null && p.x !== undefined)
-      mapa.flyTo(paraLatLng(p.x, p.y), Math.max(mapa.getZoom(), -1.5), {
-        duration: 0.5,
-      });
+    // da lista: aproxima; tocando no pino: mantém o zoom. Nos dois casos o pino fica
+    // visível acima da folha (celular) ou à esquerda do painel (PC).
+    centralizarPonto(p, !centralizar);
   }
 
   async function denunciar(p) {
@@ -518,6 +578,7 @@
     $("#carregando").hidden = true;
     for (const m of Object.values(marcadores)) m.remove();
     for (const k of Object.keys(marcadores)) delete marcadores[k];
+    for (const k of Object.keys(classesAtuais)) delete classesAtuais[k];
     for (const p of pontos) {
       if (p.x === null || p.x === undefined) continue;
       const m = L.marker(paraLatLng(p.x, p.y), {
@@ -533,6 +594,12 @@
           ? mapa.fire("click", { latlng: ev.latlng })
           : abrirPonto(p.id, false),
       );
+      // Enter num pino (teclado) abre o ponto, como o clique
+      m.on("keypress", (ev) => {
+        const k = ev.originalEvent;
+        if (!escolhendo && k && (k.key === "Enter" || k.keyCode === 13))
+          abrirPonto(p.id, false);
+      });
       marcadores[p.id] = m;
     }
     desenharFiltros();

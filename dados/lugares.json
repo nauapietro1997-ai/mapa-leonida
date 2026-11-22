@@ -1,0 +1,628 @@
+{
+ "sobre": "Nomes do mapa por zoom (nivel 1 região, 2 cidade/bairro, 3 detalhe), em pixels 4000x5472. Gerado de ../dados/lugares.json por ferramentas/copiar-camadas-gta.js; não editar aqui.",
+ "lugares": [
+  {
+   "nome": "Little Hardin Island",
+   "x": 3093,
+   "y": 1341,
+   "nivel": 3
+  },
+  {
+   "nome": "Zephyr Islands",
+   "x": 1000,
+   "y": 1395,
+   "nivel": 2
+  },
+  {
+   "nome": "Draper Island",
+   "x": 987,
+   "y": 1641,
+   "nivel": 2
+  },
+  {
+   "nome": "Port Gellhorn",
+   "x": 1214,
+   "y": 1948,
+   "nivel": 2
+  },
+  {
+   "nome": "Wild Hog Point",
+   "x": 987,
+   "y": 2128,
+   "nivel": 3
+  },
+  {
+   "nome": "Gellhorn Raceway",
+   "x": 1201,
+   "y": 2382,
+   "nivel": 3
+  },
+  {
+   "nome": "Sandbars",
+   "x": 574,
+   "y": 2215,
+   "nivel": 3
+  },
+  {
+   "nome": "Crude Islands",
+   "x": 754,
+   "y": 2389,
+   "nivel": 3
+  },
+  {
+   "nome": "Manifest Canyon",
+   "x": 1560,
+   "y": 1615,
+   "nivel": 3
+  },
+  {
+   "nome": "North Kelly County",
+   "x": 1967,
+   "y": 1528,
+   "nivel": 2,
+   "tipo": "condado"
+  },
+  {
+   "nome": "Frogswater",
+   "x": 1773,
+   "y": 1882,
+   "nivel": 2
+  },
+  {
+   "nome": "Thrillbilly Mud Club",
+   "x": 1920,
+   "y": 1718,
+   "nivel": 3
+  },
+  {
+   "nome": "Ambrosia Raceway Park",
+   "x": 2160,
+   "y": 1675,
+   "nivel": 3
+  },
+  {
+   "nome": "Lake Leonida",
+   "x": 2414,
+   "y": 1722,
+   "nivel": 2
+  },
+  {
+   "nome": "Ambrosia",
+   "x": 2220,
+   "y": 1955,
+   "nivel": 2
+  },
+  {
+   "nome": "Belville",
+   "x": 2600,
+   "y": 2168,
+   "nivel": 2
+  },
+  {
+   "nome": "Emerald Springs",
+   "x": 1840,
+   "y": 2302,
+   "nivel": 2
+  },
+  {
+   "nome": "Leonida State Prison",
+   "x": 1600,
+   "y": 2515,
+   "nivel": 3
+  },
+  {
+   "nome": "Gellhorn",
+   "x": 1413,
+   "y": 2449,
+   "nivel": 2
+  },
+  {
+   "nome": "Buckskin Swamp",
+   "x": 1920,
+   "y": 2589,
+   "nivel": 3
+  },
+  {
+   "nome": "South Leonard County",
+   "x": 2427,
+   "y": 2369,
+   "nivel": 2,
+   "tipo": "condado"
+  },
+  {
+   "nome": "Balsero",
+   "x": 2347,
+   "y": 2729,
+   "nivel": 2
+  },
+  {
+   "nome": "Rockridge",
+   "x": 2587,
+   "y": 2722,
+   "nivel": 2
+  },
+  {
+   "nome": "Richard Barebone SP",
+   "x": 2859,
+   "y": 1448,
+   "nivel": 3
+  },
+  {
+   "nome": "Waning Sands",
+   "x": 2959,
+   "y": 1768,
+   "nivel": 3
+  },
+  {
+   "nome": "Vinewood Beach",
+   "x": 3160,
+   "y": 1832,
+   "nivel": 2
+  },
+  {
+   "nome": "Leaf Links",
+   "x": 3100,
+   "y": 2286,
+   "nivel": 3
+  },
+  {
+   "nome": "Decor District",
+   "x": 2906,
+   "y": 2369,
+   "nivel": 2
+  },
+  {
+   "nome": "Washington Island",
+   "x": 3320,
+   "y": 2369,
+   "nivel": 3
+  },
+  {
+   "nome": "Penmarch Isle",
+   "x": 3193,
+   "y": 2422,
+   "nivel": 3
+  },
+  {
+   "nome": "Washington Beach",
+   "x": 3460,
+   "y": 2433,
+   "nivel": 2
+  },
+  {
+   "nome": "Oldby Island",
+   "x": 3346,
+   "y": 2502,
+   "nivel": 3
+  },
+  {
+   "nome": "Stockyard",
+   "x": 2893,
+   "y": 2462,
+   "nivel": 2
+  },
+  {
+   "nome": "La Perle",
+   "x": 2719,
+   "y": 2542,
+   "nivel": 2
+  },
+  {
+   "nome": "Bayside",
+   "x": 2873,
+   "y": 2585,
+   "nivel": 2
+  },
+  {
+   "nome": "Rialto Islands",
+   "x": 3066,
+   "y": 2555,
+   "nivel": 3
+  },
+  {
+   "nome": "Casanova Island",
+   "x": 3180,
+   "y": 2589,
+   "nivel": 3
+  },
+  {
+   "nome": "Catalan Island",
+   "x": 2986,
+   "y": 2635,
+   "nivel": 3
+  },
+  {
+   "nome": "Vespucci Island",
+   "x": 3100,
+   "y": 2662,
+   "nivel": 3
+  },
+  {
+   "nome": "Vice Beach",
+   "x": 3406,
+   "y": 2675,
+   "nivel": 2
+  },
+  {
+   "nome": "Crosstown",
+   "x": 2793,
+   "y": 2715,
+   "nivel": 2
+  },
+  {
+   "nome": "Bonanza",
+   "x": 1927,
+   "y": 778,
+   "nivel": 2
+  },
+  {
+   "nome": "Moreau",
+   "x": 2064,
+   "y": 907,
+   "nivel": 2
+  },
+  {
+   "nome": "Mount Kalaga NP",
+   "x": 1987,
+   "y": 1241,
+   "nivel": 2
+  },
+  {
+   "nome": "East Lummox County",
+   "x": 2547,
+   "y": 971,
+   "nivel": 2,
+   "tipo": "condado"
+  },
+  {
+   "nome": "Tallaloko Lakeside Resort",
+   "x": 2414,
+   "y": 1007,
+   "nivel": 3
+  },
+  {
+   "nome": "Grayson",
+   "x": 1520,
+   "y": 1194,
+   "nivel": 2
+  },
+  {
+   "nome": "Hyde Island",
+   "x": 2300,
+   "y": 631,
+   "nivel": 2
+  },
+  {
+   "nome": "Millport",
+   "x": 2660,
+   "y": 1254,
+   "nivel": 2
+  },
+  {
+   "nome": "Capri",
+   "x": 1154,
+   "y": 2883,
+   "nivel": 2
+  },
+  {
+   "nome": "Belpoint",
+   "x": 703,
+   "y": 3003,
+   "nivel": 2
+  },
+  {
+   "nome": "Bobcat Bight",
+   "x": 1107,
+   "y": 3240,
+   "nivel": 3
+  },
+  {
+   "nome": "Bobcat Key",
+   "x": 1294,
+   "y": 3510,
+   "nivel": 2
+  },
+  {
+   "nome": "Gulf of Leonida",
+   "x": 520,
+   "y": 3494,
+   "nivel": 1,
+   "tipo": "agua"
+  },
+  {
+   "nome": "Big Pine",
+   "x": 1593,
+   "y": 3407,
+   "nivel": 2
+  },
+  {
+   "nome": "Grassrivers",
+   "x": 1803,
+   "y": 3627,
+   "nivel": 2
+  },
+  {
+   "nome": "Watson Bay",
+   "x": 1729,
+   "y": 3850,
+   "nivel": 2
+  },
+  {
+   "nome": "Pelican Valley",
+   "x": 2087,
+   "y": 4003,
+   "nivel": 2
+  },
+  {
+   "nome": "Hamlet",
+   "x": 2240,
+   "y": 3750,
+   "nivel": 2
+  },
+  {
+   "nome": "Boone Speedway",
+   "x": 2193,
+   "y": 3819,
+   "nivel": 3
+  },
+  {
+   "nome": "Southside",
+   "x": 2494,
+   "y": 3552,
+   "nivel": 2
+  },
+  {
+   "nome": "South Vice-Dale",
+   "x": 2467,
+   "y": 3706,
+   "nivel": 2
+  },
+  {
+   "nome": "West Vice-Dale County",
+   "x": 1820,
+   "y": 2929,
+   "nivel": 2,
+   "tipo": "condado"
+  },
+  {
+   "nome": "VCIA",
+   "x": 2260,
+   "y": 3123,
+   "nivel": 3
+  },
+  {
+   "nome": "Breakwater Quarry",
+   "x": 1733,
+   "y": 3190,
+   "nivel": 3
+  },
+  {
+   "nome": "South Kelly County",
+   "x": 1580,
+   "y": 2765,
+   "nivel": 2,
+   "tipo": "condado"
+  },
+  {
+   "nome": "Little Cuba",
+   "x": 2640,
+   "y": 2900,
+   "nivel": 2
+  },
+  {
+   "nome": "Waxman Island",
+   "x": 3080,
+   "y": 2913,
+   "nivel": 3
+  },
+  {
+   "nome": "Port Vice City",
+   "x": 3220,
+   "y": 3043,
+   "nivel": 2
+  },
+  {
+   "nome": "Ocean Beach",
+   "x": 3446,
+   "y": 2859,
+   "nivel": 2
+  },
+  {
+   "nome": "Downtown",
+   "x": 2806,
+   "y": 2925,
+   "nivel": 2
+  },
+  {
+   "nome": "Tequesta",
+   "x": 2706,
+   "y": 3256,
+   "nivel": 2
+  },
+  {
+   "nome": "Tequesta Retreat",
+   "x": 2913,
+   "y": 3236,
+   "nivel": 3
+  },
+  {
+   "nome": "Dalton Island",
+   "x": 3460,
+   "y": 3254,
+   "nivel": 3
+  },
+  {
+   "nome": "Gloriana Key",
+   "x": 3184,
+   "y": 3420,
+   "nivel": 3
+  },
+  {
+   "nome": "Catalan Key",
+   "x": 2913,
+   "y": 3511,
+   "nivel": 3
+  },
+  {
+   "nome": "Starfish Island",
+   "x": 3140,
+   "y": 2815,
+   "nivel": 2
+  },
+  {
+   "nome": "Corsair Key",
+   "x": 2700,
+   "y": 4040,
+   "nivel": 3
+  },
+  {
+   "nome": "Riquezas Keys",
+   "x": 873,
+   "y": 4537,
+   "nivel": 2
+  },
+  {
+   "nome": "Goose Key",
+   "x": 1113,
+   "y": 4631,
+   "nivel": 3
+  },
+  {
+   "nome": "Mile Zero Air Station",
+   "x": 1107,
+   "y": 4757,
+   "nivel": 3
+  },
+  {
+   "nome": "Southwind",
+   "x": 1267,
+   "y": 4671,
+   "nivel": 2
+  },
+  {
+   "nome": "Permit Keys",
+   "x": 1460,
+   "y": 4613,
+   "nivel": 2
+  },
+  {
+   "nome": "Key Lento",
+   "x": 2273,
+   "y": 4553,
+   "nivel": 2
+  },
+  {
+   "nome": "Maroon Key",
+   "x": 1800,
+   "y": 4704,
+   "nivel": 3
+  },
+  {
+   "nome": "Abismo Key",
+   "x": 1800,
+   "y": 4880,
+   "nivel": 3
+  },
+  {
+   "nome": "Shoeless Keys",
+   "x": 2420,
+   "y": 4144,
+   "nivel": 2
+  },
+  {
+   "nome": "Cottonmouth Lake",
+   "x": 2030,
+   "y": 4180,
+   "nivel": 3
+  },
+  {
+   "nome": "Mount Kalaga",
+   "x": 1990,
+   "y": 1238,
+   "nivel": 3
+  },
+  {
+   "nome": "Lake Tallaloko",
+   "x": 2414,
+   "y": 1007,
+   "nivel": 2
+  },
+  {
+   "nome": "Vice City",
+   "x": 3000,
+   "y": 2760,
+   "nivel": 1,
+   "tipo": "regiao"
+  },
+  {
+   "nome": "Lummox County",
+   "x": 1987,
+   "y": 1100,
+   "nivel": 1,
+   "tipo": "condado"
+  },
+  {
+   "nome": "Kelly County",
+   "x": 1693,
+   "y": 2168,
+   "nivel": 1,
+   "tipo": "condado"
+  },
+  {
+   "nome": "Leonard County",
+   "x": 2750,
+   "y": 1962,
+   "nivel": 1,
+   "tipo": "condado"
+  },
+  {
+   "nome": "Mariana County",
+   "x": 1653,
+   "y": 3990,
+   "nivel": 1,
+   "tipo": "condado"
+  },
+  {
+   "nome": "Vice-Dale County",
+   "x": 2900,
+   "y": 3130,
+   "nivel": 1,
+   "tipo": "condado"
+  },
+  {
+   "nome": "Leonida Keys",
+   "x": 1800,
+   "y": 4650,
+   "nivel": 1,
+   "tipo": "regiao"
+  },
+  {
+   "nome": "Mount Kalaga",
+   "x": 2050,
+   "y": 1060,
+   "nivel": 1,
+   "tipo": "regiao"
+  },
+  {
+   "nome": "Ambrosia",
+   "x": 2250,
+   "y": 1980,
+   "nivel": 1,
+   "tipo": "regiao"
+  },
+  {
+   "nome": "Port Gellhorn",
+   "x": 1150,
+   "y": 2280,
+   "nivel": 1,
+   "tipo": "regiao"
+  },
+  {
+   "nome": "Grassrivers",
+   "x": 1900,
+   "y": 3640,
+   "nivel": 1,
+   "tipo": "regiao"
+  }
+ ]
+}

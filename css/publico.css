@@ -2508,3 +2508,23 @@ body.lista-aberta .lista-txt-aberta {
     display: inline;
   }
 }
+
+/* ---------- Estilo mapa do GTA (css/camadas-gta.css, cópia do mapa da live) ----------
+   Aqui só o que muda no site público: o pino é a imagem do ícone (sem círculo). */
+.pino {
+  position: relative;
+}
+.pino.sel {
+  transform: scale(1.5);
+}
+.pino-wrap:hover .pino.sel {
+  transform: scale(1.55);
+}
+
+/* celular: com um PONTO aberto a folha vai até 60% do mapa, para o pino em destaque
+   aparecer acima dela (o conteúdo rola por dentro). O formulário continua alto. */
+@media (max-width: 900px) {
+  .detalhe[data-tipo="ponto"] {
+    max-height: 60%;
+  }
+}
