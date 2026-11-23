@@ -13,10 +13,16 @@ window.CONFIG = Object.freeze({
   // Mapa: ladrilhos (tiles) do pôster original 5775x7900, gerados por ../ferramentas/gerar-tiles.py
   // (ou ferramentas/preparar-mapa.js); não ficam no git deste projeto, só na pasta dist/.
   // MAPA_IMAGEM = imagem única de reserva (se os ladrilhos faltarem).
-  MAPA_TILES: "img/tiles/{z}/{x}/{y}.webp",
+  MAPA_TILES: "img/tiles-sem-nomes/{z}/{x}/{y}.webp",
   // Cópia do pôster SEM os nomes pintados: aparece de perto (o nome vem do nosso texto).
   // Faltando a pasta, o site continua só com o original.
   MAPA_TILES_SEM_NOMES: "img/tiles-sem-nomes/{z}/{x}/{y}.webp",
+  // Decisão do dono (22/11): de perto vale o pôster AMPLIADO com IA (nível 6, 2x) com os nomes pintados
+  // dele; a cópia sem nomes fica desligada (MAPA_FUNDO_LIMPO: false). Os nossos nomes só de longe.
+  MAPA_FUNDO_LIMPO: false,
+  // Fundo = pôster SEM nenhum nome pintado (img/tiles-sem-nomes, até o nível 6); os nomes são só os nossos.
+  MAPA_BASE_SEM_NOMES: true,
+  MAPA_TILES_NIVEL_EXTRA: true, // existe img/tiles/6 (pôster 2x, ferramentas/gerar-tiles-nivel6.py)
   MAPA_TILES_LARGURA: 5775,
   MAPA_TILES_ALTURA: 7900,
   MAPA_TILES_NIVEL: 5, // nível do tamanho real (0 = 1 ladrilho só)

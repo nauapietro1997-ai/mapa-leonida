@@ -40,7 +40,10 @@
   const GTA = window.CamadasGTA;
   // De perto, o fundo troca para a cópia sem os nomes pintados (os nomes vêm do nosso texto)
   let nomesGTA = null;
-  const fundoLimpo = camada.opcoesTiles
+  // Base SEM nomes pintados (MAPA_BASE_SEM_NOMES): só os nossos nomes, estilo do jogo, surgindo aos poucos
+  const baseSemNomes = !!window.CONFIG.MAPA_BASE_SEM_NOMES;
+  if (baseSemNomes) mapa.getContainer().classList.add("nomes-jogo");
+  const fundoLimpo = !baseSemNomes && camada.opcoesTiles && window.CONFIG.MAPA_FUNDO_LIMPO !== false
     ? GTA.criarFundoLimpo(L, mapa, {
         url: window.CONFIG.MAPA_TILES_SEM_NOMES,
         opcoesTiles: camada.opcoesTiles,
@@ -63,10 +66,16 @@
       if (!j || !Array.isArray(j.lugares)) return;
       // sem o nosso nome onde o nome pintado ficou no pôster (não duplica);
       // nomes desviam das bolinhas de grupo e dos pinos (no celular cobriam)
-      const nomes = GTA.criarNomes(L, mapa, GTA.semPintados(j.lugares, pintados), {
+      const nomes = GTA.criarNomes(L, mapa, GTA.semPintados(j.lugares, fundoLimpo ? pintados : null), {
         paraLatLng: (l) => paraLatLng(l.x, l.y),
         obstaculos: agrupamento.retangulos,
-        faixas: () => (fundoLimpo ? fundoLimpo.faixas() : GTA.FAIXAS_SEM_FUNDO_LIMPO),
+        escalonar: baseSemNomes,
+        faixas: () =>
+          baseSemNomes
+            ? GTA.FAIXAS_JOGO
+            : fundoLimpo
+              ? fundoLimpo.faixas()
+              : GTA.FAIXAS_SEM_FUNDO_LIMPO,
       });
       nomesGTA = nomes;
       agrupamento.aoMudar(nomes.atualizar);

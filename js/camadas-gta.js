@@ -26,21 +26,45 @@
     2: [-2.5, -1.75],
     3: [-2.0, -1.5],
   };
-  // Largura (em zoom) do esmaecer na borda de cada faixa: o nome some/aparece aos poucos.
+  // Fundo SEM nenhum nome pintado (site, desde 22/11): os nomes são só os nossos, no estilo do jogo.
+  // Região some ao aproximar; cidade/ilha e bairro vão surgindo AOS POUCOS (cada nome entra um pouco
+  // depois do outro, até ESCALONAR de zoom de diferença) e ficam até o zoom máximo.
+  const FAIXAS_JOGO = {
+    1: [-Infinity, -2.25],
+    2: [-3.25, Infinity],
+    3: [-2.0, Infinity],
+  };
+  const ESCALONAR = 0.9;
+  // Largura (em zoom) da troca do fundo (criarFundoLimpo) e da folga para reservar lugar aos nomes
+  // que vão surgir. Os nomes em si trocam de uma vez na borda da faixa e o CSS anima (~0,6 s).
   const FADE = 0.35;
   // Zoom em que o fundo troca para a cópia sem nomes (no meio do esmaecer dos nomes grandes).
   const ZOOM_FUNDO_LIMPO = -2.5;
   const reduzMovimento = () =>
-    !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+    !!(
+      window.matchMedia &&
+      matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
   const limitar = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
-  // Opacidade (0 a 1) de um nível de nome no zoom z: sobe e desce suave nas bordas da faixa.
-  function opacidadeFaixa(f, z) {
-    if (!f) return 0;
-    let a = 1;
-    if (isFinite(f[0])) a *= limitar((z - (f[0] - FADE / 2)) / FADE);
-    if (isFinite(f[1])) a *= limitar((f[1] + FADE / 2 - z) / FADE);
-    return a;
+  // Estado de um nome no zoom z (o CSS anima a troca, ~0,6 s):
+  //   "visivel"   = na faixa do zoom e com lugar livre
+  //   "passou"    = já aproximou além da faixa: o nome cresce, desfoca e some ("câmera passou por ele")
+  //   ""          = ainda longe demais: o nome fica menor e borrado; ao aproximar surge nítido
+  //   "sem-lugar" = na faixa, mas sem lugar livre (pino/outro nome): só esmaece, rápido
+  // A faixa vale de (de, até]: dois níveis nunca aparecem juntos e, no zoom da troca (-2.5,
+  // fundo ainda meio pintado), ficam os nomes grandes, que caem em cima dos nomes pintados iguais.
+  function estadoNome(f, z, permitido) {
+    if (!f || z <= f[0]) return "";
+    if (z > f[1]) return "passou";
+    return permitido ? "visivel" : "sem-lugar";
   }
+  // número fixo de 0 a ESCALONAR para cada nome (não muda entre visitas)
+  function atrasoDe(texto) {
+    let h = 7;
+    for (const c of String(texto)) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+    return ((h % 7) / 6) * ESCALONAR;
+  }
+  const naFaixaAgora = (f, z) => !!f && z > f[0] && z <= f[1];
   // Grupos de pinos: até este zoom (exclusivo) os pinos perto viram uma bolinha com o número.
   const ZOOM_SEM_GRUPOS = -1.25;
   const CELULA_GRUPO = 56; // px da grade do agrupamento
@@ -102,32 +126,55 @@
           m,
           el: () => m.getElement() && m.getElement().firstChild,
           ordem: nivel * 10 + (PRIORIDADE[tipo] ?? 5) + i / 1000,
+          // atraso (em zoom) para o nome surgir aos poucos: sempre o mesmo para o mesmo nome
+          atraso: op.escalonar && nivel >= 2 ? atrasoDe(l.nome) : 0,
         };
       })
       .sort((a, b) => a.ordem - b.ordem);
 
     const faixas = () =>
       typeof op.faixas === "function" ? op.faixas() : op.faixas;
+    // faixa de zoom deste nome (com o atraso, se houver)
+    const faixaDe = (it, fx) => {
+      const f = (fx || faixas())[it.l.nivel];
+      return f && it.atraso ? [f[0] + it.atraso, f[1]] : f;
+    };
     // Entra na conta de espaço (quem encosta em quem) se já aparece ou vai aparecer logo
     // (até meio zoom antes), para o nome já ter lugar reservado quando começar a surgir.
-    function naFaixa(nivel, z) {
-      const f = faixas()[nivel];
+    function naFaixa(it, z) {
+      const f = faixaDe(it);
       return !!f && z >= f[0] - FADE / 2 - 0.5 && z < f[1] + FADE / 2 + 0.5;
     }
-    // Só mexe na opacidade (barato): roda a cada quadro do zoom animado.
+    // Só troca classes (barato, sem medir nada): roda a cada quadro do zoom animado.
+    // A animação de sumir/aparecer é do CSS (css/camadas-gta.css).
     function aplicarOpacidade(z) {
       const fx = faixas();
       for (const it of itens) {
         const el = it.el();
         if (!el) continue;
-        const a = it.permitido
-          ? Math.round(opacidadeFaixa(fx[it.l.nivel], z) * 50) / 50
-          : 0;
-        if (it.a === a) continue;
-        it.a = a;
-        el.style.setProperty("--a", String(a));
-        el.classList.toggle("visivel", a > 0);
+        const e = estadoNome(faixaDe(it, fx), z, it.permitido);
+        if (it.estado === e) continue;
+        it.estado = e;
+        el.classList.toggle("visivel", e === "visivel");
+        el.classList.toggle("passou", e === "passou");
+        el.classList.toggle("sem-lugar", e === "sem-lugar");
       }
+    }
+    // Trocar o nome de camada (pane) o tira e põe de volta na página, e o navegador perde a
+    // animação no meio (o nome "pula" para o fim). Aqui ele continua de onde estava.
+    function mudarDeCamada(el, wrap, destino) {
+      const s = getComputedStyle(el);
+      const antes =
+        s.visibility === "visible" && !reduzMovimento()
+          ? { opacity: s.opacity, filter: s.filter, scale: s.scale }
+          : null;
+      destino.appendChild(wrap);
+      if (!antes) return;
+      el.style.transition = "none";
+      for (const k in antes) el.style[k] = antes[k];
+      void el.offsetWidth; // aplica o "de onde estava" antes de soltar a animação
+      el.style.transition = "";
+      for (const k in antes) el.style[k] = "";
     }
     // Camada de cima (acima dos pinos) para o nome que não tem como sair de baixo de um grupo.
     const paneCima = op.pane + "Cima";
@@ -151,13 +198,16 @@
       // quem já está aparecendo escolhe lugar primeiro; os que ainda vão surgir depois
       const fx = faixas();
       const ordem = itens
-        .map((it) => ({ it, ja: opacidadeFaixa(fx[it.l.nivel], z) > 0 ? 0 : 1 }))
+        .map((it) => ({
+          it,
+          ja: naFaixaAgora(faixaDe(it, fx), z) ? 0 : 1,
+        }))
         .sort((a, b) => a.ja - b.ja || a.it.ordem - b.it.ordem)
         .map((x) => x.it);
       for (const it of ordem) {
         const el = it.el();
         if (!el) continue;
-        let mostrar = naFaixa(it.l.nivel, z);
+        let mostrar = naFaixa(it, z);
         let dx = 0,
           dy = 0,
           porCima = false;
@@ -208,7 +258,8 @@
                 // andar de lado "custa" mais que subir/descer (o nome fica longe do lugar)
                 .sort(
                   (u, v) =>
-                    Math.abs(u[0]) * 1.5 + Math.abs(u[1]) -
+                    Math.abs(u[0]) * 1.5 +
+                    Math.abs(u[1]) -
                     (Math.abs(v[0]) * 1.5 + Math.abs(v[1])),
                 );
               // nome grande de região (nível 1, só de longe): pode ficar em cima de pino solto
@@ -247,7 +298,8 @@
         el.classList.toggle("por-cima", mostrar && porCima);
         const wrap = el.parentNode;
         const destino = mapa.getPane(mostrar && porCima ? paneCima : op.pane);
-        if (wrap && wrap.parentNode !== destino) destino.appendChild(wrap);
+        if (wrap && wrap.parentNode !== destino)
+          mudarDeCamada(el, wrap, destino);
         it.permitido = mostrar;
       }
       aplicarOpacidade(z);
@@ -622,18 +674,25 @@
   // ferramentas/apagar-nomes.py): o nosso nome do mesmo lugar (cidade/bairro) sai, senão aparece
   // duplicado de perto. Lista vazia ou ausente = todos os nossos nomes voltam.
   function semPintados(lugares, preservados) {
-    const norm = (t) => String(t || "").trim().toLowerCase();
+    const norm = (t) =>
+      String(t || "")
+        .trim()
+        .toLowerCase();
     const pintados = new Set();
     for (const it of (preservados && preservados.nomes) || [])
-      for (const n of String((it && it.nome) || "").split(" + ")) if (norm(n)) pintados.add(norm(n));
+      for (const n of String((it && it.nome) || "").split(" + "))
+        if (norm(n)) pintados.add(norm(n));
     if (!pintados.size) return lugares;
-    return lugares.filter((l) => !(Number(l.nivel) >= 2 && pintados.has(norm(l.nome))));
+    return lugares.filter(
+      (l) => !(Number(l.nivel) >= 2 && pintados.has(norm(l.nome))),
+    );
   }
 
   window.CamadasGTA = {
     semPintados,
     FAIXAS_ZOOM,
     FAIXAS_SEM_FUNDO_LIMPO,
+    FAIXAS_JOGO,
     ZOOM_FUNDO_LIMPO,
     criarFundoLimpo,
     ZOOM_SEM_GRUPOS,

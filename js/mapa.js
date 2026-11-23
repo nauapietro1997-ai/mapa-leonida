@@ -20,7 +20,9 @@
   // Zoom 0 = pôster no tamanho real; ZOOM_MAX 0.5 = no máximo 1,4x (nunca pixelado).
   // (Antes, com a imagem única, os zooms eram ~0,5 maiores: -1 de antes = -1.5 agora.)
   const ZOOM_MIN = -4.5;
-  const ZOOM_MAX = 0.5;
+  // Com o nível 6 (pôster ampliado 2x com IA) dá para aproximar mais: zoom 1 = nível 6 no tamanho real.
+  const EXTRA = () => !!(window.CONFIG && window.CONFIG.MAPA_TILES_NIVEL_EXTRA);
+  const ZOOM_MAX = EXTRA() ? 1 : 0.5; // zoom 1 = nível 6 em tamanho real (o fundo da IA fica mole se esticar mais)
   function crsMapa(c) {
     return L.extend({}, L.CRS.Simple, {
       transformation: new L.Transformation(
@@ -42,7 +44,7 @@
       zoomOffset: n,
       minZoom: -n - 5,
       minNativeZoom: -n,
-      maxNativeZoom: 0,
+      maxNativeZoom: EXTRA() ? 1 : 0,
       maxZoom: 5,
       noWrap: true,
       bounds: L.latLngBounds(limites),
