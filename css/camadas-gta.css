@@ -85,16 +85,16 @@
     transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
     visibility 0s linear 0.25s;
 }
-/* nome que não tem como sair de baixo de uma bolinha de grupo: vai por cima dos pinos,
-   com uma tarja escura atrás (o tamanho medido do nome não muda) */
-.nome-gta.por-cima::before {
-  content: "";
-  position: absolute;
-  inset: -5px -10px;
-  z-index: -1;
-  border-radius: 7px;
-  background: rgb(18 7 42 / 0.8);
-  box-shadow: 0 2px 8px rgb(5 0 15 / 0.5);
+/* nome que não tem como sair de baixo de uma bolinha de grupo: vai por cima dos pinos.
+   SEM caixa (pedido do dono 23/11: as tarjas escuras ficavam feias); só um contorno escuro
+   mais forte para o nome ler em cima da bolinha. Vale para os 2 estilos (live e site). */
+.nome-gta.por-cima,
+.nomes-jogo .nome-gta.por-cima {
+  text-shadow:
+    0 0 2px rgb(8 4 26 / 1),
+    0 0 3px rgb(8 4 26 / 0.95),
+    0 1px 6px rgb(8 4 26 / 0.85),
+    0 0 14px rgb(8 4 26 / 0.6);
 }
 /* nível 1: região (o nome maior, de longe) */
 .nome-n1.nome-regiao {
@@ -368,26 +368,34 @@
     0 0 8px rgb(8 4 26 / 0.5);
 }
 .nomes-jogo .nome-n1.nome-regiao {
-  font: 800 30px/1 "Montserrat", sans-serif;
+  font:
+    800 30px/1 "Montserrat",
+    sans-serif;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #fff;
 }
 .nomes-jogo .nome-n1.nome-condado {
-  font: 700 18px/1 "Montserrat", sans-serif;
+  font:
+    700 18px/1 "Montserrat",
+    sans-serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: rgb(255 255 255 / 0.92);
 }
 .nomes-jogo .nome-n1.nome-agua {
-  font: 500 15px/1 "Montserrat", sans-serif;
+  font:
+    500 15px/1 "Montserrat",
+    sans-serif;
   letter-spacing: 0.03em;
   text-transform: none;
   font-style: normal;
   color: rgb(205 228 255 / 0.9);
 }
 .nomes-jogo .nome-n2 {
-  font: 700 17px/1 "Montserrat", sans-serif;
+  font:
+    700 17px/1 "Montserrat",
+    sans-serif;
   letter-spacing: 0.01em;
   text-transform: none;
   color: #fff;
@@ -398,7 +406,9 @@
   letter-spacing: 0.06em;
 }
 .nomes-jogo .nome-n3 {
-  font: 500 13px/1 "Montserrat", sans-serif;
+  font:
+    500 13px/1 "Montserrat",
+    sans-serif;
   letter-spacing: 0.02em;
   color: rgb(255 255 255 / 0.86);
 }

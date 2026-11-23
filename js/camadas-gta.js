@@ -92,6 +92,7 @@
         paraLatLng: (l) => [-l.y, l.x],
         pane: "nomesGTA",
         obstaculos: null,
+        tamanho: { w: 4000, h: 5472 }, // pôster (mesmo espaço dos x,y de lugares.json)
       },
       opcoes,
     );
@@ -210,16 +211,39 @@
         let mostrar = naFaixa(it, z);
         let dx = 0,
           dy = 0,
+          ax = 0, // empurrão para o nome não sair do pôster
+          ay = 0,
           porCima = false;
         if (mostrar) {
           const pt = mapa.latLngToContainerPoint(it.m.getLatLng());
           const w = el.offsetWidth,
             h = el.offsetHeight;
+          // o nome nunca passa da borda do pôster (ex.: "PORT GELLHORN" saía para a margem)
+          const p0 = mapa.latLngToContainerPoint(op.paraLatLng({ x: 0, y: 0 }));
+          const p1 = mapa.latLngToContainerPoint(
+            op.paraLatLng({ x: op.tamanho.w, y: op.tamanho.h }),
+          );
+          const [bx1, bx2] = [
+            Math.min(p0.x, p1.x) + 6,
+            Math.max(p0.x, p1.x) - 6,
+          ];
+          const [by1, by2] = [
+            Math.min(p0.y, p1.y) + 6,
+            Math.max(p0.y, p1.y) - 6,
+          ];
+          if (bx2 - bx1 > w) {
+            if (pt.x - w / 2 < bx1) ax = bx1 - (pt.x - w / 2);
+            else if (pt.x + w / 2 > bx2) ax = bx2 - (pt.x + w / 2);
+          }
+          if (by2 - by1 > h) {
+            if (pt.y - h / 2 < by1) ay = by1 - (pt.y - h / 2);
+            else if (pt.y + h / 2 > by2) ay = by2 - (pt.y + h / 2);
+          }
           const caixa = (a, b) => ({
-            x1: pt.x + a - w / 2 - 4,
-            y1: pt.y + b - h / 2 - 2,
-            x2: pt.x + a + w / 2 + 4,
-            y2: pt.y + b + h / 2 + 2,
+            x1: pt.x + ax + a - w / 2 - 4,
+            y1: pt.y + ay + b - h / 2 - 2,
+            x2: pt.x + ax + a + w / 2 + 4,
+            y2: pt.y + ay + b + h / 2 + 2,
           });
           let r = caixa(0, 0);
           const foraDaTela =
@@ -228,7 +252,12 @@
             r.x1 > tela.x + 200 ||
             r.y1 > tela.y + 200;
           if (!foraDaTela) {
+            // dentro do pôster (quando cabe) e sem encostar em obstáculo nem em outro nome
+            const dentro = (c) =>
+              (bx2 - bx1 <= w || (c.x1 + 4 >= bx1 - 0.5 && c.x2 - 4 <= bx2 + 0.5)) &&
+              (by2 - by1 <= h || (c.y1 + 2 >= by1 - 0.5 && c.y2 - 2 <= by2 + 0.5));
             const livre = (c, lista) =>
+              dentro(c) &&
               !lista.some((o) => encosta(c, o)) &&
               !ocupado.some((o) => encosta(c, o));
             if (obst.some((o) => encosta(r, o))) {
@@ -285,6 +314,8 @@
             else ocupado.push(r);
           }
         }
+        dx = Math.round(dx + ax);
+        dy = Math.round(dy + ay);
         for (const [k, v] of [
           ["--dx", dx],
           ["--dy", dy],
