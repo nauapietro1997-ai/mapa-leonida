@@ -1,4 +1,11 @@
 {
  "sobre": "Nomes que ainda estão pintados no fundo sem nomes (o site não mostra o nosso nome por cima). Gerado de ../dados/nomes-preservados.json por ferramentas/copiar-camadas-gta.js; não editar aqui.",
- "nomes": []
+ "nomes": [
+  {
+   "nome": "Little Hardin Island"
+  },
+  {
+   "nome": "Tisha-Wocka Flea Market + Balsero"
+  }
+ ]
 }
