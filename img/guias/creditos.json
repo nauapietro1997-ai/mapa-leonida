@@ -77,12 +77,6 @@
   "site": "Insider Gaming",
   "url": "https://insider-gaming.com/best-secret-loot-location-early-game-gta-6/"
  },
- "p13-fachada-exotic-animals-com-papagaio": {
-  "arquivo": "p13-fachada-exotic-animals-com-papagaio.webp",
-  "slug": "p13-fachada-exotic-animals-com-papagaio",
-  "site": "Detonated",
-  "url": "https://detonated.com/gta-6-secret-loot-rooms-early-cash-weapons/"
- },
  "p14-rum-da-shirley-three-sheets-liquor": {
   "arquivo": "p14-rum-da-shirley-three-sheets-liquor.webp",
   "slug": "p14-rum-da-shirley-three-sheets-liquor",
@@ -203,17 +197,35 @@
   "site": "GTABase",
   "url": "https://www.gtabase.com/gta-6/weapons/soldiers-combat-knife"
  },
+ "p34-carro-na-lama-dirty-drifter": {
+  "arquivo": "p34-carro-na-lama-dirty-drifter.webp",
+  "slug": "p34-carro-na-lama-dirty-drifter",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/weapons/dirty-drifter"
+ },
  "p35-porta-malas-do-donnie-donnie-s-h-l-38": {
   "arquivo": "p35-porta-malas-do-donnie-donnie-s-h-l-38.webp",
   "slug": "p35-porta-malas-do-donnie-donnie-s-h-l-38",
   "site": "KeenGamer",
   "url": "https://www.keengamer.com/articles/guides/gta-6-best-early-game-unique-weapon-locations/"
  },
+ "p36-bret-vogel-killtelligence-sm-69": {
+  "arquivo": "p36-bret-vogel-killtelligence-sm-69.webp",
+  "slug": "p36-bret-vogel-killtelligence-sm-69",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/weapons/killtelligence-sm-69"
+ },
  "p37-bunker-presidencial-de-sharktooth-island-russo-s": {
   "arquivo": "p37-bunker-presidencial-de-sharktooth-island-russo-s.webp",
   "slug": "p37-bunker-presidencial-de-sharktooth-island-russo-s",
   "site": "GTABase",
   "url": "https://www.gtabase.com/gta-6/weapons/russos-1992"
+ },
+ "p38-casa-de-palafitas-de-lanto-reef-gun-nut-sms-01": {
+  "arquivo": "p38-casa-de-palafitas-de-lanto-reef-gun-nut-sms-01.webp",
+  "slug": "p38-casa-de-palafitas-de-lanto-reef-gun-nut-sms-01",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/weapons/gun-nut-sms-01"
  },
  "p39-bunker-de-big-pine-cold-war-556": {
   "arquivo": "p39-bunker-de-big-pine-cold-war-556.webp",
@@ -245,6 +257,12 @@
   "site": "GTABase",
   "url": "https://www.gtabase.com/gta-6/weapons/marthas-1992"
  },
+ "p44-carro-submerso-do-reservatorio-kalaga-the-patria": {
+  "arquivo": "p44-carro-submerso-do-reservatorio-kalaga-the-patria.webp",
+  "slug": "p44-carro-submerso-do-reservatorio-kalaga-the-patria",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/weapons/the-patriarch-drx"
+ },
  "p45-taco-de-dinossauro-brontasaurus-bat": {
   "arquivo": "p45-taco-de-dinossauro-brontasaurus-bat.webp",
   "slug": "p45-taco-de-dinossauro-brontasaurus-bat",
@@ -257,11 +275,35 @@
   "site": "GTA6Intel",
   "url": "https://gta6intel.com/businesses/phils-ammu-nation"
  },
+ "p49-trailer-da-carta-lucky-maivia": {
+  "arquivo": "p49-trailer-da-carta-lucky-maivia.webp",
+  "slug": "p49-trailer-da-carta-lucky-maivia",
+  "site": "Grand Leonida",
+  "url": "https://grandleonida.com/guides/gta-6-lucky-maivia-card-trailer-safe-code-44017/"
+ },
+ "p50-casa-isolada-da-smg-dourada-silenciada": {
+  "arquivo": "p50-casa-isolada-da-smg-dourada-silenciada.webp",
+  "slug": "p50-casa-isolada-da-smg-dourada-silenciada",
+  "site": "Grand Leonida",
+  "url": "https://grandleonida.com/guides/gta-6-golden-silenced-smg-mariana-county-robbery/"
+ },
+ "p52-queda-de-aviao-de-contrabando": {
+  "arquivo": "p52-queda-de-aviao-de-contrabando.webp",
+  "slug": "p52-queda-de-aviao-de-contrabando",
+  "site": "AlcastHQ",
+  "url": "https://alcasthq.com/?p=87680"
+ },
  "p53-vender-carros-ao-moses": {
   "arquivo": "p53-vender-carros-ao-moses.webp",
   "slug": "p53-vender-carros-ao-moses",
   "site": "PowerPyx",
   "url": "https://www.powerpyx.com/gta-6-moses-take-a-vehicle-to-moses-walkthrough/"
+ },
+ "p54-deposito-do-brian-receptador": {
+  "arquivo": "p54-deposito-do-brian-receptador.webp",
+  "slug": "p54-deposito-do-brian-receptador",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/map/?feature=fence"
  },
  "p55-ovo-de-pascoa-de-verdade-ninho-na-torre": {
   "arquivo": "p55-ovo-de-pascoa-de-verdade-ninho-na-torre.webp",
@@ -298,6 +340,12 @@
   "slug": "p60-cachorro-de-jet-ski",
   "site": "ComicBook",
   "url": "https://comicbook.com/gaming/list/5-most-exciting-gta-6-easter-eggs-players-have-found-after-launch-day/"
+ },
+ "p61-ilha-do-sos": {
+  "arquivo": "p61-ilha-do-sos.webp",
+  "slug": "p61-ilha-do-sos",
+  "site": "ProdigyGamers",
+  "url": "https://prodigygamers.com/?p=37892"
  },
  "p62-meteorito-roxo": {
   "arquivo": "p62-meteorito-roxo.webp",
@@ -365,6 +413,12 @@
   "site": "Detonated",
   "url": "https://detonated.com/gta-6-best-car-locations/"
  },
+ "i-bravado-gauntlet-hellfire-ferro-velho-m7": {
+  "arquivo": "i-bravado-gauntlet-hellfire-ferro-velho-m7.webp",
+  "slug": "i-bravado-gauntlet-hellfire-ferro-velho-m7",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/vehicles/gauntlet-hellfire"
+ },
  "p73-carro-roxo-com-nitro-chatfield-storage": {
   "arquivo": "p73-carro-roxo-com-nitro-chatfield-storage.webp",
   "slug": "p73-carro-roxo-com-nitro-chatfield-storage",
@@ -382,6 +436,12 @@
   "slug": "p75-lowrider-rosa-jakjak-s-janjak-s-garage",
   "site": "Detonated",
   "url": "https://detonated.com/gta-6-best-car-locations/"
+ },
+ "p76-bravado-dominator-anarchist": {
+  "arquivo": "p76-bravado-dominator-anarchist.webp",
+  "slug": "p76-bravado-dominator-anarchist",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/vehicles/anarchist-dominator"
  },
  "i-maibatsu-penumbra-ff-97-homenagem-ao-eclipse-ver": {
   "arquivo": "i-maibatsu-penumbra-ff-97-homenagem-ao-eclipse-ver.webp",
@@ -412,6 +472,12 @@
   "slug": "i-mamba-gt",
   "site": "GTABase",
   "url": "https://www.gtabase.com/vehicles/gta-6/mamba-gt"
+ },
+ "i-ascot-paragon": {
+  "arquivo": "i-ascot-paragon.webp",
+  "slug": "i-ascot-paragon",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/vehicles/gta-6/paragon-r"
  },
  "i-furia-fonte-escreve-piccia-furia": {
   "arquivo": "i-furia-fonte-escreve-piccia-furia.webp",
@@ -521,17 +587,155 @@
   "site": "GamesFuze",
   "url": "https://gamesfuze.com/guides/gta-6-how-to-get-a-helicopter-early/"
  },
+ "i-mallard-do-kyle": {
+  "arquivo": "i-mallard-do-kyle.webp",
+  "slug": "i-mallard-do-kyle",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/vehicles/kyles-mallard"
+ },
+ "i-aeronaves-fixas-sem-guarda-lista-powerpyx": {
+  "arquivo": "i-aeronaves-fixas-sem-guarda-lista-powerpyx.webp",
+  "slug": "i-aeronaves-fixas-sem-guarda-lista-powerpyx",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/?p=370490"
+ },
+ "i-carros-classicos-do-wyman-classic-car-collection": {
+  "arquivo": "i-carros-classicos-do-wyman-classic-car-collection.webp",
+  "slug": "i-carros-classicos-do-wyman-classic-car-collection",
+  "site": "GTABase (screenshot oficial da Rockstar, Ultimate Edition)",
+  "url": "https://www.gtabase.com/side-missions/gta-6/wyman-s-classic-car-collection"
+ },
  "i-lista-do-randy-16-a-18-carros-de-luxo": {
   "arquivo": "i-lista-do-randy-16-a-18-carros-de-luxo.webp",
   "slug": "i-lista-do-randy-16-a-18-carros-de-luxo",
   "site": "GTABase",
   "url": "https://www.gtabase.com/gta-6/vehicles/zorrusso"
  },
+ "i-lojas-de-pintura-pay-n-spray-vender-qualquer-car": {
+  "arquivo": "i-lojas-de-pintura-pay-n-spray-vender-qualquer-car.webp",
+  "slug": "i-lojas-de-pintura-pay-n-spray-vender-qualquer-car",
+  "site": "MetaForge",
+  "url": "https://metaforge.app/gta-6/gta-6-pay-n-spray-locations-how-to-lose-the-cops"
+ },
  "i-randy-compra-os-carros-da-lista-showroom": {
   "arquivo": "i-randy-compra-os-carros-da-lista-showroom.webp",
   "slug": "i-randy-compra-os-carros-da-lista-showroom",
   "site": "GTABase",
   "url": "https://www.gtabase.com/gta-6/strangers/randys-wish-list"
+ },
+ "i-conjunto-de-cartas-vice-city-flamingos-24-cartas": {
+  "arquivo": "i-conjunto-de-cartas-vice-city-flamingos-24-cartas.webp",
+  "slug": "i-conjunto-de-cartas-vice-city-flamingos-24-cartas",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-vice-city-flamingos-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-vice-city-narcos-24-cartas": {
+  "arquivo": "i-conjunto-de-cartas-vice-city-narcos-24-cartas.webp",
+  "slug": "i-conjunto-de-cartas-vice-city-narcos-24-cartas",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-vice-city-narcos-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-vice-city-manatees-24-cartas": {
+  "arquivo": "i-conjunto-de-cartas-vice-city-manatees-24-cartas.webp",
+  "slug": "i-conjunto-de-cartas-vice-city-manatees-24-cartas",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-vice-city-manatees-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-vice-city-club-de-futbol-30-c": {
+  "arquivo": "i-conjunto-de-cartas-vice-city-club-de-futbol-30-c.webp",
+  "slug": "i-conjunto-de-cartas-vice-city-club-de-futbol-30-c",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-vice-city-club-de-futbol-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-liberty-city-swingers-24-cart": {
+  "arquivo": "i-conjunto-de-cartas-liberty-city-swingers-24-cart.webp",
+  "slug": "i-conjunto-de-cartas-liberty-city-swingers-24-cart",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-liberty-city-swingers-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-liberty-city-penetrators-24-c": {
+  "arquivo": "i-conjunto-de-cartas-liberty-city-penetrators-24-c.webp",
+  "slug": "i-conjunto-de-cartas-liberty-city-penetrators-24-c",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-liberty-city-penetrators-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-liberty-city-wrath-24-cartas": {
+  "arquivo": "i-conjunto-de-cartas-liberty-city-wrath-24-cartas.webp",
+  "slug": "i-conjunto-de-cartas-liberty-city-wrath-24-cartas",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-liberty-city-wrath-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-los-santos-corkers-24-cartas": {
+  "arquivo": "i-conjunto-de-cartas-los-santos-corkers-24-cartas.webp",
+  "slug": "i-conjunto-de-cartas-los-santos-corkers-24-cartas",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-los-santos-corkers-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-los-santos-panic-24-cartas": {
+  "arquivo": "i-conjunto-de-cartas-los-santos-panic-24-cartas.webp",
+  "slug": "i-conjunto-de-cartas-los-santos-panic-24-cartas",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-los-santos-panic-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-los-santos-pounders-24-cartas": {
+  "arquivo": "i-conjunto-de-cartas-los-santos-pounders-24-cartas.webp",
+  "slug": "i-conjunto-de-cartas-los-santos-pounders-24-cartas",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-los-santos-pounders-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-backyard-wrestling-12-cartas": {
+  "arquivo": "i-conjunto-de-cartas-backyard-wrestling-12-cartas.webp",
+  "slug": "i-conjunto-de-cartas-backyard-wrestling-12-cartas",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-backyard-wrestling-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-america-s-next-top-hooker-24-": {
+  "arquivo": "i-conjunto-de-cartas-america-s-next-top-hooker-24-.webp",
+  "slug": "i-conjunto-de-cartas-america-s-next-top-hooker-24",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-americas-next-top-hooker-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-delights-dancers-18-cartas": {
+  "arquivo": "i-conjunto-de-cartas-delights-dancers-18-cartas.webp",
+  "slug": "i-conjunto-de-cartas-delights-dancers-18-cartas",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-delights-dancers-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-jack-of-hearts-dancers-36-car": {
+  "arquivo": "i-conjunto-de-cartas-jack-of-hearts-dancers-36-car.webp",
+  "slug": "i-conjunto-de-cartas-jack-of-hearts-dancers-36-car",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-jack-of-hearts-dancers-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-nine1nine-dancers-36-cartas": {
+  "arquivo": "i-conjunto-de-cartas-nine1nine-dancers-36-cartas.webp",
+  "slug": "i-conjunto-de-cartas-nine1nine-dancers-36-cartas",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-nine1nine-dancers-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-the-legend-of-ratface-36-cart": {
+  "arquivo": "i-conjunto-de-cartas-the-legend-of-ratface-36-cart.webp",
+  "slug": "i-conjunto-de-cartas-the-legend-of-ratface-36-cart",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-the-legends-of-ratface-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-right-wing-america-s-hero-36-": {
+  "arquivo": "i-conjunto-de-cartas-right-wing-america-s-hero-36-.webp",
+  "slug": "i-conjunto-de-cartas-right-wing-america-s-hero-36",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-right-wing-americas-hero-collectible-card-set-locations/"
+ },
+ "i-conjunto-de-cartas-ed-comics-universe-36-cartas": {
+  "arquivo": "i-conjunto-de-cartas-ed-comics-universe-36-cartas.webp",
+  "slug": "i-conjunto-de-cartas-ed-comics-universe-36-cartas",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/gta-6-ed-comics-universe-collectible-card-set-locations/"
+ },
+ "i-onde-vender-cartas-qualquer-loja-de-penhores-paw": {
+  "arquivo": "i-onde-vender-cartas-qualquer-loja-de-penhores-paw.webp",
+  "slug": "i-onde-vender-cartas-qualquer-loja-de-penhores-paw",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/map/?feature=smash-n-grab"
  },
  "i-farol-assombrado-e-navio-fantasma-faca-amaldicoa": {
   "arquivo": "i-farol-assombrado-e-navio-fantasma-faca-amaldicoa.webp",
@@ -647,6 +851,12 @@
   "site": "PowerPyx",
   "url": "https://www.powerpyx.com/gta-6-search-for-the-skunk-ape-walkthrough/"
  },
+ "i-tritao-homem-com-rabo-de-sereia": {
+  "arquivo": "i-tritao-homem-com-rabo-de-sereia.webp",
+  "slug": "i-tritao-homem-com-rabo-de-sereia",
+  "site": "YouTube (MELOO)",
+  "url": "https://www.youtube.com/watch?v=XpAskLo80-Q"
+ },
  "i-kraken-no-naufragio": {
   "arquivo": "i-kraken-no-naufragio.webp",
   "slug": "i-kraken-no-naufragio",
@@ -659,11 +869,29 @@
   "site": "PowerPyx",
   "url": "https://www.powerpyx.com/gta-6-all-curiosities-scan-locations/"
  },
+ "i-homem-imortal-da-mira-de-sniper": {
+  "arquivo": "i-homem-imortal-da-mira-de-sniper.webp",
+  "slug": "i-homem-imortal-da-mira-de-sniper",
+  "site": "YouTube (Frankoceangaming)",
+  "url": "https://www.youtube.com/watch?v=JKHxFvPAWHY"
+ },
  "i-referencias-de-vice-city-classico-ocean-view-hot": {
   "arquivo": "i-referencias-de-vice-city-classico-ocean-view-hot.webp",
   "slug": "i-referencias-de-vice-city-classico-ocean-view-hot",
   "site": "GTA6Info",
   "url": "https://gta6info.com/wiki/Easter_Eggs"
+ },
+ "i-ponto-de-onibus-de-abacaxi-bob-esponja": {
+  "arquivo": "i-ponto-de-onibus-de-abacaxi-bob-esponja.webp",
+  "slug": "i-ponto-de-onibus-de-abacaxi-bob-esponja",
+  "site": "YouTube (Gamer Guides)",
+  "url": "https://www.youtube.com/watch?v=56eTlNi1MS0"
+ },
+ "i-circulo-de-pedras-tipo-stonehenge": {
+  "arquivo": "i-circulo-de-pedras-tipo-stonehenge.webp",
+  "slug": "i-circulo-de-pedras-tipo-stonehenge",
+  "site": "YouTube (Robbin Rams)",
+  "url": "https://www.youtube.com/watch?v=AypQ6C8Il7w"
  },
  "i-qr-code-nao-de-descarga-no-flushers-missao-the-f": {
   "arquivo": "i-qr-code-nao-de-descarga-no-flushers-missao-the-f.webp",
@@ -791,6 +1019,12 @@
   "site": "GTABase",
   "url": "https://www.gtabase.com/gta-6/weapons/redneck-w-22"
  },
+ "i-plataforma-de-caca-do-kalaga-reservoir-twin-s-la": {
+  "arquivo": "i-plataforma-de-caca-do-kalaga-reservoir-twin-s-la.webp",
+  "slug": "i-plataforma-de-caca-do-kalaga-reservoir-twin-s-la",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/weapons/twins-laird-350"
+ },
  "i-telhado-do-aichi-condominiums-iaa-sms-01": {
   "arquivo": "i-telhado-do-aichi-condominiums-iaa-sms-01.webp",
   "slug": "i-telhado-do-aichi-condominiums-iaa-sms-01",
@@ -809,17 +1043,41 @@
   "site": "GTABase",
   "url": "https://www.gtabase.com/gta-6/weapons/internal-affairs-ff-sr"
  },
+ "i-gaiola-de-tubarao-afundada-shark-knife": {
+  "arquivo": "i-gaiola-de-tubarao-afundada-shark-knife.webp",
+  "slug": "i-gaiola-de-tubarao-afundada-shark-knife",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/weapons/shark-knife"
+ },
+ "i-rio-subterraneo-pelo-selkie-hole-explorer-s-knif": {
+  "arquivo": "i-rio-subterraneo-pelo-selkie-hole-explorer-s-knif.webp",
+  "slug": "i-rio-subterraneo-pelo-selkie-hole-explorer-s-knif",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/weapons/explorers-knife"
+ },
  "i-cabana-evergreen-tallaloko-knife-joias": {
   "arquivo": "i-cabana-evergreen-tallaloko-knife-joias.webp",
   "slug": "i-cabana-evergreen-tallaloko-knife-joias",
   "site": "GTABase",
   "url": "https://www.gtabase.com/gta-6/weapons/tallaloko-knife"
  },
+ "i-armas-unicas-de-missao-gil-s-kalinga-monty-s-199": {
+  "arquivo": "i-armas-unicas-de-missao-gil-s-kalinga-monty-s-199.webp",
+  "slug": "i-armas-unicas-de-missao-gil-s-kalinga-monty-s-199",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/weapons/gils-kalinga-50"
+ },
  "i-big-shots-loja-de-armas": {
   "arquivo": "i-big-shots-loja-de-armas.webp",
   "slug": "i-big-shots-loja-de-armas",
   "site": "NerdsChalk",
   "url": "https://nerdschalk.com/big-shots-location-grand-theft-auto-vi/"
+ },
+ "i-iron-oak-loja-de-armas": {
+  "arquivo": "i-iron-oak-loja-de-armas.webp",
+  "slug": "i-iron-oak-loja-de-armas",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/map/?feature=ammu-nation"
  },
  "i-pawn-gun-port-gellhorn-loja-de-armas": {
   "arquivo": "i-pawn-gun-port-gellhorn-loja-de-armas.webp",
@@ -833,11 +1091,35 @@
   "site": "GTABase",
   "url": "https://www.gtabase.com/gta-6/map/?feature=ammu-nation"
  },
+ "i-woodhatch-loja-de-armas": {
+  "arquivo": "i-woodhatch-loja-de-armas.webp",
+  "slug": "i-woodhatch-loja-de-armas",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/map/?feature=ammu-nation"
+ },
+ "i-vice-city-gun-pawn-loja-de-armas": {
+  "arquivo": "i-vice-city-gun-pawn-loja-de-armas.webp",
+  "slug": "i-vice-city-gun-pawn-loja-de-armas",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/map/?feature=ammu-nation"
+ },
  "i-chuck-s-tackle-shot-loja-de-armas-e-pesca": {
   "arquivo": "i-chuck-s-tackle-shot-loja-de-armas-e-pesca.webp",
   "slug": "i-chuck-s-tackle-shot-loja-de-armas-e-pesca",
   "site": "Games.gg",
   "url": "https://games.gg/grand-theft-auto-vi/guides/gta-6-gear-up-mission/"
+ },
+ "i-biff-s-gun-supply-loja-de-armas": {
+  "arquivo": "i-biff-s-gun-supply-loja-de-armas.webp",
+  "slug": "i-biff-s-gun-supply-loja-de-armas",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/map/?feature=ammu-nation"
+ },
+ "i-richardson-hunting-supplies-loja-de-armas": {
+  "arquivo": "i-richardson-hunting-supplies-loja-de-armas.webp",
+  "slug": "i-richardson-hunting-supplies-loja-de-armas",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/map/?feature=ammu-nation"
  },
  "i-barco-afundado-perto-de-corsair-key": {
   "arquivo": "i-barco-afundado-perto-de-corsair-key.webp",
@@ -845,11 +1127,41 @@
   "site": "GTABase",
   "url": "https://www.gtabase.com/gta-6/missions/donnies-lost-drugs"
  },
- "i-galpao-vermelho-da-apollo-aggregates-leste-de-ha": {
-  "arquivo": "i-galpao-vermelho-da-apollo-aggregates-leste-de-ha.webp",
-  "slug": "i-galpao-vermelho-da-apollo-aggregates-leste-de-ha",
-  "site": "GTABoom",
-  "url": "https://www.gtaboom.com/gta-6-apollo-aggregates-warehouse-stash-5820"
+ "i-flamingos-de-cocaina-125": {
+  "arquivo": "i-flamingos-de-cocaina-125.webp",
+  "slug": "i-flamingos-de-cocaina-125",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/?p=373486"
+ },
+ "i-pontos-de-meditacao-10-lugares-18-meditacoes": {
+  "arquivo": "i-pontos-de-meditacao-10-lugares-18-meditacoes.webp",
+  "slug": "i-pontos-de-meditacao-10-lugares-18-meditacoes",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/?p=370569"
+ },
+ "i-relogios-de-luxo-discovered-styles-79": {
+  "arquivo": "i-relogios-de-luxo-discovered-styles-79.webp",
+  "slug": "i-relogios-de-luxo-discovered-styles-79",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/map/?feature=luxury-watch"
+ },
+ "i-escaneamentos-waink": {
+  "arquivo": "i-escaneamentos-waink.webp",
+  "slug": "i-escaneamentos-waink",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/?p=374044"
+ },
+ "i-revistas-livros-e-quadrinhos": {
+  "arquivo": "i-revistas-livros-e-quadrinhos.webp",
+  "slug": "i-revistas-livros-e-quadrinhos",
+  "site": "PowerPyx",
+  "url": "https://www.powerpyx.com/?p=374112"
+ },
+ "i-imponte-bloodbath-phoenix-trans-am-preto-e-verme": {
+  "arquivo": "i-imponte-bloodbath-phoenix-trans-am-preto-e-verme.webp",
+  "slug": "i-imponte-bloodbath-phoenix-trans-am-preto-e-verme",
+  "site": "GTABase",
+  "url": "https://www.gtabase.com/gta-6/vehicles/bloodbath-phoenix"
  },
  "i-nissan-skyline-com-pintura-anime-starfish-island": {
   "arquivo": "i-nissan-skyline-com-pintura-anime-starfish-island.webp",
@@ -862,5 +1174,41 @@
   "slug": "i-casa-da-praia-de-key-lento-sniper-lendaria-l11",
   "site": "ActuGaming",
   "url": "https://www.actugaming.net/?p=834182"
+ },
+ "i-naufragio-del-ocio-nuestra-senora-del-ocio-10-do": {
+  "arquivo": "i-naufragio-del-ocio-nuestra-senora-del-ocio-10-do.webp",
+  "slug": "i-naufragio-del-ocio-nuestra-senora-del-ocio-10-do",
+  "site": "GTABoom",
+  "url": "https://www.gtaboom.com/gta-6-treasure-hunting-2b73"
+ },
+ "i-naufragio-la-noche-nuestra-senora-de-la-noche-7-": {
+  "arquivo": "i-naufragio-la-noche-nuestra-senora-de-la-noche-7-.webp",
+  "slug": "i-naufragio-la-noche-nuestra-senora-de-la-noche-7",
+  "site": "itemlevel.net",
+  "url": "https://itemlevel.net/gta-6-nuestra-senora-de-la-noche-treasure-locations/"
+ },
+ "i-naufragio-etica-laxa-nuestra-senora-de-la-etica-": {
+  "arquivo": "i-naufragio-etica-laxa-nuestra-senora-de-la-etica-.webp",
+  "slug": "i-naufragio-etica-laxa-nuestra-senora-de-la-etica",
+  "site": "GTABoom",
+  "url": "https://www.gtaboom.com/gta-6-treasure-hunting-2b73"
+ },
+ "i-naufragio-urca-de-cinco-torres-6-tesouros": {
+  "arquivo": "i-naufragio-urca-de-cinco-torres-6-tesouros.webp",
+  "slug": "i-naufragio-urca-de-cinco-torres-6-tesouros",
+  "site": "GameWith",
+  "url": "https://gamewith.jp/gta6/588366"
+ },
+ "i-naufragio-lujuriosa-nuestra-senora-lujuriosa-6-t": {
+  "arquivo": "i-naufragio-lujuriosa-nuestra-senora-lujuriosa-6-t.webp",
+  "slug": "i-naufragio-lujuriosa-nuestra-senora-lujuriosa-6-t",
+  "site": "Games Horizon",
+  "url": "https://gameshorizon.com/?p=82405"
+ },
+ "i-naufragio-urca-de-santa-sierra-6-tesouros": {
+  "arquivo": "i-naufragio-urca-de-santa-sierra-6-tesouros.webp",
+  "slug": "i-naufragio-urca-de-santa-sierra-6-tesouros",
+  "site": "gamerhour.net",
+  "url": "https://gamerhour.net/locations/gta-6-all-6-urca-de-santa-sierra-treasures-locations/"
  }
 }
