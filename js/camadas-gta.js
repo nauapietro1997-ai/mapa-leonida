@@ -254,8 +254,10 @@
           if (!foraDaTela) {
             // dentro do pôster (quando cabe) e sem encostar em obstáculo nem em outro nome
             const dentro = (c) =>
-              (bx2 - bx1 <= w || (c.x1 + 4 >= bx1 - 0.5 && c.x2 - 4 <= bx2 + 0.5)) &&
-              (by2 - by1 <= h || (c.y1 + 2 >= by1 - 0.5 && c.y2 - 2 <= by2 + 0.5));
+              (bx2 - bx1 <= w ||
+                (c.x1 + 4 >= bx1 - 0.5 && c.x2 - 4 <= bx2 + 0.5)) &&
+              (by2 - by1 <= h ||
+                (c.y1 + 2 >= by1 - 0.5 && c.y2 - 2 <= by2 + 0.5));
             const livre = (c, lista) =>
               dentro(c) &&
               !lista.some((o) => encosta(c, o)) &&
@@ -525,7 +527,11 @@
       for (const m of [...grupos, ...naTela]) {
         const e = m.getElement && m.getElement();
         if (!e) continue;
-        const r = e.getBoundingClientRect();
+        // pino solto: mede o desenho (.pino), não o invólucro. O invólucro tem 40x40 para o
+        // toque no celular e o desenho é menor (28 px desde 24/11); sem isso os nomes
+        // desviariam de uma caixa maior que o pino.
+        const desenho = grupos.includes(m) ? null : e.querySelector(".pino");
+        const r = (desenho || e).getBoundingClientRect();
         if (!r.width) continue;
         const folga = 4; // o anel/sombra do pino passa um pouco da caixa
         saida.push({

@@ -22,6 +22,12 @@ window.CONFIG = Object.freeze({
   MAPA_FUNDO_LIMPO: false,
   // Fundo = pôster SEM nenhum nome pintado (img/tiles-sem-nomes, até o nível 6); os nomes são só os nossos.
   MAPA_BASE_SEM_NOMES: true,
+  // FUNDO VETORIAL (24/11, escolha do dono): mapa desenhado por programa a partir do pôster, estilo
+  // menu do GTA 6. Desde 24/11 (noite) é o DECALQUE (../ferramentas/vetor/decalque.py inteiro), níveis
+  // 0-6 (6 = 2x, nítido). Ligado, ele é o fundo em TODOS os zooms; faltando img/tiles-decalque, o site
+  // volta sozinho para MAPA_TILES. Trocar o ?v= sempre que os ladrilhos forem refeitos.
+  MAPA_BASE_VETOR: true,
+  MAPA_TILES_VETOR: "img/tiles-decalque/{z}/{x}/{y}.webp?v=20261124b",
   MAPA_TILES_NIVEL_EXTRA: false, // existe img/tiles/6 (pôster 2x, ferramentas/gerar-tiles-nivel6.py)
   MAPA_TILES_LARGURA: 5775,
   MAPA_TILES_ALTURA: 7900,

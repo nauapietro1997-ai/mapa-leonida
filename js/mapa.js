@@ -22,7 +22,9 @@
   const ZOOM_MIN = -4.5;
   // Com o nível 6 (pôster ampliado 2x com IA) dá para aproximar mais: zoom 1 = nível 6 no tamanho real.
   const EXTRA = () => !!(window.CONFIG && window.CONFIG.MAPA_TILES_NIVEL_EXTRA);
-  const ZOOM_MAX = EXTRA() ? 1 : 0.5; // zoom 1 = nível 6 em tamanho real (o fundo da IA fica mole se esticar mais)
+  // Fundo vetorial (MAPA_BASE_VETOR): tem nível 6 nítido, zoom máximo 1 (nível 6 em tamanho real).
+  const VETOR = () => !!(window.CONFIG && window.CONFIG.MAPA_BASE_VETOR && window.CONFIG.MAPA_TILES_VETOR);
+  const ZOOM_MAX = EXTRA() || VETOR() ? 1 : 0.5; // zoom 1 = nível 6 em tamanho real (o fundo da IA fica mole se esticar mais)
   function crsMapa(c) {
     return L.extend({}, L.CRS.Simple, {
       transformation: new L.Transformation(
@@ -50,11 +52,24 @@
       bounds: L.latLngBounds(limites),
       keepBuffer: 4,
     };
-    const tiles = L.tileLayer(c.MAPA_TILES, opcoesTiles);
     avisos.opcoesTiles = opcoesTiles; // para a camada sem nomes usar as mesmas
-    let erros = 0,
+    let vetor = VETOR();
+    avisos.usandoVetor = () => vetor;
+    let tiles = null,
+      erros = 0,
       carregados = 0,
       trocou = false;
+    function ligar(url, opcoes, aoFalhar) {
+      erros = 0;
+      carregados = 0;
+      tiles = L.tileLayer(url, opcoes);
+      tiles.on("tileload", () => carregados++);
+      tiles.on("tileerror", () => {
+        erros++;
+        if ((carregados === 0 && erros >= 2) || erros >= 6) aoFalhar();
+      });
+      tiles.addTo(mapa);
+    }
     function usarReserva() {
       if (trocou) return;
       trocou = true;
@@ -65,12 +80,18 @@
       }).addTo(mapa);
       img.on("error", () => avisos.fire("error"));
     }
-    tiles.on("tileload", () => carregados++);
-    tiles.on("tileerror", () => {
-      erros++;
-      if ((carregados === 0 && erros >= 2) || erros >= 6) usarReserva();
-    });
-    tiles.addTo(mapa);
+    if (vetor) {
+      // ladrilhos do vetor faltando: volta para o pôster (MAPA_TILES) e depois para a imagem única
+      ligar(c.MAPA_TILES_VETOR, { ...opcoesTiles, maxNativeZoom: 1, className: "fundo-vetor" }, () => {
+        if (!vetor) return;
+        vetor = false;
+        tiles.remove();
+        avisos.fire("semVetor");
+        ligar(c.MAPA_TILES, opcoesTiles, usarReserva);
+      });
+    } else {
+      ligar(c.MAPA_TILES, opcoesTiles, usarReserva);
+    }
     return avisos;
   }
 

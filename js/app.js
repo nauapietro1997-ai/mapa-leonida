@@ -41,7 +41,9 @@
   // De perto, o fundo troca para a cópia sem os nomes pintados (os nomes vêm do nosso texto)
   let nomesGTA = null;
   // Base SEM nomes pintados (MAPA_BASE_SEM_NOMES): só os nossos nomes, estilo do jogo, surgindo aos poucos
-  const baseSemNomes = !!window.CONFIG.MAPA_BASE_SEM_NOMES;
+  // (o fundo vetorial, MAPA_BASE_VETOR, também não tem nome pintado: mesmo comportamento)
+  const baseSemNomes =
+    !!window.CONFIG.MAPA_BASE_SEM_NOMES || !!(camada.usandoVetor && camada.usandoVetor());
   if (baseSemNomes) mapa.getContainer().classList.add("nomes-jogo");
   const fundoLimpo = !baseSemNomes && camada.opcoesTiles && window.CONFIG.MAPA_FUNDO_LIMPO !== false
     ? GTA.criarFundoLimpo(L, mapa, {
