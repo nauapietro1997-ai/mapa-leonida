@@ -19,6 +19,18 @@
   };
   const CHAVE = "platina-gta6-v1";
 
+  // ---------- Abertura "trailer" (js/abertura-platina.js liga html.pl-abrindo) ----------
+  // O que depende da capa aparecer (placar, troféus ao rolar) espera o fim dos cartões.
+  const raiz = document.documentElement;
+  const abrindo = () =>
+    raiz.classList.contains("pl-abrindo") &&
+    !raiz.classList.contains("pl-abertura-fim");
+  function depoisDaAbertura(fn) {
+    if (abrindo())
+      document.addEventListener("pl:abertura-fim", () => fn(), { once: true });
+    else fn();
+  }
+
   // ---------- Capa: sem o arquivo da arte, fica só cor e tipografia ----------
   const hero = $("#pl-hero");
   const capa = $("#pl-capa-img");
@@ -30,6 +42,57 @@
     if (capa.complete && !capa.naturalWidth) semCapa();
     else capa.addEventListener("error", semCapa, { once: true });
   }
+
+  // ---------- Capa viva: vídeo em loop por cima da arte (Flow/Veo, sem som) ----------
+  // A imagem parada continua embaixo: enquanto o vídeo carrega, se ele falhar,
+  // com "menos movimento" ou com economia de dados, fica só a imagem.
+  // Celular recebe a versão menor. Pausa fora da tela e com a aba escondida.
+  (function capaViva() {
+    const caixa = document.querySelector(".pl-capa");
+    if (!caixa || !capa || !capa.isConnected) return;
+    const menosMov = matchMedia("(prefers-reduced-motion: reduce)");
+    const economia = navigator.connection && navigator.connection.saveData;
+    if (menosMov.matches || economia) return;
+    const celular = matchMedia("(max-width: 900px)").matches;
+    const v = document.createElement("video");
+    v.className = "pl-capa-img pl-capa-video";
+    v.muted = true;
+    v.defaultMuted = true;
+    v.loop = true;
+    v.playsInline = true;
+    v.setAttribute("playsinline", "");
+    v.setAttribute("aria-hidden", "true");
+    v.setAttribute("tabindex", "-1");
+    v.disablePictureInPicture = true;
+    v.preload = "auto";
+    v.src = celular ? "img/platina-capa-cel.mp4" : "img/platina-capa-pc.mp4";
+    let naTela = true;
+    const tocar = () => {
+      if (naTela && !document.hidden && !menosMov.matches) {
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+      }
+    };
+    v.addEventListener("playing", () => v.classList.add("tocando"), {
+      once: true,
+    });
+    v.addEventListener("error", () => v.remove(), { once: true });
+    v.addEventListener("canplay", tocar, { once: true });
+    caixa.insertBefore(v, capa.nextSibling);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((ent) => {
+        naTela = ent[0].isIntersecting;
+        if (naTela) tocar();
+        else v.pause();
+      }).observe(caixa);
+    }
+    document.addEventListener("visibilitychange", () =>
+      document.hidden ? v.pause() : tocar(),
+    );
+    menosMov.addEventListener("change", () => {
+      if (menosMov.matches) v.remove();
+    });
+  })();
 
   // filtros grudam embaixo do topo (no PC): altura real do topo
   const topo = document.querySelector(".topo");
@@ -303,6 +366,14 @@
         text: "Nenhum troféu perdível confirmado até agora.",
       }),
     );
+  // números dos cartões da abertura vêm dos dados (se ela ainda está na tela)
+  const abTotal = $("#pl-ab-total");
+  if (abTotal) {
+    abTotal.textContent = String(total);
+    $("#pl-ab-perd").textContent = String(perdiveis.length);
+    $("#pl-ab-perd-palavra").textContent =
+      perdiveis.length === 1 ? "perdível" : "perdíveis";
+  }
   $("#pl-perd-lead").textContent = perdiveis.length
     ? perdiveis.length === 1
       ? "Só 1 troféu pode ser perdido. Passou do ponto, só jogando tudo de novo."
@@ -524,15 +595,24 @@
     barra.max = total;
     barra.value = feitos;
     barra.setAttribute("aria-valuetext", feitos + " de " + total + " troféus");
-    const escala = total ? feitos / total : 0;
-    if (primeiraVez && !menosMovimento())
-      // espera a capa aparecer para a barra encher junto com o número
-      setTimeout(
-        () => (trilho.style.transform = "scaleX(" + escala + ")"),
-        450,
-      );
-    else trilho.style.transform = "scaleX(" + escala + ")";
-    contarAte(feitos, primeiraVez ? 450 : 0);
+    const encher = () => {
+      const agora = trofeus.filter((t) => salvo.conquistados.has(t.n)).length;
+      trilho.style.transform = "scaleX(" + (total ? agora / total : 0) + ")";
+      return agora;
+    };
+    if (primeiraVez)
+      // espera a capa aparecer (e a abertura acabar) para a barra encher junto com o número
+      depoisDaAbertura(() => {
+        if (menosMovimento()) contarAte(encher(), 0);
+        else
+          setTimeout(() => {
+            encher();
+            contarAte(
+              trofeus.filter((t) => salvo.conquistados.has(t.n)).length,
+            );
+          }, 450);
+      });
+    else contarAte(encher(), 0);
     const tipos = limpar($("#pl-tipos"));
     for (const tipo of ["bronze", "prata", "ouro", "platina"]) {
       const n = trofeus.filter(
@@ -548,6 +628,72 @@
       );
     }
   }
+
+  // ---------- Troféus (e títulos) aparecem um a um ao rolar ----------
+  // html.pl-revela esconde o que ainda não entrou na tela; ao entrar ganha pl-visto
+  // (CSS faz subir + aparecer). Não liga sem IntersectionObserver nem com link #trofeu-N.
+  // O 1º uso de filtro/busca desliga tudo (lista aparece na hora).
+  const vistos = new Set(); // nº dos troféus já revelados (a lista é redesenhada às vezes)
+  const revela = revelarAoRolar();
+  function revelarAoRolar() {
+    if (!("IntersectionObserver" in window) || /^#trofeu-/.test(location.hash))
+      return null;
+    raiz.classList.add("pl-revela");
+    const ativo = () => raiz.classList.contains("pl-revela");
+    const celular = () => window.matchMedia("(max-width: 900px)").matches;
+    const fila = []; // observados só depois da abertura (atrás da película não adianta)
+    let io = null;
+    function mostrar(alvo, atraso) {
+      alvo.style.setProperty("--pl-d", atraso + "ms");
+      alvo.classList.add("pl-visto");
+      if (alvo.dataset.n) vistos.add(Number(alvo.dataset.n));
+      io.unobserve(alvo);
+    }
+    depoisDaAbertura(() => {
+      if (!ativo()) return;
+      io = new IntersectionObserver(
+        (entradas) => {
+          const passo = celular() ? 45 : 70;
+          let i = 0;
+          for (const e of entradas) {
+            if (e.isIntersecting) mostrar(e.target, Math.min(i++, 5) * passo);
+            // já ficou para trás (página aberta rolada): aparece sem efeito
+            else if (e.boundingClientRect.bottom < 0) mostrar(e.target, 0);
+          }
+        },
+        { rootMargin: "0px 0px -10% 0px", threshold: 0.15 },
+      );
+      fila.splice(0).forEach((a) => io.observe(a));
+    });
+    return {
+      ativo,
+      observar(alvo) {
+        if (!ativo()) return;
+        if (io) io.observe(alvo);
+        else fila.push(alvo);
+      },
+      esquecer(alvo) {
+        if (io) io.unobserve(alvo);
+        const i = fila.indexOf(alvo);
+        if (i >= 0) fila.splice(i, 1);
+      },
+      desligar() {
+        raiz.classList.remove("pl-revela");
+        if (io) io.disconnect();
+        fila.length = 0;
+      },
+    };
+  }
+  // cartão novo da lista: já visto (ou trocado no lugar) nasce visível; senão espera a vez
+  function prepararRevela(li, n, trocado) {
+    if (!revela || !revela.ativo()) return;
+    if (trocado || vistos.has(n)) {
+      li.classList.add("pl-visto");
+      vistos.add(n);
+    } else revela.observar(li);
+  }
+  if (revela)
+    document.querySelectorAll(".pl-h2").forEach((h) => revela.observar(h));
 
   // ---------- Lista ----------
   const filtro = {
@@ -763,13 +909,15 @@
       },
       artigo,
     );
+    prepararRevela(li, t.n, opcoes && opcoes.trocado);
     return li;
   }
 
   function trocarCartao(t, opcoes) {
     const velho = document.getElementById("trofeu-" + t.n);
     if (!velho) return null;
-    const novo = cartao(t, opcoes);
+    if (revela) revela.esquecer(velho);
+    const novo = cartao(t, Object.assign({}, opcoes, { trocado: true }));
     velho.replaceWith(novo);
     if (!visivel(t)) novo.hidden = true;
     contarVisiveis();
@@ -822,6 +970,8 @@
   }
 
   function desenharLista() {
+    if (revela)
+      for (const velho of $("#pl-trofeus").children) revela.esquecer(velho);
     const lista = limpar($("#pl-trofeus"));
     for (const t of trofeus) {
       const li = cartao(t);
@@ -862,6 +1012,8 @@
     desenharLista();
   });
   function aplicarFiltros() {
+    // quem filtra quer ver o resultado na hora: desliga o "aparecer ao rolar"
+    if (revela && revela.ativo()) revela.desligar();
     for (const t of trofeus) {
       const li = document.getElementById("trofeu-" + t.n);
       if (li) li.hidden = !visivel(t);

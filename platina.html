@@ -18,10 +18,34 @@
     />
     <meta name="color-scheme" content="dark" />
     <link rel="icon" type="image/png" href="assets/marca/np-monograma.png" />
-    <link rel="stylesheet" href="css/publico.css?v=202611250501" />
-    <link rel="stylesheet" href="css/platina.css?v=202611250501" />
+    <!-- abertura "trailer": decide antes da 1ª pintura (sem defer de propósito) -->
+    <script src="js/abertura-platina.js?v=202611261219"></script>
+    <link rel="stylesheet" href="css/publico.css?v=202611261219" />
+    <link rel="stylesheet" href="css/platina.css?v=202611261219" />
   </head>
   <body class="pagina-texto pagina-platina">
+    <!-- ABERTURA "trailer": cartões de título em tela cheia, 1 vez por visita.
+         Só aparece com html.pl-abrindo (js/abertura-platina.js); some sozinha pelo CSS.
+         Os números são trocados pelos do dados/trofeus.json (js/platina.js). -->
+    <div class="pl-abertura" id="pl-abertura">
+      <div class="pl-cartoes" aria-hidden="true">
+        <p class="pl-cartao pl-cartao-1">
+          <span class="pl-cartao-sobre">Um guia do</span>
+          <span class="pl-cartao-nome">Nauã Pietro</span>
+        </p>
+        <p class="pl-cartao pl-cartao-2">
+          <span class="pl-cartao-num" id="pl-ab-total">55</span
+          ><span class="pl-cartao-palavra">troféus</span>
+        </p>
+        <p class="pl-cartao pl-cartao-3">
+          <span class="pl-cartao-num" id="pl-ab-perd">1</span
+          ><span class="pl-cartao-palavra" id="pl-ab-perd-palavra"
+            >perdível</span
+          >
+        </p>
+      </div>
+      <button type="button" class="pl-pular">Pular abertura</button>
+    </div>
     <header class="topo">
       <a class="marca" href="index.html">
         <img
@@ -49,6 +73,8 @@
 
     <main class="platina">
       <!-- CAPA: arte em img/platina-capa.webp (16:9, terço esquerdo escuro para o título).
+           Capa viva: js/platina.js põe por cima img/platina-capa-pc.mp4 (celular: -cel.mp4),
+           sem som, em loop; com "menos movimento" ou economia de dados fica só a imagem.
            Sem o arquivo, a página fica só com cor e tipografia (o JS tira a imagem). -->
       <section class="pl-hero" id="pl-hero" aria-labelledby="pl-titulo">
         <div class="pl-capa" aria-hidden="true">
@@ -299,8 +325,8 @@
         <a href="politica-de-privacidade.html">Privacidade</a>
       </p>
     </footer>
-    <script src="js/config.js?v=202611250501"></script>
-    <script src="js/util.js?v=202611250501"></script>
-    <script src="js/platina.js?v=202611250501"></script>
+    <script src="js/config.js?v=202611261219"></script>
+    <script src="js/util.js?v=202611261219"></script>
+    <script src="js/platina.js?v=202611261219"></script>
   </body>
 </html>

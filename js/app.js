@@ -43,15 +43,19 @@
   // Base SEM nomes pintados (MAPA_BASE_SEM_NOMES): só os nossos nomes, estilo do jogo, surgindo aos poucos
   // (o fundo vetorial, MAPA_BASE_VETOR, também não tem nome pintado: mesmo comportamento)
   const baseSemNomes =
-    !!window.CONFIG.MAPA_BASE_SEM_NOMES || !!(camada.usandoVetor && camada.usandoVetor());
+    !!window.CONFIG.MAPA_BASE_SEM_NOMES ||
+    !!(camada.usandoVetor && camada.usandoVetor());
   if (baseSemNomes) mapa.getContainer().classList.add("nomes-jogo");
-  const fundoLimpo = !baseSemNomes && camada.opcoesTiles && window.CONFIG.MAPA_FUNDO_LIMPO !== false
-    ? GTA.criarFundoLimpo(L, mapa, {
-        url: window.CONFIG.MAPA_TILES_SEM_NOMES,
-        opcoesTiles: camada.opcoesTiles,
-        aoFalhar: () => nomesGTA && nomesGTA.atualizar(),
-      })
-    : null;
+  const fundoLimpo =
+    !baseSemNomes &&
+    camada.opcoesTiles &&
+    window.CONFIG.MAPA_FUNDO_LIMPO !== false
+      ? GTA.criarFundoLimpo(L, mapa, {
+          url: window.CONFIG.MAPA_TILES_SEM_NOMES,
+          opcoesTiles: camada.opcoesTiles,
+          aoFalhar: () => nomesGTA && nomesGTA.atualizar(),
+        })
+      : null;
   camada.on("reserva", () => fundoLimpo && fundoLimpo.remover());
   const agrupamento = GTA.criarAgrupamento(L, mapa, {
     corMarca:
@@ -63,22 +67,30 @@
     fetch(url)
       .then((r) => (r.ok ? r.json() : null))
       .catch(() => null);
-  Promise.all([lerJson("dados/lugares.json"), lerJson("dados/nomes-preservados.json")])
+  Promise.all([
+    lerJson("dados/lugares.json"),
+    lerJson("dados/nomes-preservados.json"),
+  ])
     .then(([j, pintados]) => {
       if (!j || !Array.isArray(j.lugares)) return;
       // sem o nosso nome onde o nome pintado ficou no pôster (não duplica);
       // nomes desviam das bolinhas de grupo e dos pinos (no celular cobriam)
-      const nomes = GTA.criarNomes(L, mapa, GTA.semPintados(j.lugares, fundoLimpo ? pintados : null), {
-        paraLatLng: (l) => paraLatLng(l.x, l.y),
-        obstaculos: agrupamento.retangulos,
-        escalonar: baseSemNomes,
-        faixas: () =>
-          baseSemNomes
-            ? GTA.FAIXAS_JOGO
-            : fundoLimpo
-              ? fundoLimpo.faixas()
-              : GTA.FAIXAS_SEM_FUNDO_LIMPO,
-      });
+      const nomes = GTA.criarNomes(
+        L,
+        mapa,
+        GTA.semPintados(j.lugares, fundoLimpo ? pintados : null),
+        {
+          paraLatLng: (l) => paraLatLng(l.x, l.y),
+          obstaculos: agrupamento.retangulos,
+          escalonar: baseSemNomes,
+          faixas: () =>
+            baseSemNomes
+              ? GTA.FAIXAS_JOGO
+              : fundoLimpo
+                ? fundoLimpo.faixas()
+                : GTA.FAIXAS_SEM_FUNDO_LIMPO,
+        },
+      );
       nomesGTA = nomes;
       agrupamento.aoMudar(nomes.atualizar);
     })
@@ -331,6 +343,7 @@
     sem.sort(ordem).forEach((p) => ls.append(itemLista(p)));
     $("#conta-sem").textContent = sem.length;
     $("#bloco-sem").hidden = !sem.length;
+    $("#conta-lista").textContent = noMapa.length + sem.length;
     marcarLista();
   }
   function marcarLista() {
@@ -469,11 +482,12 @@
         el(
           "div",
           { class: "det-cab" },
-          el("span", {
-            class: "det-cat",
-            cor: cat.cor,
-            text: cat.icone + " " + cat.nome,
-          }),
+          el(
+            "span",
+            { class: "det-cat", cor: cat.cor },
+            U.iconeCategoria(p.categoria, p.subtipo, "det-cat-ic"),
+            el("span", { text: cat.nome }),
+          ),
           p.precisao ? el("span", { class: "selo", text: p.precisao }) : null,
         ),
         el("h2", { class: "det-nome", text: p.nome }),
@@ -1111,6 +1125,36 @@
   $("#btn-lista").addEventListener("click", () => {
     if (document.body.classList.contains("lista-aberta")) fecharLista();
     else abrirLista();
+  });
+
+  // PC (proposta C): a lista do bloco flutuante abre e fecha, para não tampar o mapa.
+  // Começa fechada; a escolha fica lembrada neste navegador. Buscar algo abre a lista.
+  const btnRecolher = $("#btn-recolher");
+  function definirRecolhida(recolhida) {
+    document.body.classList.toggle("lista-recolhida", recolhida);
+    btnRecolher.setAttribute("aria-expanded", String(!recolhida));
+    try {
+      localStorage.setItem("mapa-lista-recolhida", recolhida ? "1" : "0");
+    } catch (e) {
+      /* sem armazenamento: só não lembra */
+    }
+  }
+  let comecaRecolhida = true;
+  try {
+    comecaRecolhida = localStorage.getItem("mapa-lista-recolhida") !== "0";
+  } catch (e) {
+    /* sem armazenamento: começa fechada */
+  }
+  definirRecolhida(comecaRecolhida);
+  btnRecolher.addEventListener("click", () =>
+    definirRecolhida(!document.body.classList.contains("lista-recolhida")),
+  );
+  $("#busca").addEventListener("input", (ev) => {
+    if (
+      ev.target.value.trim() &&
+      document.body.classList.contains("lista-recolhida")
+    )
+      definirRecolhida(false);
   });
 
   // ---------- Conta ----------

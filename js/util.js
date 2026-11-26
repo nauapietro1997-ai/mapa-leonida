@@ -21,6 +21,11 @@
     veiculos: { nome: "Veículos", icone: "🚗", cor: "#ffd3ea" },
     lojas: { nome: "Lojas", icone: "🛒", cor: "#ff7a2f" },
     colecionaveis: { nome: "Colecionáveis", icone: "⭐", cor: "#fff36b" },
+    // 26/11/2026: categorias que antes eram só do mapa da live (ícones em assets/icones/).
+    "tesouro-mar": { nome: "Tesouros do mar", icone: "⚓", cor: "#2a9df4" },
+    missoes: { nome: "Missões opcionais", icone: "🏁", cor: "#c6f432" },
+    estranhos: { nome: "Estranhos e Malucos", icone: "🎭", cor: "#18c7a5" },
+    eventos: { nome: "Eventos aleatórios", icone: "⚡", cor: "#ff4d5e" },
   };
 
   // Tipos de veículo com ícone próprio (coluna "subtipo" dos pontos).

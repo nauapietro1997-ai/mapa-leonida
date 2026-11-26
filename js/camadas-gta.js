@@ -407,7 +407,7 @@
       const z = mapa.getZoom();
       let alvo = mapa.getBoundsZoom(b.pad(0.35));
       alvo = Math.min(mapa.getMaxZoom(), Math.max(alvo, z + 1));
-      mapa.flyTo(b.getCenter(), alvo, { duration: 0.55 });
+      voar(mapa, b.getCenter(), alvo);
     }
 
     function recalcular() {
@@ -609,21 +609,46 @@
     mapa.setMaxBounds(orig);
   }
 
+  // Duração do voo proporcional ao caminho: perto = 0,45 s, longe (uma tela inteira ou
+  // 3 níveis de zoom) = 0,9 s. Assim um pulinho ao lado não demora e uma viagem longa não "teleporta".
+  function duracaoVoo(mapa, destino, z) {
+    const zAgora = mapa.getZoom();
+    const tam = mapa.getSize();
+    const tela = Math.hypot(tam.x, tam.y) || 1;
+    const px = mapa
+      .project(mapa.getCenter(), zAgora)
+      .distanceTo(mapa.project(destino, zAgora));
+    const longe = Math.min(1, px / tela + Math.abs(z - zAgora) / 3);
+    return 0.45 + 0.45 * longe;
+  }
+  // Voa até o destino; com "menos movimento" ligado no sistema, vai direto (sem animação).
+  function voar(mapa, destino, z, duracao) {
+    if (reduzMovimento()) {
+      mapa.setView(destino, z, { animate: false });
+      return;
+    }
+    mapa.flyTo(destino, z, {
+      duration: duracao == null ? duracaoVoo(mapa, destino, z) : duracao,
+    });
+  }
+
   function centralizar(L, mapa, latlng, opcoes) {
-    const op = Object.assign({ duracao: 0.6 }, opcoes);
+    const op = Object.assign({}, opcoes);
     const z = op.zoom == null ? mapa.getZoom() : op.zoom;
     const alvo = mapa
       .project(latlng, z)
       .add(deslocamentoPainel(mapa, op.painel));
     const centro = mapa.unproject(alvo, z);
     soltarLimites(L, mapa, centro, z);
-    if (Math.abs(z - mapa.getZoom()) < 0.01)
-      mapa.panTo(centro, {
-        animate: true,
-        duration: op.duracao * 0.8,
-        easeLinearity: 0.2,
-      });
-    else mapa.flyTo(centro, z, { duration: op.duracao });
+    if (Math.abs(z - mapa.getZoom()) < 0.01) {
+      if (reduzMovimento()) mapa.panTo(centro, { animate: false });
+      else
+        mapa.panTo(centro, {
+          animate: true,
+          duration: (op.duracao || duracaoVoo(mapa, centro, z)) * 0.8,
+          easeLinearity: 0.2,
+        });
+    } else voar(mapa, centro, z, op.duracao);
   }
 
   // Diz se o ponto está fora da parte livre do mapa (embaixo do painel ou fora da tela).

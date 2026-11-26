@@ -23,10 +23,10 @@
     <meta name="color-scheme" content="dark" />
     <link rel="icon" type="image/png" href="assets/marca/np-monograma.png" />
     <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
-    <link rel="stylesheet" href="css/camadas-gta.css?v=202611250501" />
-    <link rel="stylesheet" href="css/publico.css?v=202611250501" />
+    <link rel="stylesheet" href="css/camadas-gta.css?v=202611261219" />
+    <link rel="stylesheet" href="css/publico.css?v=202611261219" />
   </head>
-  <body class="pagina-mapa">
+  <body class="pagina-mapa lista-recolhida">
     <header class="topo">
       <a class="marca" href="index.html">
         <img
@@ -69,8 +69,7 @@
           aria-expanded="false"
           aria-label="Lista de pontos"
         >
-          <span class="lista-ic" aria-hidden="true">☰</span
-          ><span class="lista-txt-fechada">Lista</span
+          <span class="lista-txt-fechada">Lista</span
           ><span class="lista-txt-aberta">Mapa</span>
         </button>
         <div class="conta" id="conta">
@@ -151,9 +150,25 @@
             role="group"
             aria-label="Categorias"
           ></div>
+          <!-- Proposta C: no PC a lista abre e fecha para não tampar o mapa -->
+          <button
+            type="button"
+            class="recolher"
+            id="btn-recolher"
+            aria-controls="lateral-rolagem"
+            aria-expanded="false"
+          >
+            <span
+              >Lista de pontos
+              <span class="conta-num" id="conta-lista"></span></span
+            ><span class="recolher-acao"
+              ><span class="recolher-fechada">Abrir</span
+              ><span class="recolher-aberta">Fechar</span></span
+            >
+          </button>
         </div>
 
-        <div class="lateral-rolagem">
+        <div class="lateral-rolagem" id="lateral-rolagem">
           <p class="aviso-banido" id="aviso-banido" hidden>
             Sua conta está suspensa: você pode ver o mapa, mas não enviar
             sugestões.
@@ -234,31 +249,34 @@
       </div>
 
       <aside class="detalhe" id="detalhe" aria-label="Detalhes" hidden>
-        <div class="detalhe-barra">
-          <button
-            type="button"
-            class="detalhe-fechar"
-            id="detalhe-fechar"
-            aria-label="Fechar e voltar ao mapa"
-          >
-            <span class="so-celular" aria-hidden="true">← Voltar ao mapa</span
-            ><span class="so-pc" aria-hidden="true">Fechar</span>
-          </button>
+        <!-- a caixa tem o fundo e o canto chanfrado; a sombra fica no aside (o recorte não a corta) -->
+        <div class="detalhe-caixa">
+          <div class="detalhe-barra">
+            <button
+              type="button"
+              class="detalhe-fechar"
+              id="detalhe-fechar"
+              aria-label="Fechar e voltar ao mapa"
+            >
+              <span class="so-celular" aria-hidden="true">← Voltar ao mapa</span
+              ><span class="so-pc" aria-hidden="true">Fechar</span>
+            </button>
+          </div>
+          <div class="detalhe-conteudo" id="detalhe-conteudo"></div>
         </div>
-        <div class="detalhe-conteudo" id="detalhe-conteudo"></div>
       </aside>
     </main>
 
-    <script src="js/config.js?v=202611250501"></script>
-    <script src="js/util.js?v=202611250501"></script>
+    <script src="js/config.js?v=202611261219"></script>
+    <script src="js/util.js?v=202611261219"></script>
     <script src="vendor/leaflet/leaflet.js"></script>
-    <script src="js/api-demo.js?v=202611250501"></script>
-    <script src="js/api-supabase.js?v=202611250501"></script>
-    <script src="js/api.js?v=202611250501"></script>
-    <script src="js/imagem.js?v=202611250501"></script>
-    <script src="js/mapa.js?v=202611250501"></script>
-    <script src="js/camadas-gta.js?v=202611250501"></script>
-    <script src="js/conta.js?v=202611250501"></script>
-    <script src="js/app.js?v=202611250501"></script>
+    <script src="js/api-demo.js?v=202611261219"></script>
+    <script src="js/api-supabase.js?v=202611261219"></script>
+    <script src="js/api.js?v=202611261219"></script>
+    <script src="js/imagem.js?v=202611261219"></script>
+    <script src="js/mapa.js?v=202611261219"></script>
+    <script src="js/camadas-gta.js?v=202611261219"></script>
+    <script src="js/conta.js?v=202611261219"></script>
+    <script src="js/app.js?v=202611261219"></script>
   </body>
 </html>

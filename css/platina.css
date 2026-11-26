@@ -56,7 +56,7 @@
 }
 .pl-h2 {
   margin: 0;
-  font: 400 clamp(36px, 5vw, 56px) / 0.95 var(--f-titulo);
+  font: 900 clamp(36px, 5vw, 56px) / 0.95 var(--f-titulo);
   text-transform: uppercase;
   letter-spacing: 0.005em;
   color: var(--texto);
@@ -71,7 +71,7 @@
 }
 .pl-h3 {
   margin: 0 0 8px;
-  font: 400 24px/1.05 var(--f-titulo);
+  font: 900 24px/1.05 var(--f-titulo);
   text-transform: uppercase;
   letter-spacing: 0.01em;
   color: var(--texto);
@@ -109,6 +109,17 @@
   height: 100%;
   object-fit: cover;
   object-position: 70% 30%;
+}
+/* capa viva: vídeo em loop por cima da arte; só aparece quando começa a tocar */
+.pl-capa-video {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.pl-capa-video.tocando {
+  opacity: 1;
 }
 /* véu escuro: deixa o título legível no terço esquerdo e funde a base com a página */
 .pl-capa::after {
@@ -155,7 +166,7 @@
 }
 .pl-sobre {
   margin: 0 0 18px;
-  font: 700 15px/1.2 var(--f-faixa);
+  font: 600 15px/1.2 var(--f-faixa);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--sol);
@@ -163,7 +174,7 @@
 .pl-titulo {
   margin: 0 0 22px;
   font-family: var(--f-titulo);
-  font-weight: 400;
+  font-weight: 900;
   text-transform: uppercase;
   line-height: 1;
   transform: rotate(-3deg);
@@ -199,7 +210,7 @@
 }
 .pl-assina {
   margin: 0;
-  font: 700 14px/1.2 var(--f-faixa);
+  font: 600 14px/1.2 var(--f-faixa);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--pl-t3);
@@ -227,13 +238,13 @@
   gap: 4px;
 }
 .pl-fato-rotulo {
-  font: 700 12px/1.1 var(--f-faixa);
+  font: 600 12px/1.1 var(--f-faixa);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--pl-t3);
 }
 .pl-fato-valor {
-  font: 400 30px/1 var(--f-titulo);
+  font: 900 30px/1 var(--f-titulo);
   color: var(--texto);
   font-variant-numeric: tabular-nums;
 }
@@ -242,7 +253,7 @@
 .pl-placar {
   grid-area: placar;
   padding: 22px 22px 18px;
-  border-radius: 20px;
+  border-radius: 0;
   background: rgb(18 7 42 / 0.72);
   border: 1px solid var(--pl-borda);
   backdrop-filter: blur(12px);
@@ -251,7 +262,7 @@
 }
 .pl-placar-titulo {
   margin: 0;
-  font: 700 14px/1.2 var(--f-faixa);
+  font: 600 14px/1.2 var(--f-faixa);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--pl-t2);
@@ -259,6 +270,7 @@
 .pl-placar-num {
   margin: 6px 0 0;
   font-family: var(--f-titulo);
+  font-weight: 900;
   line-height: 0.9;
   font-variant-numeric: tabular-nums;
 }
@@ -273,14 +285,14 @@
 }
 .pl-prog-num {
   margin: 6px 0 12px;
-  font: 700 15px/1.2 var(--f-faixa);
+  font: 600 15px/1.2 var(--f-faixa);
   letter-spacing: 0.04em;
   color: var(--valor);
   font-variant-numeric: tabular-nums;
 }
 .pl-trilho {
   height: 8px;
-  border-radius: var(--raio-pilula);
+  border-radius: 0;
   background: rgb(214 196 234 / 0.12);
   overflow: hidden;
 }
@@ -315,13 +327,13 @@
   border-top: 1px solid var(--cor-tipo);
 }
 .pl-tipo-nome {
-  font: 700 12px/1.1 var(--f-faixa);
+  font: 600 12px/1.1 var(--f-faixa);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--cor-tipo);
 }
 .pl-tipo-conta strong {
-  font: 700 18px/1.1 var(--f-faixa);
+  font: 600 18px/1.1 var(--f-faixa);
   color: var(--texto);
   font-variant-numeric: tabular-nums;
 }
@@ -377,38 +389,51 @@
 .pl-importar:focus-within {
   outline: 2px solid var(--sol);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 /* entrada da capa: o título sobe por trás de uma linha, depois o resto aparece.
-   Só na abertura da página; quem pede menos movimento vê tudo parado (regra do publico.css). */
+   Só na abertura da página; quem pede menos movimento vê tudo parado (regra do publico.css).
+   Com a abertura "trailer" (html.pl-abrindo) tudo espera --pl-abertura (fim dos cartões);
+   ao pular (html.pl-pulou) a espera vira 0 e os nomes "-b" fazem a entrada recomeçar já. */
 .pl-titulo-linha > span {
-  animation: pl-sobe 0.9s var(--pl-ease-out) both;
+  animation: pl-sobe 0.9s var(--pl-ease-out) var(--pl-abertura, 0s) both;
 }
 .pl-titulo-2 > span {
-  animation-delay: 0.12s;
+  animation-delay: calc(var(--pl-abertura, 0s) + 0.12s);
 }
 .pl-lead,
 .pl-assina,
 .pl-sobre,
 .pl-placar,
 .pl-fatos {
-  animation: pl-aparece 0.7s var(--pl-ease-out) both;
+  animation: pl-aparece 0.7s var(--pl-ease-out) var(--pl-abertura, 0s) both;
 }
 .pl-sobre {
-  animation-delay: 0.05s;
+  animation-delay: calc(var(--pl-abertura, 0s) + 0.05s);
 }
 .pl-lead,
 .pl-assina {
-  animation-delay: 0.35s;
+  animation-delay: calc(var(--pl-abertura, 0s) + 0.35s);
 }
 .pl-placar {
-  animation-delay: 0.45s;
+  animation-delay: calc(var(--pl-abertura, 0s) + 0.45s);
 }
 .pl-fatos {
-  animation-delay: 0.55s;
+  animation-delay: calc(var(--pl-abertura, 0s) + 0.55s);
+}
+.pl-pulou .pl-titulo-linha > span {
+  animation-name: pl-sobe-b;
+}
+.pl-pulou :is(.pl-lead, .pl-assina, .pl-sobre, .pl-placar, .pl-fatos) {
+  animation-name: pl-aparece-b;
 }
 @keyframes pl-sobe {
+  from {
+    transform: translateY(104%);
+  }
+}
+@keyframes pl-sobe-b {
   from {
     transform: translateY(104%);
   }
@@ -419,12 +444,277 @@
     transform: translateY(10px);
   }
 }
+@keyframes pl-aparece-b {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* ---------- ABERTURA "TRAILER" (1 vez por visita; js/abertura-platina.js) ----------
+   Cartões de título em tela cheia com cortes secos, como nos trailers da Rockstar.
+   PC: 0-150 ms escuro · 150-850 "Um guia do Nauã Pietro" (letras se juntam) ·
+   850-1550 "55 troféus" (empurrão 1.06 → 1) · 1550-2150 "1 perdível" (rosa/sol) ·
+   2150 corte seco para a capa (a arte faz um empurrão 1.08 → 1, sem mexer na opacidade).
+   Celular: sem o 1º cartão, ~1500 ms. Trava: a película some sozinha pelo CSS no fim,
+   mesmo se o JS falhar. Só transform/opacity (e o espaçamento das letras do 1º cartão). */
+.pl-abertura {
+  display: none;
+}
+.pl-abrindo {
+  --pl-abertura: 2150ms;
+}
+.pl-abrindo.pl-pulou {
+  --pl-abertura: 0ms;
+}
+.pl-abrindo .pl-abertura {
+  position: fixed;
+  inset: 0;
+  z-index: 1150; /* acima do topo (1100), abaixo do aviso (3000) */
+  display: grid;
+  background: var(--noite);
+  contain: strict;
+  animation: pl-ab-corta 1ms 2150ms forwards;
+}
+.pl-cartoes {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  padding: 0 var(--pl-lado);
+}
+.pl-cartao {
+  grid-area: 1 / 1;
+  margin: 0;
+  text-align: center;
+  font-family: var(--f-titulo);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  opacity: 0;
+}
+.pl-cartao > span {
+  display: block;
+}
+.pl-cartao-sobre {
+  margin-bottom: 14px;
+  font: 600 clamp(14px, 1.4vw, 18px) / 1.2 var(--f-faixa);
+  letter-spacing: 0.3em;
+  color: var(--pl-t2);
+}
+.pl-cartao-nome {
+  font-size: clamp(44px, 6vw, 92px);
+  letter-spacing: 0.08em;
+  color: var(--texto);
+}
+.pl-cartao-num {
+  font-size: clamp(120px, 28vw, 340px);
+  line-height: 0.84;
+  letter-spacing: -0.01em;
+  color: var(--texto);
+  font-variant-numeric: tabular-nums;
+}
+.pl-cartao-palavra {
+  margin-top: 0.26em;
+  font-size: clamp(40px, 10vw, 96px);
+  letter-spacing: 0.06em;
+  color: var(--pl-t2);
+}
+.pl-cartao-3 .pl-cartao-num {
+  color: var(--rosa);
+}
+.pl-cartao-3 .pl-cartao-palavra {
+  color: var(--sol);
+}
+/* corte seco: cada cartão entra e sai de uma vez (o 1º entra esmaecendo do escuro) */
+.pl-cartao-1 {
+  animation:
+    pl-ab-entra 350ms var(--pl-ease-out) 150ms both,
+    pl-ab-corta 1ms 850ms forwards;
+}
+.pl-cartao-1 .pl-cartao-nome {
+  animation: pl-ab-junta 350ms var(--pl-ease-out) 150ms both;
+}
+.pl-cartao-2 {
+  animation:
+    pl-ab-empurra 700ms var(--pl-ease-out) 850ms forwards,
+    pl-ab-corta 1ms 1550ms forwards;
+}
+.pl-cartao-3 {
+  animation:
+    pl-ab-empurra-leve 600ms var(--pl-ease-out) 1550ms forwards,
+    pl-ab-corta 1ms 2150ms forwards;
+}
+/* a capa aparece no corte e "assenta" (empurrão de câmera) */
+.pl-abrindo .pl-capa-img {
+  animation: pl-capa-empurra 1400ms var(--pl-ease-out) var(--pl-abertura) both;
+}
+.pl-abrindo.pl-pulou .pl-capa-img {
+  animation-name: pl-capa-empurra-b;
+}
+/* pular: a película some em 180 ms e a capa começa na hora */
+.pl-pulou .pl-abertura {
+  animation: pl-ab-esmaece 180ms var(--pl-ease-out) forwards;
+}
+.pl-pular {
+  grid-area: 1 / 1;
+  align-self: end;
+  justify-self: end;
+  margin: 0 max(24px, env(safe-area-inset-right))
+    max(24px, env(safe-area-inset-bottom)) 0;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgb(214 196 234 / 0.28);
+  border-radius: 0;
+  background: transparent;
+  color: var(--pl-t2);
+  font: 600 13px/1 var(--f-faixa);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.pl-pular:focus-visible {
+  outline: 2px solid var(--sol);
+  outline-offset: 3px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .pl-pular:hover {
+    color: var(--texto);
+    border-color: var(--rosa);
+  }
+}
+@keyframes pl-ab-entra {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pl-ab-junta {
+  from {
+    letter-spacing: 0.3em;
+  }
+  to {
+    letter-spacing: 0.08em;
+  }
+}
+@keyframes pl-ab-empurra {
+  from {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes pl-ab-empurra-leve {
+  from {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes pl-ab-corta {
+  from,
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes pl-ab-esmaece {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes pl-capa-empurra {
+  from {
+    transform: scale(1.08);
+  }
+}
+@keyframes pl-capa-empurra-b {
+  from {
+    transform: scale(1.08);
+  }
+}
+/* celular: sem o 1º cartão, ~1500 ms no total */
+@media (max-width: 900px) {
+  .pl-abrindo {
+    --pl-abertura: 1500ms;
+  }
+  .pl-abrindo .pl-abertura {
+    animation-delay: 1500ms;
+  }
+  .pl-cartao-1 {
+    display: none;
+  }
+  .pl-cartao-2 {
+    animation-delay: 100ms, 800ms;
+  }
+  .pl-cartao-3 {
+    animation-delay: 800ms, 1500ms;
+  }
+  .pl-pular {
+    margin: 0 max(16px, env(safe-area-inset-right))
+      max(16px, env(safe-area-inset-bottom)) 0;
+  }
+}
+
+/* ---------- troféus (e títulos das seções) aparecem um a um ao rolar ----------
+   html.pl-revela vem do js/platina.js (só com IntersectionObserver e sem link #trofeu-N);
+   cada um ganha pl-visto ao entrar na tela, com atraso --pl-d (escada de 70 ms, até 5). */
+.pl-revela .pl-trofeus > li,
+.pl-revela .pl-h2 {
+  transition:
+    opacity 520ms var(--pl-ease-out) var(--pl-d, 0ms),
+    transform 520ms var(--pl-ease-out) var(--pl-d, 0ms);
+}
+.pl-revela .pl-trofeus > li:not(.pl-visto),
+.pl-revela .pl-h2:not(.pl-visto) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.pl-revela .pl-trofeus > li.pl-li-platina {
+  transition-duration: 700ms;
+}
+.pl-revela .pl-trofeus > li.pl-li-platina:not(.pl-visto) {
+  transform: translateY(24px) scale(0.98);
+}
+@media (max-width: 900px) {
+  .pl-revela .pl-trofeus > li,
+  .pl-revela .pl-h2 {
+    transition-duration: 420ms;
+  }
+  .pl-revela .pl-trofeus > li:not(.pl-visto),
+  .pl-revela .pl-h2:not(.pl-visto) {
+    transform: translateY(16px);
+  }
+  .pl-revela .pl-trofeus > li.pl-li-platina:not(.pl-visto) {
+    transform: translateY(16px) scale(0.98);
+  }
+}
+@media print {
+  .pl-revela .pl-trofeus > li,
+  .pl-revela .pl-h2 {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 
 /* ---------- TROFÉUS PERDÍVEIS ---------- */
 .pl-perdiveis {
   position: relative;
   padding: 36px clamp(18px, 4vw, 44px) 32px;
-  border-radius: 24px;
+  border-radius: 0;
   border: 1px solid rgb(255 59 92 / 0.45);
   background:
     linear-gradient(180deg, rgb(255 59 92 / 0.1), rgb(255 59 92 / 0.03) 60%),
@@ -446,10 +736,10 @@
 }
 .pl-regras li {
   padding: 7px 14px;
-  border-radius: var(--raio-pilula);
+  border-radius: 0;
   border: 1px solid var(--pl-borda);
   background: rgb(18 7 42 / 0.5);
-  font: 700 14px/1.25 var(--f-faixa);
+  font: 600 14px/1.25 var(--f-faixa);
   letter-spacing: 0.03em;
   color: var(--pl-t2);
 }
@@ -465,7 +755,7 @@
 }
 .pl-perd-item {
   padding: 24px;
-  border-radius: 18px;
+  border-radius: 0;
   background: rgb(18 7 42 / 0.65);
   border: 1px solid rgb(255 59 92 / 0.3);
 }
@@ -477,14 +767,14 @@
   margin-bottom: 10px;
 }
 .pl-perd-meta {
-  font: 700 14px/1.2 var(--f-faixa);
+  font: 600 14px/1.2 var(--f-faixa);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--cor-tipo, var(--pl-t3));
 }
 .pl-perd-nome {
   margin: 0;
-  font: 400 clamp(30px, 4vw, 44px) / 0.98 var(--f-titulo);
+  font: 900 clamp(30px, 4vw, 44px) / 0.98 var(--f-titulo);
   text-transform: uppercase;
   letter-spacing: 0.005em;
   color: var(--texto);
@@ -516,7 +806,7 @@
 }
 .pl-perd-fatos dt {
   margin: 0 0 6px;
-  font: 800 13px/1.2 var(--f-faixa);
+  font: 700 13px/1.2 var(--f-faixa);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--pl-perigo);
@@ -545,8 +835,8 @@
   align-items: center;
   gap: 6px;
   padding: 3px 10px;
-  border-radius: var(--raio-pilula);
-  font: 800 12px/1.3 var(--f-faixa);
+  border-radius: 0;
+  font: 700 12px/1.3 var(--f-faixa);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -587,20 +877,20 @@
 }
 .pl-atencao-lista li {
   padding: 16px 18px;
-  border-radius: 14px;
+  border-radius: 0;
   background: rgb(255 179 71 / 0.06);
   border: 1px solid rgb(255 179 71 / 0.28);
 }
 .pl-atencao-nome {
   margin: 0 0 2px;
-  font: 400 22px/1.05 var(--f-titulo);
+  font: 900 22px/1.05 var(--f-titulo);
   text-transform: uppercase;
   color: var(--texto);
   overflow-wrap: anywhere;
 }
 .pl-atencao-meta {
   margin: 0 0 8px;
-  font: 700 13px/1.2 var(--f-faixa);
+  font: 600 13px/1.2 var(--f-faixa);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--cor-tipo, var(--pl-t3));
@@ -652,8 +942,8 @@
 .pl-tipo {
   display: inline-block;
   padding: 3px 9px;
-  border-radius: var(--raio-pilula);
-  font: 800 12px/1.25 var(--f-faixa);
+  border-radius: 0;
+  font: 700 12px/1.25 var(--f-faixa);
   letter-spacing: 0.07em;
   text-transform: uppercase;
   background: rgb(214 196 234 / 0.1);
@@ -682,7 +972,7 @@
 .pl-sempre {
   margin: 0 0 28px;
   padding: 14px 18px;
-  border-radius: 14px;
+  border-radius: 0;
   background: rgb(255 179 71 / 0.08);
   border: 1px solid rgb(255 179 71 / 0.35);
   color: var(--texto);
@@ -690,7 +980,7 @@
 }
 .pl-sempre strong {
   color: var(--sol);
-  font: 800 13px/1 var(--f-faixa);
+  font: 700 13px/1 var(--f-faixa);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-right: 8px;
@@ -714,14 +1004,14 @@
 }
 .pl-etapa-num {
   margin: 0;
-  font: 400 88px/0.8 var(--f-titulo);
+  font: 900 88px/0.8 var(--f-titulo);
   color: var(--rosa);
   font-variant-numeric: tabular-nums;
 }
 .pl-etapa-num span {
   display: block;
   margin-bottom: 10px;
-  font: 700 12px/1 var(--f-faixa);
+  font: 600 12px/1 var(--f-faixa);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--pl-t3);
@@ -743,7 +1033,7 @@
 }
 .pl-etapa-horas {
   margin: 0;
-  font: 700 18px/1 var(--f-faixa);
+  font: 600 18px/1 var(--f-faixa);
   letter-spacing: 0.04em;
   color: var(--valor);
   white-space: nowrap;
@@ -766,7 +1056,7 @@
   grid-template-columns: auto minmax(0, 1fr);
   gap: 4px 14px;
   padding: 14px 16px;
-  border-radius: 14px;
+  border-radius: 0;
   background: rgb(255 179 71 / 0.08);
   border: 1px solid rgb(255 179 71 / 0.38);
 }
@@ -774,10 +1064,10 @@
   grid-row: span 2;
   align-self: start;
   padding: 4px 9px;
-  border-radius: 6px;
+  border-radius: 0;
   background: var(--sol);
   color: #1a0b00;
-  font: 800 12px/1.2 var(--f-faixa);
+  font: 700 12px/1.2 var(--f-faixa);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -797,7 +1087,7 @@
 /* o mais difícil + lista do 100% */
 .pl-dificil {
   padding: 26px;
-  border-radius: 20px;
+  border-radius: 0;
   background: var(--pl-superficie);
   border: 1px solid rgb(255 211 106 / 0.35);
 }
@@ -862,7 +1152,7 @@
   width: 100%;
   min-height: 50px;
   padding: 10px 20px;
-  border-radius: var(--raio-pilula);
+  border-radius: 0;
   border: 1px solid var(--pl-borda);
   background: var(--pl-superficie);
   color: var(--texto);
@@ -888,7 +1178,7 @@
   margin: 0;
   padding: 3px;
   border: 1px solid var(--pl-borda);
-  border-radius: var(--raio-pilula);
+  border-radius: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 2px;
@@ -908,8 +1198,8 @@
 .pl-segmento span {
   display: block;
   padding: 8px 14px;
-  border-radius: var(--raio-pilula);
-  font: 700 15px/1.2 var(--f-faixa);
+  border-radius: 0;
+  font: 600 15px/1.2 var(--f-faixa);
   letter-spacing: 0.04em;
   color: var(--cor-tipo, var(--pl-t2));
   transition:
@@ -933,7 +1223,7 @@
 .pl-chave {
   min-height: 40px;
   padding: 6px 16px;
-  border-radius: var(--raio-pilula);
+  border-radius: 0;
   border: 1px solid var(--pl-borda);
   background: transparent;
   color: var(--pl-t2);
@@ -962,7 +1252,7 @@
 .pl-carregando,
 .pl-vazio {
   margin: 0 0 16px;
-  font: 700 14px/1.3 var(--f-faixa);
+  font: 600 14px/1.3 var(--f-faixa);
   letter-spacing: 0.04em;
   color: var(--pl-t3);
 }
@@ -995,7 +1285,7 @@
   flex-direction: column;
   gap: 12px;
   padding: 18px 18px 16px;
-  border-radius: 18px;
+  border-radius: 0;
   border: 1px solid color-mix(in srgb, var(--cor-tipo) 22%, transparent);
   background: color-mix(in srgb, var(--pl-superficie) 94%, var(--cor-tipo));
   transition:
@@ -1025,7 +1315,7 @@
   padding-right: 110px; /* espaço do carimbo "Conquistado" */
 }
 .pl-num {
-  font: 700 15px/1 var(--f-faixa);
+  font: 600 15px/1 var(--f-faixa);
   letter-spacing: 0.04em;
   color: var(--pl-t3);
   font-variant-numeric: tabular-nums;
@@ -1036,7 +1326,7 @@
 }
 .pl-nome {
   margin: 0;
-  font: 400 28px/1.02 var(--f-titulo);
+  font: 900 28px/1.02 var(--f-titulo);
   text-transform: uppercase;
   letter-spacing: 0.005em;
   color: var(--texto);
@@ -1072,7 +1362,7 @@
 }
 .pl-como .pl-rotulo {
   margin-bottom: 3px;
-  font: 800 12px/1.3 var(--f-faixa);
+  font: 700 12px/1.3 var(--f-faixa);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--sol);
@@ -1081,17 +1371,17 @@
   margin: 10px 0 0;
   display: inline-block;
   padding: 4px 10px;
-  border-radius: 8px;
+  border-radius: 0;
   background: rgb(49 231 255 / 0.08);
   color: var(--valor);
-  font: 700 14px/1.3 var(--f-faixa);
+  font: 600 14px/1.3 var(--f-faixa);
   letter-spacing: 0.03em;
 }
 .pl-perdivel-texto,
 .pl-atencao-texto-cartao {
   margin: 10px 0 0;
   padding: 10px 12px;
-  border-radius: 10px;
+  border-radius: 0;
   border: 1px solid rgb(255 59 92 / 0.35);
   background: rgb(255 59 92 / 0.07);
   color: var(--pl-t2);
@@ -1106,7 +1396,7 @@
 .pl-atencao-texto-cartao strong {
   display: block;
   margin-bottom: 2px;
-  font: 800 12px/1.3 var(--f-faixa);
+  font: 700 12px/1.3 var(--f-faixa);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--pl-perigo);
@@ -1123,7 +1413,7 @@
 .pl-conquistei {
   min-height: 44px;
   padding: 8px 18px;
-  border-radius: var(--raio-pilula);
+  border-radius: 0;
   border: 1px solid var(--rosa);
   background: transparent;
   color: var(--texto);
@@ -1149,7 +1439,7 @@
   color: #04202a;
 }
 .pl-ver-mapa {
-  border-radius: var(--raio-pilula);
+  border-radius: 0;
   min-height: 44px;
   padding: 8px 16px;
   border-color: var(--pl-borda);
@@ -1157,7 +1447,7 @@
 }
 .pl-xbox {
   margin-left: auto;
-  font: 700 13px/1 var(--f-faixa);
+  font: 600 13px/1 var(--f-faixa);
   letter-spacing: 0.04em;
   color: var(--pl-t3);
   font-variant-numeric: tabular-nums;
@@ -1170,9 +1460,9 @@
   right: 14px;
   padding: 3px 9px;
   border: 2px solid var(--valor);
-  border-radius: 6px;
+  border-radius: 0;
   color: var(--valor);
-  font: 800 13px/1.2 var(--f-faixa);
+  font: 700 13px/1.2 var(--f-faixa);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   transform: rotate(-6deg);
@@ -1192,7 +1482,7 @@
 .pl-fontes-gerais summary {
   cursor: pointer;
   width: fit-content;
-  font: 700 14px/1.3 var(--f-faixa);
+  font: 600 14px/1.3 var(--f-faixa);
   letter-spacing: 0.04em;
   color: var(--pl-t3);
   transition: color 0.2s ease;
@@ -1232,7 +1522,7 @@
   height: fit-content;
   min-height: 44px;
   padding: 10px 18px;
-  border-radius: var(--raio-pilula);
+  border-radius: 0;
   border: 1px solid var(--sol);
   background: rgb(18 7 42 / 0.88);
   color: var(--sol);
@@ -1406,7 +1696,7 @@
   }
   .pl-perdiveis {
     padding: 26px 16px 22px;
-    border-radius: 20px;
+    border-radius: 0;
   }
   .pl-perd-item {
     padding: 18px 16px;
@@ -1450,5 +1740,16 @@
   .pl-chave,
   .pl-revelar {
     transition: none;
+  }
+  /* sem película (o JS nem liga a abertura; isto é só reserva) */
+  .pl-abertura {
+    display: none !important;
+  }
+  /* troféus e títulos ao rolar: só esmaecem, sem andar. Seletor mais forte + !important
+     porque o publico.css desliga TODAS as transições com !important no "*" */
+  html.pl-revela .pl-trofeus > li,
+  html.pl-revela .pl-h2 {
+    transform: none !important;
+    transition: opacity 300ms ease !important;
   }
 }
